@@ -4,30 +4,36 @@
 
 ## Estado general
 
-Fase: **preproducción / preparación técnica**.
+Fase: **preproducción / prototipado técnico**.
 
-El concepto principal del juego está definido y documentado, pero todavía no existe una implementación jugable.
+El concepto principal del juego está definido y documentado. El entorno local ya está preparado y Roblox Studio se ha conectado correctamente al proyecto mediante Rojo. Todavía no existe una implementación jugable del juego.
 
 ## Repositorio
 
 - Repositorio: `Carlaidus/Islas`
 - Rama principal: `main`
-- Estado actual: memoria operativa inicial creada y lista para comenzar la preparación técnica local.
+- Directorio local: `C:\Dev\Islas`
+- Git para Windows instalado y funcionando.
+- Rojo instalado: 7.6.1.
+- El proyecto local se inicializó con `rojo init`.
+- Islas se está sirviendo con Rojo por el puerto `34873` para no interferir con otro proyecto que usa/ocupaba el puerto habitual.
+- Roblox Studio se ha conectado correctamente a `localhost:34873`.
 
 ## Herramientas acordadas
 
 - Roblox Studio
 - Rojo
-- VS Code
 - GitHub
 - Codex
-- Rebirth cuando aporte valor suficiente
+- Rebirth cuando aporte valor real
+- VS Code opcional, no necesario
 
 ## Diseño actualmente acordado
 
-- Dos islas enfrentadas.
+- El jugador empieza en un lobby, no directamente en una isla.
+- Lobby mínimo con accesos/colas 1v1, 2v2 y 3v3.
+- Dos islas enfrentadas por partida.
 - Equipos de 1 a 3 jugadores.
-- Soporte natural para 1v1, 2v2 y 3v3.
 - Fase de preparación y fase de batalla.
 - Recursos iniciales: madera, piedra y cocos.
 - Moneda de partida.
@@ -52,21 +58,21 @@ El concepto principal del juego está definido y documentado, pero todavía no e
 - `PROMPTS_LOG.md` — registro de prompts relevantes y de pago.
 - `IDEAS_BACKLOG.md` — ideas interesantes todavía no convertidas en requisitos.
 
-## Implementado
+## Implementado / preparado
 
 - Repositorio GitHub creado.
 - Memoria operativa inicial creada.
-- Diseño inicial documentado.
-- Flujo de trabajo definido.
-- Reglas de trabajo para Codex definidas.
-- Estrategia de uso de Rebirth definida.
+- Git instalado y repositorio clonado localmente.
+- Rojo 7.6.1 funcionando.
+- Proyecto Islas inicializado con Rojo.
+- Roblox Studio conectado correctamente al servidor Rojo de Islas.
+- Diseño inicial y flujo de lobby documentados.
 
 ## No implementado todavía
 
-- Copia local del repositorio en el PC.
-- Estructura Rojo.
-- Proyecto base de Roblox.
-- Código Luau.
+- Rebirth instalado/conectado y probado.
+- Lobby físico.
+- Colas 1v1/2v2/3v3.
 - Islas.
 - Recursos.
 - Recolección.
@@ -76,9 +82,8 @@ El concepto principal del juego está definido y documentado, pero todavía no e
 - Cañón.
 - Núcleo.
 - Daño.
-- Flujo de partida.
+- Flujo completo de partida.
 - UI.
-- Lobby.
 - Persistencia.
 - Matchmaking.
 - Rangos.
@@ -87,14 +92,13 @@ El concepto principal del juego está definido y documentado, pero todavía no e
 
 ## Próximo objetivo técnico
 
-Preparar el entorno local del proyecto en Windows y crear un esqueleto mínimo Rojo/Roblox que sincronice correctamente con Studio antes de implementar mecánicas.
-
-Directorio local recomendado: `C:\Dev\Islas`.
+Instalar y conectar Rebirth al proyecto Islas sin gastar créditos. Después, ChatGPT decidirá y preparará la primera intervención de Rebirth para generar un prototipo visual/estructural de alto valor.
 
 ## Riesgos a vigilar
 
 - Añadir demasiados sistemas antes de validar el bucle principal.
-- Gastar prompts de Rebirth en tareas que Codex/Rojo pueden resolver sin coste adicional.
+- Gastar prompts de Rebirth en tareas demasiado pequeñas o mal delimitadas.
+- Permitir que Rebirth y Rojo compitan por los mismos objetos/scripts sin una estrategia clara de propiedad.
 - Acoplar valores de balance directamente al código.
 - Diseñar sistemas que sólo funcionen en 3v3 y rompan el 1v1.
 - Introducir pay-to-win.
@@ -102,6 +106,6 @@ Directorio local recomendado: `C:\Dev\Islas`.
 
 ## Criterio para avanzar de fase
 
-No se considerará listo para progresión/monetización hasta que una versión básica 1v1 permita completar repetidamente este ciclo:
+Antes de progresión/monetización debe existir una versión básica que permita repetir este ciclo:
 
-recolectar -> construir -> preparar -> combatir -> destruir/proteger núcleo -> terminar partida.
+lobby -> elegir formato -> formar partida -> recolectar -> construir/comprar -> combatir -> destruir/proteger núcleo -> resultado -> volver al ciclo de lobby/partida.
