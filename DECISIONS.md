@@ -12,26 +12,36 @@ Registro de decisiones que se consideran vigentes. Si una decisión cambia, se a
 
 - Roblox Studio para construir, probar y publicar.
 - Rojo para sincronizar el proyecto entre archivos locales y Roblox Studio.
-- VS Code como editor principal local.
 - GitHub para historial, colaboración y memoria operativa.
-- Codex disponible y preferido para muchas tareas de código, ya que la cuenta de pago ya está contratada.
+- Codex está disponible mediante la cuenta de pago y se utilizará para código, arquitectura y tareas sobre el repositorio cuando sea la opción más conveniente.
+- Rebirth se utilizará cuando su integración directa con Roblox Studio permita crear o modificar el juego más rápido y con suficiente control.
+- VS Code es opcional y no forma parte obligatoria del flujo.
 - No usar Cursor Pro por ahora.
-- Rebirth puede utilizarse cuando aporte una ventaja clara dentro de Roblox Studio.
+- ChatGPT decidirá qué herramienta usar tarea por tarea; no se impondrá una división rígida si otra opción es mejor.
 - Los prompts de herramientas con coste deben prepararse con precisión para evitar gasto innecesario.
 
 ## 2026-08-16 — Dirección del proyecto
 
 ChatGPT actuará como director técnico y de diseño del proyecto:
 
-- dividirá el trabajo en tareas pequeñas y verificables;
+- decidirá el orden de construcción;
 - decidirá qué herramienta conviene para cada tarea;
 - preparará prompts detallados para Codex y Rebirth;
 - revisará la documentación operativa antes de tareas importantes;
+- evitará pedir al usuario que tome decisiones técnicas que puedan resolverse razonadamente desde la dirección del proyecto;
 - priorizará un prototipo divertido antes de sistemas secundarios.
+
+## 2026-08-16 — Lobby y entrada a partida
+
+- Los jugadores NO empiezan directamente en una isla.
+- El punto de entrada del juego será un lobby/hub.
+- El lobby tendrá zonas o accesos claros para entrar en partidas 1v1, 2v2 y 3v3.
+- La versión inicial del lobby será funcional y sencilla; podrá crecer después con contenido social, personalización, progresión y otras actividades.
+- El diseño futuro deberá permitir que un jugador solo pueda entrar en una cola de equipo y que grupos puedan mantenerse juntos cuando implementemos el sistema de parties/matchmaking.
 
 ## 2026-08-16 — Formato inicial de partida
 
-- Dos islas enfrentadas.
+- Dos islas enfrentadas por partida.
 - Equipos de 1 a 3 jugadores por isla.
 - El mismo diseño debe soportar 1v1, 2v2 y 3v3.
 - No se implementarán más de dos islas en la primera versión.
@@ -44,9 +54,11 @@ ChatGPT actuará como director técnico y de diseño del proyecto:
 
 ## 2026-08-16 — Bucle principal
 
+- Lobby: elegir formato/cola y formar partida.
 - Fase de preparación: recolectar, conseguir moneda, comprar y construir.
 - Fase de batalla: disparar, gestionar munición, reparar y defender.
 - La condición principal de victoria es destruir el núcleo/tótem rival.
+- Al finalizar, el flujo debe permitir regresar al ciclo de lobby/partida.
 
 ## 2026-08-16 — Recursos iniciales
 
@@ -82,4 +94,5 @@ No añadir muchos recursos antes de comprobar que estos generan decisiones inter
 
 - Sistemas configurables y desacoplados.
 - Valores de balance centralizados cuando sea posible.
-- No construir lobby avanzado, rangos, matchmaking ni monetización antes del vertical slice jugable.
+- El lobby mínimo funcional sí pertenece al vertical slice porque es el punto de entrada real del juego.
+- Decoración avanzada del lobby, rangos, matchmaking por nivel y monetización pueden esperar hasta validar el núcleo jugable.
