@@ -47,6 +47,12 @@ No se implementarán todavía lobby avanzado, matchmaking por rango, múltiples 
 - Codex, ya disponible en la cuenta de pago.
 - Rebirth, como herramienta adicional cuando trabajar directamente dentro de Roblox Studio aporte una ventaja clara.
 
+## Directorio local recomendado
+
+En Windows: `C:\Dev\Islas`.
+
+Esta carpeta contendrá la copia local del repositorio, el código, la configuración de Rojo y los archivos de documentación. GitHub será el remoto y el historial del proyecto.
+
 ## Regla de trabajo
 
 Antes de encargar una tarea relevante a Codex o Rebirth se debe revisar, como mínimo:
@@ -58,9 +64,12 @@ Antes de encargar una tarea relevante a Codex o Rebirth se debe revisar, como m�
 - `NEXT_TASK.md`
 - `LAST_CODEX_REPORT.md`
 - `AGENTS.md`
+- `WORKFLOW.md`
+
+Consultar también `IDEAS_BACKLOG.md` cuando la tarea afecte al diseño y `PROMPTS_LOG.md` antes de reutilizar una orden de pago.
 
 `PROJECT_STATE.md` y `NEXT_TASK.md` deben mantenerse actualizados para que el proyecto pueda retomarse sin depender de una conversación concreta.
 
 ## Estado
 
-Preproducción. Diseño base definido. Todavía no existe implementación jugable.
+Preproducción. Diseño base y memoria operativa creados. La siguiente tarea es preparar el entorno local y la sincronización Rojo/Roblox Studio.
