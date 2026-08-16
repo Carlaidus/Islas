@@ -4,9 +4,9 @@
 
 ## Estado general
 
-Fase: **preproducción / prototipado visual inicial**.
+Fase: **preproducción de producto / rediseño de mundo y dirección artística**.
 
-El concepto principal del juego está definido y documentado. El entorno local está preparado, Roblox Studio se conecta correctamente mediante Rojo y Rebirth ya está instalado y conectado al Studio de Islas. Todavía no existe una implementación jugable completa.
+El concepto del juego sigue vigente, pero el primer escenario visual generado por Rebirth ha sido rechazado. No se continuará construyendo encima de esa maqueta. Antes de volver a generar mundo se han definido criterios profesionales de escala, recorrido y arte.
 
 ## Repositorio y entorno local
 
@@ -17,99 +17,136 @@ El concepto principal del juego está definido y documentado. El entorno local e
 - Rojo instalado: 7.6.1.
 - Proyecto local inicializado con `rojo init`.
 - Islas usa el puerto Rojo `34873` para no interferir con otro proyecto.
-- Roblox Studio se ha conectado correctamente a `localhost:34873`.
-- Rebirth está instalado y aparece `Connected` en verde dentro de Roblox Studio.
+- Roblox Studio se conecta correctamente a `localhost:34873`.
+- Rebirth está instalado y conectado correctamente al Studio de Islas.
 
-## Herramientas acordadas
+## Herramientas
 
 - Roblox Studio
 - Rojo
 - GitHub
 - Codex
-- Rebirth para tareas donde modificar directamente Studio aporte una ventaja real
+- Rebirth cuando demuestre ventaja real
 - VS Code opcional, no necesario
+
+No se asume ya que Rebirth deba hacer automáticamente todo el worldbuilding. Se evaluará herramienta por tarea.
 
 ## Diseño actualmente acordado
 
-- El jugador empieza en un lobby, no directamente en una isla.
-- Lobby con accesos/colas claros para 1v1, 2v2 y 3v3.
+- El jugador empieza en un lobby/hub real, no directamente en una isla.
+- Accesos/colas para 1v1, 2v2 y 3v3.
 - Dos islas enfrentadas por partida.
 - Equipos de 1 a 3 jugadores.
-- Fase de preparación y fase de batalla.
+- Fase de preparación basada en explorar, recolectar, comprar y construir.
+- Fase de batalla basada en cañón, munición, reparación y defensa.
 - Recursos iniciales: madera, piedra y cocos.
 - Moneda de partida.
 - NPC/tienda por isla.
 - Construcción modular con snap.
 - Núcleo/tótem como objetivo principal.
-- Cañón con ángulo, orientación y potencia.
-- Daño localizado por piezas.
-- Reparación durante combate.
-- Progresión, rangos y monetización reservados para fases posteriores.
+- Progresión, rangos y monetización después de validar el núcleo jugable.
 
-## Memoria operativa creada
+## Escala de mundo objetivo v0.2
 
-- `README.md` — visión general y reglas básicas del proyecto.
-- `GAME_DESIGN.md` — diseño detallado del juego.
-- `DECISIONS.md` — decisiones cerradas y vigentes.
-- `PROJECT_STATE.md` — estado real actual.
-- `NEXT_TASK.md` — única tarea prioritaria siguiente.
-- `AGENTS.md` — instrucciones para Codex y otros agentes.
-- `WORKFLOW.md` — método de trabajo del proyecto.
-- `LAST_CODEX_REPORT.md` — informe operativo de la última tarea de Codex.
-- `PROMPTS_LOG.md` — registro de prompts relevantes y de pago.
-- `IDEAS_BACKLOG.md` — ideas interesantes todavía no convertidas en requisitos.
+Ver `WORLD_DESIGN.md`.
 
-## Implementado / preparado
+Objetivos iniciales por isla:
 
-- Repositorio GitHub creado.
-- Memoria operativa inicial creada.
-- Git instalado y repositorio clonado localmente.
-- Rojo 7.6.1 funcionando.
-- Proyecto Islas inicializado con Rojo.
-- Roblox Studio conectado correctamente al servidor Rojo de Islas.
-- Rebirth instalado y conectado correctamente al Studio de Islas.
-- Diseño inicial y flujo de lobby documentados.
+- 420–500 studs de largo;
+- 350–450 studs de ancho;
+- costa irregular;
+- relieve útil 30–50 studs;
+- zona construible aproximada de 130–160 studs;
+- cruce de isla: 30–45 s;
+- recurso lejano desde base: 20–30 s;
+- perímetro amplio: 60–90 s;
+- separación objetivo entre costas: 250–350 studs, pendiente de validar con física real del cañón.
+
+## Dirección artística
+
+Ver `ART_DIRECTION.md`.
+
+Objetivo: experiencia tropical de aventura, estilizada y colorida, con calidad visual suficiente para parecer un juego Roblox publicado. No se aceptarán círculos planos, árboles primitivos, pads flotantes ni composición de baseplate como dirección del producto.
+
+## Primer intento con Rebirth
+
+Estado: **RECHAZADO**.
+
+Rebirth generó una estructura técnicamente ordenada con 763 instancias, lobby, dos islas y jerarquía correcta, pero el resultado visual y espacial no cumple el nivel requerido.
+
+Problemas principales:
+
+- isla demasiado pequeña para explorar;
+- geometría plana/circular;
+- lobby sin arquitectura real;
+- recursos y props primitivos;
+- falta de dirección artística;
+- escala decidida antes de definir tiempos de recorrido.
+
+No se invertirá trabajo en pulir esta maqueta. Debe sustituirse por un diseño nuevo.
+
+## Memoria operativa
+
+- `README.md`
+- `GAME_DESIGN.md`
+- `WORLD_DESIGN.md`
+- `ART_DIRECTION.md`
+- `DECISIONS.md`
+- `PROJECT_STATE.md`
+- `NEXT_TASK.md`
+- `AGENTS.md`
+- `WORKFLOW.md`
+- `LAST_CODEX_REPORT.md`
+- `PROMPTS_LOG.md`
+- `IDEAS_BACKLOG.md`
+
+## Preparado
+
+- repositorio y memoria operativa;
+- entorno Git/Rojo/Studio;
+- conexión Rebirth;
+- concepto de juego;
+- flujo de lobby;
+- escala y tiempos objetivo de primera isla real;
+- dirección artística inicial;
+- registro del fallo del primer prototipo.
 
 ## No implementado todavía
 
-- Primer prototipo visual generado con Rebirth.
-- Lobby físico.
-- Colas 1v1/2v2/3v3.
-- Islas.
-- Recursos.
-- Recolección.
-- Construcción.
-- Moneda.
-- Tienda/NPC funcional.
-- Cañón funcional.
-- Núcleo funcional.
-- Daño.
-- Flujo completo de partida.
-- UI definitiva.
-- Persistencia.
-- Matchmaking.
-- Rangos.
-- Misiones.
-- Monetización.
+- lobby definitivo/producible;
+- isla real con escala correcta;
+- arena real;
+- recursos funcionales;
+- recolección;
+- construcción;
+- moneda;
+- tienda funcional;
+- cañón funcional;
+- núcleo funcional;
+- daño;
+- matchmaking;
+- UI definitiva;
+- persistencia;
+- progresión;
+- monetización.
 
 ## Próximo objetivo
 
-Usar el primer prompt de Rebirth para generar un **prototipo visual y estructural amplio** del lobby y de una arena 1v1/2v2/3v3 de dos islas, sin implementar todavía sistemas sensibles ni arquitectura definitiva.
+No enviar otro prompt grande a Rebirth todavía.
 
-La primera intervención debe crear elementos modulares, claramente nombrados y agrupados bajo un contenedor propio para poder revisarlos, corregirlos o eliminarlos sin contaminar el resto del proyecto.
+Primero preparar una **referencia visual y espacial concreta** de la isla/lobby basada en `WORLD_DESIGN.md` y `ART_DIRECTION.md`. Después se reconstruirá el escenario desde cero con la herramienta que ofrezca mejor calidad, utilizando esa referencia y midiendo tiempos reales de recorrido.
 
-## Riesgos a vigilar
+El siguiente escenario debe plantearse como parte real del juego, no como un blockout desechable sin dirección.
 
-- Añadir demasiados sistemas antes de validar el bucle principal.
-- Gastar prompts de Rebirth en tareas demasiado pequeñas o mal delimitadas.
-- Permitir que Rebirth y Rojo compitan por los mismos objetos/scripts sin una estrategia clara de propiedad.
-- Acoplar valores de balance directamente al código.
-- Diseñar sistemas que sólo funcionen en 3v3 y rompan el 1v1.
-- Introducir pay-to-win.
-- Intentar destrucción física compleja demasiado pronto.
+## Criterio para avanzar
 
-## Criterio para avanzar de fase
+No se aprobará la nueva isla por cumplir una lista de objetos. Debe demostrar:
 
-Antes de progresión/monetización debe existir una versión básica que permita repetir este ciclo:
-
-lobby -> elegir formato -> formar partida -> recolectar -> construir/comprar -> combatir -> destruir/proteger núcleo -> resultado -> volver al ciclo de lobby/partida.
+- ganas de explorar;
+- rutas y zonas reconocibles;
+- relieve y vegetación coherentes;
+- espacio real de construcción;
+- posición defendible del Core;
+- lectura clara del cañón y enemigo;
+- tiempos de recorrido dentro de objetivos;
+- calidad visual coherente con `ART_DIRECTION.md`.
