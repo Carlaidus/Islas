@@ -4,232 +4,368 @@
 
 ## Objetivo
 
-Definir la escala, recorrido, estructura espacial y criterios de diseño del mundo de **Islas** antes de volver a generar arte o escenarios con IA.
+Definir la escala, recorrido, estructura espacial y reglas competitivas del mundo de **Islas** antes de generar un nuevo escenario.
 
-El primer prototipo de Rebirth de 2026-08-16 queda rechazado como referencia visual y de escala. Sirvió únicamente para comprobar que Rebirth puede crear una jerarquía grande y respetar restricciones, pero no representa el juego que queremos construir.
+El primer prototipo de Rebirth del 2026-08-16 queda rechazado como referencia visual, espacial y de escala. No se reutilizan sus medidas.
 
 ## Principio principal
 
-Las dimensiones no se elegirán porque "quepan" los objetos. Se elegirán a partir del tiempo que queremos que tarde un jugador en desplazarse, explorar, decidir y volver a la base.
+La isla debe sentirse como un lugar que merece ser explorado durante la preparación, pero la zona de combate debe estar deliberadamente diseñada para que el Core pueda ser atacado.
 
-La isla debe sentirse como un lugar pequeño pero real: suficientemente grande para explorar y repartir tareas, suficientemente compacta para que una fase de preparación de pocos minutos no se convierta en caminar sin hacer nada.
+No se elegirá una escala porque los objetos "quepan". Se elegirá según:
 
-## Estructura de la experiencia
+- tiempos de recorrido;
+- ritmo de recolección;
+- cantidad de decisiones por minuto;
+- tamaño de fortaleza;
+- visibilidad de objetivos;
+- balística del cañón;
+- número de equipos.
 
-La experiencia se diseñará desde el principio con dos espacios conceptualmente distintos:
+## Dos conceptos diferentes
 
-1. **Lobby / Hub**: punto de entrada, social y de selección de modo.
-2. **Arena de partida**: dos islas enfrentadas, dedicadas al bucle de recolección, construcción y combate.
+No confundir:
 
-A nivel técnico se estudiará usar Places separados dentro de la misma experiencia para Lobby y Match. No mezclar físicamente el lobby y las partidas a 800 studs de distancia se considera una solución de prototipo, no la arquitectura final deseada.
+### Tamaño de equipo
+
+- 1v1 = 1 jugador por equipo;
+- 2v2 = 2 jugadores por equipo;
+- 3v3 = 3 jugadores por equipo.
+
+### Número de equipos/islas
+
+- `Duel`: 2 islas/equipos;
+- `Triad`: 3 islas/equipos, futuro modo escalable.
+
+Esto permite diseñar en el futuro formatos como 1v1v1, 2v2v2 o 3v3v3 sin rehacer los sistemas base.
+
+El primer vertical slice se centrará en `Duel`, pero el diseño espacial se construirá para no bloquear `Triad`.
+
+## Arquitectura general de la experiencia
+
+La experiencia tendrá dos espacios conceptualmente distintos:
+
+1. **Lobby / Hub**: entrada, social, selección de cola/modo, progresión futura.
+2. **Match Arena**: arena dedicada a preparación y batalla.
+
+Dirección técnica preferida: Lobby y Match terminarán como Places separados dentro de la misma experiencia cuando el flujo de teleport/matchmaking esté listo.
+
+No considerar solución final colocar lobby y arena a cientos de studs dentro del mismo Place.
 
 ## Lobby objetivo
 
-El lobby no debe ser una baseplate decorada ni una colección de carteles flotantes.
+El lobby debe parecer una pequeña isla-base/puerto tropical habitado.
 
-Objetivo de escala inicial:
+Objetivo aproximado inicial:
 
-- zona jugable aproximada: **250–300 studs de ancho**;
-- plaza o espacio central reconocible;
-- accesos 1v1, 2v2 y 3v3 integrados en arquitectura real;
-- recorridos cortos: un jugador debe poder entender el lobby y llegar a cualquier cola rápidamente;
+- 250–320 studs de zona principal;
+- arquitectura real integrada en el terreno;
+- cola 1v1, 2v2 y 3v3 claramente comprensible;
 - espacios futuros para tienda, misiones, rangos, cosméticos, tutorial, estadísticas y eventos;
-- sensación de pequeña isla/puerto/base tropical habitada, no de menú 3D vacío.
+- recorridos cortos: llegar a una cola no debe ser una excursión;
+- un punto visual central memorable.
 
-El lobby puede crecer más adelante, pero no debe competir en tamaño con la arena de partida.
+Los accesos no serán carteles flotantes sobre pads de debug.
 
-## Arena: escala objetivo v0.2
+## Geometría de la arena
 
-Las primeras islas reales deben ser mucho mayores que las del prototipo rechazado.
+La arena se organiza alrededor de un **centro de combate abierto** —mar/laguna— y las islas se colocan alrededor de ese centro.
 
-### Tamaño por isla
+Cada isla tiene dos direcciones funcionales:
 
-Objetivo inicial de huella jugable:
+### Frente de combate (`CombatFront`)
 
-- aproximadamente **420–500 studs de largo**;
-- aproximadamente **350–450 studs de ancho**;
-- forma irregular y orgánica, nunca un círculo perfecto;
-- relieve vertical útil de aproximadamente **30–50 studs** entre playas, zonas interiores y puntos elevados.
+La cara de la isla orientada hacia el centro de la arena.
 
-Estas cifras son objetivos de diseño para el primer prototipo serio, no valores sagrados. Se ajustarán según tiempos reales de recorrido en Studio.
+Contiene o conecta directamente con:
 
-### Tiempos de recorrido objetivo
+- DefenseZone;
+- CoreSockets;
+- CannonPlatform;
+- tienda/taller cercanos;
+- líneas de tiro controladas.
 
-El diseño debe buscar aproximadamente:
+### Zona exterior de exploración (`ExplorationBackland`)
 
-- base/núcleo -> recurso común cercano: **8–12 s**;
-- base/núcleo -> recurso lejano o valioso: **20–30 s**;
-- cruzar la isla por una ruta razonable: **30–45 s**;
+Se extiende hacia atrás y hacia los laterales, alejándose del centro de la arena.
+
+Contiene:
+
+- selva/vegetación;
+- árboles;
+- canteras;
+- cocoteros;
+- rutas;
+- desniveles;
+- objetivos secundarios;
+- resource sockets.
+
+Esta forma permite una isla grande y explorable sin esconder el Core detrás de la propia geografía.
+
+## Disposición de islas
+
+### Duel — 2 islas
+
+- colocadas aproximadamente a 180° una de otra;
+- ambas CombatFront miran al centro;
+- sus zonas de exploración se extienden hacia fuera;
+- el espacio central queda libre para balística y lectura visual.
+
+### Triad — 3 islas
+
+- colocadas aproximadamente a 120° entre sí;
+- las tres CombatFront miran hacia el centro;
+- cada CannonPlatform debe poder apuntar a cualquiera de las otras dos;
+- cada CoreSocket válido debe ser atacable desde ambos rivales.
+
+No se diseñará una isla que sólo funcione mirando a un único enemigo situado exactamente enfrente.
+
+## Escala objetivo de la isla v0.3
+
+Objetivo inicial de huella jugable por isla:
+
+- largo: aproximadamente **420–520 studs**;
+- ancho: aproximadamente **350–460 studs**;
+- forma orgánica/irregular;
+- relieve útil: aproximadamente **35–65 studs** entre costa, rutas, colinas y zona base.
+
+No son medidas definitivas. Se ajustarán mediante pruebas de recorrido con avatar real.
+
+## Tiempos de recorrido objetivo
+
+A velocidad normal de jugador, buscando rutas reales y no líneas rectas perfectas:
+
+- base -> recurso cercano: **8–12 s**;
+- base -> recurso medio: **15–20 s**;
+- base -> recurso lejano/valioso: **22–32 s**;
+- cruzar buena parte de la isla: **30–45 s**;
 - recorrer gran parte del perímetro: **60–90 s**.
 
-Estos tiempos deben medirse jugando, no suponerse sólo por studs.
+La preparación debe tener exploración, no caminar por caminar.
 
-La finalidad es que explorar importe sin convertir la preparación en un simulador de caminar.
+## Forma de la isla
+
+Dirección recomendada: silueta tipo hoja/abanico irregular.
+
+- parte interior (hacia el centro): costa/terrazas de combate más controladas;
+- parte media: base, tienda, taller y conexiones;
+- parte exterior: exploración más amplia y orgánica;
+- laterales: rutas alternativas y recursos secundarios.
+
+No usar círculos, discos ni plataformas uniformes.
+
+## DefenseZone
+
+Zona principal de construcción y protección del Core.
+
+Objetivo inicial:
+
+- aproximadamente **130–170 studs** de espacio defensivo útil;
+- integrada en una meseta/terraza natural;
+- varias rutas de entrada;
+- suficiente espacio para diseños de fortaleza distintos;
+- no necesariamente cuadrada;
+- situada dentro del CombatFront.
+
+La DefenseZone no ocupará toda la isla.
+
+## Core y CoreSockets
+
+El Core no puede aparecer en cualquier coordenada aleatoria.
+
+Cada isla tendrá varios `CoreSockets` diseñados y validados previamente dentro del CombatFront.
+
+Ejemplo:
+
+- CoreSocket_A
+- CoreSocket_B
+- CoreSocket_C
+- CoreSocket_D si el mapa lo permite.
+
+Al comenzar cada partida, el servidor escoge uno de los sockets válidos.
+
+### Reglas de un CoreSocket válido
+
+Debe:
+
+- ser defendible con construcción;
+- permanecer geográficamente atacable desde todos los equipos enemigos del modo;
+- no quedar detrás de colinas/acantilados permanentes;
+- no quedar bloqueado por árboles grandes permanentes;
+- ofrecer ventaja comparable al resto de sockets;
+- permitir una línea de tiro suficiente para balística;
+- tener espacio de fortificación alrededor;
+- estar claramente integrado en el terreno, no sobre una plataforma de debug.
+
+En `Triad`, cada socket debe pasar validación de línea de tiro desde las otras dos CannonPlatforms.
+
+## Señal del Core
+
+El jugador debe saber siempre qué zona está atacando.
+
+Dirección visual:
+
+- pedestal/tótem visible;
+- haz/energía/partículas verticales moderadas visibles desde lejos;
+- indicador discreto de objetivo durante batalla.
+
+Las defensas construidas sí pueden ocultar físicamente el Core. Eso es estrategia válida: el rival sabe dónde está, pero debe romper las defensas.
+
+## Selección del Core
+
+Primera versión:
+
+- selección aleatoria server-side entre sockets validados;
+- la posición se revela al comenzar preparación;
+- el Core no se mueve durante la partida.
+
+Posible evolución:
+
+- fase corta donde el equipo vota/elige entre 2–3 CoreSockets;
+- sólo después de validar que añade estrategia sin complicar onboarding.
+
+## CannonPlatform
+
+- situada en el CombatFront;
+- conectada a DefenseZone mediante ruta corta;
+- elevada lo suficiente para leer el horizonte;
+- no pegada al Core;
+- área amplia para colaboración de 1–3 jugadores;
+- rango horizontal preparado para 2 o 3 enemigos.
+
+La plataforma debe evitar que la propia isla bloquee la mayoría de disparos.
 
 ## Separación entre islas
 
-Objetivo inicial:
+No se fija todavía un número definitivo.
 
-- separación entre costas enfrentadas: aproximadamente **250–350 studs**;
-- distancia aproximada entre centros: alrededor de **700–800 studs**, dependiendo de la forma final de las islas.
+Objetivo inicial para `Duel`:
 
-La distancia debe permitir:
+- aproximadamente **250–380 studs de agua útil entre costas de combate**;
+- centros probablemente en el rango de **700–900 studs**, dependiendo de la forma real.
 
-- ver claramente la isla enemiga;
-- observar el vuelo del proyectil durante varios segundos;
-- necesitar controlar ángulo y potencia;
-- fallar por habilidad, no sólo por aleatoriedad;
-- distinguir impactos en distintas zonas de la base enemiga.
+Para `Triad`, la distancia radial se ajustará para conseguir tiempos de vuelo y lectura equivalentes entre cualquier par de islas.
 
-La distancia final se validará junto al prototipo de física del cañón. No se fijará definitivamente antes de probar el proyectil.
+La distancia final la decide la física del cañón:
 
-## Estructura interna de cada isla
+- tiempo de vuelo;
+- arco;
+- potencia;
+- precisión;
+- legibilidad de impactos.
 
-Cada isla se organiza en capas y rutas, no en objetos puestos alrededor de un círculo.
+## Estructura interna
 
-### 1. Costa / playa
+### 1. Costa
 
 - contorno irregular;
-- zonas de arena, pequeñas rocas, vegetación de costa;
-- algunas rutas rápidas alrededor de la isla;
-- vistas abiertas hacia el enemigo en la costa enfrentada;
-- posibles pequeños embarcaderos o restos decorativos en el futuro.
+- arena de anchura variable;
+- roca y vegetación costera;
+- pequeños entrantes/salientes;
+- rutas laterales;
+- vistas importantes hacia la arena central.
 
-### 2. Cinturón de exploración y recursos
+### 2. ExplorationBackland
 
-Ocupa buena parte de la isla y contiene:
+- vegetación rica pero navegable;
+- resource sockets distribuidos;
+- 2–3 rutas principales;
+- rutas secundarias;
+- cambios de altura;
+- 2–3 puntos de interés pequeños;
+- ningún espacio enorme sin función jugable.
 
-- palmeras y árboles;
-- zonas de piedra;
-- cocoteros y cocos;
-- caminos naturales;
-- desniveles suaves;
-- pequeñas zonas ocultas o rincones que recompensen explorar;
-- suficiente vegetación para dar sensación de isla real sin bloquear navegación o visibilidad.
+### 3. Base / DefenseZone
 
-### 3. Zona base / construcción
+- CoreSocket activo;
+- espacio de construcción;
+- conexión a CannonPlatform;
+- acceso al comerciante/taller;
+- rutas hacia recursos.
 
-Una meseta o zona relativamente plana integrada en el terreno, no una plataforma cuadrada evidente.
+### 4. Tienda y taller
 
-Objetivo inicial:
+- integrados físicamente en el mundo;
+- cerca de la base pero no amontonados con Core/cañón;
+- visibles desde rutas principales;
+- suficiente espacio para varios jugadores.
 
-- área construible aproximada: **130–160 studs por lado**, ajustada a la forma del terreno;
-- Core dentro de la zona defensiva pero no necesariamente exactamente en el centro geométrico;
-- espacio para varios diseños de fortaleza;
-- entradas/rutas de acceso desde varios lados;
-- líneas de tiro que puedan modificarse mediante construcción.
+## ResourceSockets
 
-### 4. Zona de cañón
+No usar spawn completamente aleatorio.
 
-- debe mirar naturalmente hacia la isla rival;
-- ligeramente elevada respecto a la playa, sin convertirse en una torre dominante;
-- espacio suficiente para tres jugadores;
-- no pegada al Core;
-- conectada a la base mediante una ruta corta;
-- debe permitir leer claramente la trayectoria hacia el enemigo.
+Cada socket tiene metadata conceptual:
 
-Dirección de diseño preferida: el cañón básico forma parte del objetivo de preparación y se ensambla/desbloquea al final de esa fase, en vez de existir como un objeto totalmente funcional desde el segundo cero. La mecánica exacta queda por prototipar.
+- tipo;
+- zona;
+- distancia;
+- valor;
+- dificultad/ruta;
+- grupo de equilibrio.
 
-### 5. Tienda
+El servidor selecciona combinaciones equivalentes para cada equipo.
 
-- integrada físicamente en la isla, como pequeño puesto/refugio/personaje;
-- accesible desde la zona base;
-- suficientemente separada del Core y el cañón para que no parezca todo amontonado;
-- visible desde rutas principales.
+## Simetría funcional
 
-## Exploración real
+Las islas no tienen que ser clones visuales.
 
-La isla debe ofrecer decisiones de ruta.
+Deben ser equivalentes en:
 
-Objetivo inicial:
+- superficie útil;
+- tiempos de acceso;
+- cantidad/valor de recursos;
+- opciones de CoreSocket;
+- coberturas principales;
+- líneas de cañón;
+- rutas de base.
 
-- 2–3 caminos naturales principales;
-- rutas secundarias más cortas o más arriesgadas;
-- uno o dos rincones secundarios memorables por isla;
-- cambios de altura suficientes para que el jugador reconozca distintas zonas;
-- ninguna zona puramente decorativa que obligue a recorrer grandes distancias sin recompensa.
+Las diferencias artísticas y pequeñas variaciones geográficas son deseables si no cambian la ventaja competitiva.
 
-No se busca un mundo abierto. Se busca una arena compacta que tenga sensación de exploración.
+## Preparación y tamaño de equipo
 
-## Recursos y aleatoriedad
+La isla debe funcionar en 1v1, 2v2 y 3v3.
 
-No generar recursos en posiciones totalmente aleatorias.
+No exigir que tres personas hagan tareas simultáneas para que la partida sea viable.
 
-Usar **resource sockets** o puntos de aparición diseñados previamente.
+La economía puede ajustar por modo:
 
-Cada isla tendrá un conjunto amplio de ubicaciones posibles y, al comenzar una partida, se activará una selección equilibrada.
+- nodos activos;
+- rendimientos;
+- costes;
+- tiempos;
+- contratos.
 
-Ventajas:
+## Criterios obligatorios del próximo escenario
 
-- cada partida cambia;
-- obliga a mirar/explorar;
-- mantiene equilibrio entre equipos;
-- evita nodos imposibles o colocaciones absurdas;
-- permite balancear distancias reales.
+No se acepta por contener una lista de objetos.
 
-Los dos equipos deben recibir valor y tiempos de acceso equivalentes, aunque la distribución concreta pueda variar.
+Debe demostrar:
 
-## Simetría competitiva
+1. escala real de exploración;
+2. isla con silueta orgánica;
+3. CombatFront y ExplorationBackland comprensibles sin carteles de debug;
+4. 2–3 rutas reales;
+5. vegetación y relieve de calidad;
+6. DefenseZone integrada;
+7. al menos 3 CoreSockets válidos;
+8. línea de tiro validable a los CoreSockets;
+9. CannonPlatform preparada para múltiples objetivos;
+10. recursos distribuidos por zonas;
+11. tienda/taller integrados;
+12. calidad visual coherente con ART_DIRECTION.md.
 
-No queremos dos círculos idénticos.
+## Validación antes de aprobar el mapa
 
-Queremos **simetría funcional**:
+Medir en Studio:
 
-- superficie jugable comparable;
-- tiempos de acceso a recursos comparables;
-- posiciones de Core y cañón equivalentes en ventaja;
-- coberturas y rutas equivalentes;
-- pequeñas diferencias visuales y geográficas permitidas.
+- tiempos de recorrido;
+- tiempo a recursos;
+- rutas principales;
+- porcentaje de visión desde CannonPlatform;
+- línea de tiro a cada CoreSocket;
+- giro requerido para dos/tres enemigos;
+- tamaño real de fortaleza posible;
+- FPS/rendimiento aproximado con vegetación;
+- lectura del Core y construcciones desde la distancia de combate.
 
-## Fase de preparación y escala
-
-Duración objetivo inicial para probar: **aproximadamente 5 minutos**, configurable por modo.
-
-El balance debe considerar el tamaño del equipo:
-
-- 1v1 no puede exigir la misma cantidad total de trabajo que 3v3;
-- producción de recursos, costes, objetivos o duración podrán escalar por modo;
-- nunca diseñar una isla que sólo funcione si tres personas recolectan simultáneamente.
-
-## Construcción
-
-La construcción no debe ocupar toda la isla.
-
-Debe concentrarse principalmente en la zona base para:
-
-- evitar fortalezas absurdas en cualquier rincón;
-- mantener legibilidad del combate;
-- simplificar validación;
-- permitir que el resto de la isla conserve su función de exploración y recursos.
-
-El sistema de snap debe respetar el terreno y permitir distintos diseños de defensa.
-
-## Criterios del próximo prototipo serio
-
-No se acepta un nuevo prototipo únicamente porque contenga todos los objetos solicitados.
-
-Debe demostrar visual y jugablemente:
-
-1. una isla de escala suficiente para explorar;
-2. rutas distinguibles;
-3. relieve real;
-4. vegetación y recursos integrados en el paisaje;
-5. zona de construcción amplia y natural;
-6. Core con posición defendible;
-7. zona de cañón con buena lectura hacia el enemigo;
-8. tienda integrada;
-9. dos islas que se sientan como lugares, no plataformas;
-10. recorrido medido dentro de los tiempos objetivo.
-
-## Validación
-
-Antes de dar por buena una isla se harán pruebas reales dentro de Roblox Studio midiendo:
-
-- tiempo desde spawn/base a recursos cercanos;
-- tiempo a recursos lejanos;
-- tiempo de cruce de isla;
-- legibilidad de rutas;
-- visibilidad de la isla rival;
-- espacio real disponible para una defensa de 1v1 y 3v3.
-
-Sólo después se fijarán dimensiones definitivas.
+Las dimensiones definitivas sólo se congelarán después de esas pruebas.
