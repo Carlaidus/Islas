@@ -4,149 +4,200 @@
 
 ## Estado general
 
-Fase: **preproducción de producto / rediseño de mundo y dirección artística**.
+Fase: **preproducción de producto / rediseño completo previo a nueva construcción**.
 
-El concepto del juego sigue vigente, pero el primer escenario visual generado por Rebirth ha sido rechazado. No se continuará construyendo encima de esa maqueta. Antes de volver a generar mundo se han definido criterios profesionales de escala, recorrido y arte.
+El primer escenario de Rebirth está rechazado. No se continuará sobre él. El proyecto ha sido reorganizado para definir antes de construir:
 
-## Repositorio y entorno local
+- escala real;
+- exploración;
+- CombatFront y CoreSockets;
+- soporte futuro de 2–3 islas;
+- economía de preparación;
+- minijuegos de recolección;
+- tienda/contratos;
+- fabricación;
+- construcción;
+- cañón y batalla;
+- dirección artística.
+
+## Repositorio y entorno
 
 - Repositorio: `Carlaidus/Islas`
 - Rama principal: `main`
 - Directorio local: `C:\Dev\Islas`
-- Git para Windows instalado y funcionando.
-- Rojo instalado: 7.6.1.
-- Proyecto local inicializado con `rojo init`.
-- Islas usa el puerto Rojo `34873` para no interferir con otro proyecto.
-- Roblox Studio se conecta correctamente a `localhost:34873`.
-- Rebirth está instalado y conectado correctamente al Studio de Islas.
+- Git funcionando.
+- Rojo 7.6.1 instalado.
+- Islas usa puerto Rojo `34873`.
+- Roblox Studio puede conectarse correctamente mediante Rojo.
+- Rebirth está instalado y conectado.
+- VS Code no es obligatorio.
 
-## Herramientas
+## Documentos de diseño vigentes
 
-- Roblox Studio
-- Rojo
-- GitHub
-- Codex
-- Rebirth cuando demuestre ventaja real
-- VS Code opcional, no necesario
-
-No se asume ya que Rebirth deba hacer automáticamente todo el worldbuilding. Se evaluará herramienta por tarea.
-
-## Diseño actualmente acordado
-
-- El jugador empieza en un lobby/hub real, no directamente en una isla.
-- Accesos/colas para 1v1, 2v2 y 3v3.
-- Dos islas enfrentadas por partida.
-- Equipos de 1 a 3 jugadores.
-- Fase de preparación basada en explorar, recolectar, comprar y construir.
-- Fase de batalla basada en cañón, munición, reparación y defensa.
-- Recursos iniciales: madera, piedra y cocos.
-- Moneda de partida.
-- NPC/tienda por isla.
-- Construcción modular con snap.
-- Núcleo/tótem como objetivo principal.
-- Progresión, rangos y monetización después de validar el núcleo jugable.
-
-## Escala de mundo objetivo v0.2
-
-Ver `WORLD_DESIGN.md`.
-
-Objetivos iniciales por isla:
-
-- 420–500 studs de largo;
-- 350–450 studs de ancho;
-- costa irregular;
-- relieve útil 30–50 studs;
-- zona construible aproximada de 130–160 studs;
-- cruce de isla: 30–45 s;
-- recurso lejano desde base: 20–30 s;
-- perímetro amplio: 60–90 s;
-- separación objetivo entre costas: 250–350 studs, pendiente de validar con física real del cañón.
-
-## Dirección artística
-
-Ver `ART_DIRECTION.md`.
-
-Objetivo: experiencia tropical de aventura, estilizada y colorida, con calidad visual suficiente para parecer un juego Roblox publicado. No se aceptarán círculos planos, árboles primitivos, pads flotantes ni composición de baseplate como dirección del producto.
-
-## Primer intento con Rebirth
-
-Estado: **RECHAZADO**.
-
-Rebirth generó una estructura técnicamente ordenada con 763 instancias, lobby, dos islas y jerarquía correcta, pero el resultado visual y espacial no cumple el nivel requerido.
-
-Problemas principales:
-
-- isla demasiado pequeña para explorar;
-- geometría plana/circular;
-- lobby sin arquitectura real;
-- recursos y props primitivos;
-- falta de dirección artística;
-- escala decidida antes de definir tiempos de recorrido.
-
-No se invertirá trabajo en pulir esta maqueta. Debe sustituirse por un diseño nuevo.
-
-## Memoria operativa
-
-- `README.md`
-- `GAME_DESIGN.md`
-- `WORLD_DESIGN.md`
-- `ART_DIRECTION.md`
-- `DECISIONS.md`
-- `PROJECT_STATE.md`
-- `NEXT_TASK.md`
-- `AGENTS.md`
+- `README.md` — resumen del proyecto y flujo operativo.
+- `GAME_DESIGN.md` — diseño maestro actual.
+- `WORLD_DESIGN.md` — escala, rutas, arena radial, CombatFront, ExplorationBackland y CoreSockets.
+- `ART_DIRECTION.md` — calidad y estilo visual.
+- `ECONOMY_DESIGN.md` — recursos, MatchCoins, contratos, tienda, fabricación, construcción y preparación.
+- `COMBAT_DESIGN.md` — Core, cañón, balística, daño, reparación, Duel/Triad y victoria.
+- `DECISIONS.md` — decisiones vigentes.
+- `NEXT_TASK.md` — única prioridad siguiente.
+- `AGENTS.md` — reglas para agentes.
 - `WORKFLOW.md`
 - `LAST_CODEX_REPORT.md`
 - `PROMPTS_LOG.md`
 - `IDEAS_BACKLOG.md`
 
-## Preparado
+## Diseño base actual
 
-- repositorio y memoria operativa;
-- entorno Git/Rojo/Studio;
-- conexión Rebirth;
-- concepto de juego;
-- flujo de lobby;
-- escala y tiempos objetivo de primera isla real;
-- dirección artística inicial;
-- registro del fallo del primer prototipo.
+### Entrada
+
+- Lobby/hub tropical real.
+- Colas 1v1, 2v2 y 3v3.
+
+### Tamaño de equipo
+
+- 1–3 jugadores por equipo.
+
+### Número de equipos
+
+- `Duel`: 2 islas/equipos — primera prioridad.
+- `Triad`: 3 islas/equipos — previsto desde arquitectura.
+
+### Partida
+
+- despliegue corto;
+- preparación;
+- transición;
+- batalla;
+- resultado;
+- regreso a lobby.
+
+### Preparación
+
+Incluye pequeños bucles jugables:
+
+- explorar;
+- tala;
+- minería;
+- cocos;
+- contratos;
+- MatchCoins;
+- comerciante;
+- fabricación compacta;
+- construcción;
+- preparación/mejora del cañón.
+
+### Batalla
+
+- un cañón principal por equipo inicialmente;
+- orientación + elevación + potencia;
+- coco balístico;
+- daño modular;
+- reparación de estructuras existentes;
+- victoria por destruir Core.
+
+## Core y visibilidad
+
+La posición del Core se resuelve mediante `CoreSockets`.
+
+- No puede aparecer en cualquier lugar.
+- Cada isla define varios sockets en su CombatFront.
+- El servidor selecciona uno al comenzar la partida.
+- El Core se revela durante preparación.
+- Todo socket debe ser atacable por todos los rivales del modo.
+- En Triad debe existir línea de tiro desde las otras dos islas.
+- El Core tendrá una señal visual a distancia.
+- Las construcciones del jugador sí pueden ocultarlo físicamente.
+
+## Mundo objetivo
+
+Escala inicial aproximada por isla:
+
+- 420–520 studs de largo;
+- 350–460 studs de ancho;
+- relieve útil 35–65 studs;
+- DefenseZone de ~130–170 studs;
+- 30–45 s para cruzar buena parte de la isla;
+- 22–32 s hasta recurso lejano;
+- 60–90 s de recorrido amplio.
+
+Arena radial:
+
+- Duel: islas ~180°.
+- Triad: islas ~120°.
+- CombatFront hacia centro.
+- ExplorationBackland hacia exterior/laterales.
+
+La distancia definitiva entre islas no se congela hasta prototipar la balística.
+
+## Tiempos iniciales para probar
+
+- preparación 1v1: ~6:00;
+- preparación 2v2: ~5:30;
+- preparación 3v3: ~5:00;
+- batalla: ~4:00;
+- overtime: hasta ~1:00.
+
+Configurables y pendientes de playtest.
+
+## Primer intento Rebirth
+
+Estado: **RECHAZADO**.
+
+No usar como referencia de:
+
+- escala;
+- arte;
+- layout;
+- calidad visual.
+
+Se mantiene temporalmente únicamente para no borrar nada antes de ordenar el nuevo flujo.
 
 ## No implementado todavía
 
-- lobby definitivo/producible;
-- isla real con escala correcta;
-- arena real;
-- recursos funcionales;
+- isla de producción;
+- arena Duel real;
+- Triad;
+- lobby producible;
 - recolección;
+- economía funcional;
 - construcción;
-- moneda;
-- tienda funcional;
-- cañón funcional;
-- núcleo funcional;
+- taller;
+- cañón;
+- balística;
+- Core funcional;
 - daño;
 - matchmaking;
-- UI definitiva;
 - persistencia;
 - progresión;
 - monetización.
 
-## Próximo objetivo
+## Herramientas: criterio actual
 
-No enviar otro prompt grande a Rebirth todavía.
+No asignar automáticamente "arte = Rebirth" y "código = Codex".
 
-Primero preparar una **referencia visual y espacial concreta** de la isla/lobby basada en `WORLD_DESIGN.md` y `ART_DIRECTION.md`. Después se reconstruirá el escenario desde cero con la herramienta que ofrezca mejor calidad, utilizando esa referencia y midiendo tiempos reales de recorrido.
+ChatGPT decide por tarea entre:
 
-El siguiente escenario debe plantearse como parte real del juego, no como un blockout desechable sin dirección.
+- Roblox Studio;
+- Rebirth;
+- Codex/Rojo;
+- herramientas propias de Roblox;
+- combinación de Terrain, MeshParts y assets seguros.
+
+La próxima intervención de Rebirth debe partir de una referencia visual/compositiva mucho más concreta que el primer prompt.
 
 ## Criterio para avanzar
 
-No se aprobará la nueva isla por cumplir una lista de objetos. Debe demostrar:
+Antes de implementar sistemas grandes debe existir una primera isla aprobada que demuestre:
 
-- ganas de explorar;
-- rutas y zonas reconocibles;
-- relieve y vegetación coherentes;
-- espacio real de construcción;
-- posición defendible del Core;
-- lectura clara del cañón y enemigo;
-- tiempos de recorrido dentro de objetivos;
-- calidad visual coherente con `ART_DIRECTION.md`.
+- escala de exploración;
+- rutas;
+- calidad artística;
+- DefenseZone;
+- varios CoreSockets válidos;
+- CannonPlatform;
+- distribución de recursos;
+- tienda/taller integrados;
+- líneas de tiro válidas;
+- tiempos de recorrido medidos.
