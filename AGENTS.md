@@ -2,6 +2,16 @@
 
 Instrucciones para cualquier agente de IA que trabaje en este repositorio, especialmente Codex.
 
+## Modelo operativo del proyecto
+
+Hay tres responsabilidades distintas:
+
+- **ChatGPT**: dirección de juego/producto. Decide prioridades, diseño, alcance, criterios de calidad y prepara las órdenes para Rebirth o Codex.
+- **Rebirth**: constructor dentro de Roblox Studio. Puede crear mundo, objetos, UI, scripts y mecánicas cuando sea la herramienta adecuada.
+- **Codex**: operador técnico permanente del proyecto local y GitHub. Mantiene `C:\Dev\Islas`, inspecciona el estado guardado de Studio, sincroniza/exporta código para revisión, ejecuta comprobaciones, actualiza documentación y realiza commit/push cuando corresponde.
+
+Codex NO debe reinventar decisiones de game design cerradas por ChatGPT/usuarios. Si detecta una contradicción importante, debe detenerse y reportarla.
+
 ## Antes de modificar nada
 
 Leer siempre:
@@ -28,6 +38,28 @@ Si la tarea afecta a Core, cañón, balística, daño, reparación, victoria, do
 11. `COMBAT_DESIGN.md`
 
 Si alguno de estos archivos contradice una instrucción nueva y explícita del usuario, prevalece la instrucción nueva, pero la documentación debe actualizarse para reflejar el cambio.
+
+## Sincronización después de Rebirth
+
+El Place de trabajo debe guardarse en una ruta fija dentro del proyecto, preferiblemente:
+
+`C:\Dev\Islas\studio\Islas_CURRENT.rbxlx`
+
+Después de una sesión significativa de Rebirth, Codex debe poder recibir la orden corta `Sincroniza la sesión de Rebirth` y realizar el trabajo técnico sin pedir al usuario que haga Git manualmente.
+
+Al sincronizar:
+
+1. Leer `git status` y el estado del repositorio.
+2. Inspeccionar `studio/Islas_CURRENT.rbxlx` si existe.
+3. Extraer a archivos de revisión cualquier `Script`, `LocalScript` y `ModuleScript` contenido en el `.rbxlx`, manteniendo una ruta/nombre reconocible y sin convertirlo automáticamente en código de producción.
+4. Generar/actualizar un manifiesto legible con scripts encontrados, rutas y cambios relevantes para revisión.
+5. No migrar automáticamente código bruto de Rebirth al árbol Rojo definitivo salvo que la tarea lo autorice explícitamente.
+6. Actualizar la documentación operativa necesaria.
+7. Ejecutar las comprobaciones razonables para la tarea.
+8. Crear commit y hacer push a GitHub cuando el estado sea coherente y la tarea lo permita.
+9. Dejar `LAST_CODEX_REPORT.md` con un resumen suficiente para que ChatGPT pueda revisar lo ocurrido desde GitHub.
+
+El objetivo es que el usuario no tenga que gestionar comandos Git ni exportaciones repetitivas. Su acción normal debe limitarse a guardar el Place y lanzar una orden corta a Codex.
 
 ## Regla de alcance
 
@@ -68,8 +100,8 @@ Prioridades:
 
 ## Roblox / Rojo
 
-- El repositorio local es la fuente de verdad del código gestionado por Rojo.
-- No crear manualmente en Studio scripts que deberían vivir en el árbol sincronizado salvo necesidad documentada.
+- El repositorio local es la fuente de verdad del código aprobado gestionado por Rojo.
+- Rebirth puede crear código dentro de Studio, pero ese código se considera candidato hasta ser inspeccionado y, si procede, migrado al árbol Rojo.
 - Mantener clara la separación servidor/cliente/compartido.
 - No introducir dependencias externas sin justificar su necesidad.
 - Para el mundo visual se permite Terrain, MeshParts y assets seguros cuando sean la opción adecuada; no sacrificar calidad visual únicamente para encajar todo dentro de una estructura de archivos cómoda.
@@ -113,20 +145,19 @@ Para sistemas económicos/combate, probar al menos los tamaños de equipo releva
 
 ## Coste de herramientas
 
-Rebirth u otras herramientas con coste por solicitud sólo se usarán cuando ChatGPT determine que aportan una ventaja real. Los prompts deben estar cerrados y ser verificables antes de enviarlos.
-
-No enviar una nueva generación grande de mundo sin referencia visual/compositiva suficiente.
+Rebirth u otras herramientas con coste por solicitud se usan cuando ChatGPT determine que aportan ventaja real. Los prompts deben estar cerrados y ser verificables antes de enviarlos.
 
 ## Al finalizar una tarea de Codex
 
-Actualizar o proporcionar contenido suficiente para actualizar `LAST_CODEX_REPORT.md` con:
+Actualizar `LAST_CODEX_REPORT.md` con:
 
 - tarea realizada;
 - archivos modificados;
-- decisiones tomadas;
+- estado Studio/repo observado;
+- decisiones técnicas tomadas;
 - pruebas realizadas;
 - resultados;
 - problemas pendientes;
-- commit o rama si existe.
+- commit y push si existen.
 
-También debe quedar claro si `PROJECT_STATE.md` o `NEXT_TASK.md` necesitan actualización.
+Actualizar también `PROJECT_STATE.md` y `NEXT_TASK.md` cuando corresponda.
