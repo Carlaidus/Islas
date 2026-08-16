@@ -115,6 +115,12 @@ Rojo de Islas usa el puerto `34873`.
 - `ROBLOX_PRODUCT_STRATEGY.md`
 - `PRODUCTION_PLAN.md`
 
+### Lobby actual
+
+- `LOBBY_DESIGN.md`
+- `LOBBY_REFERENCE_BRIEF.md`
+- `REBIRTH_LOBBY_PLAN_PROMPT.md`
+
 ### Rebirth y herramientas
 
 - `REBIRTH_PLAYBOOK.md`
@@ -147,6 +153,11 @@ Si se usa Rebirth, leer obligatoriamente:
 - `REBIRTH_POSTMORTEMS.md`
 - `REBIRTH_PROMPT_TEMPLATES.md`
 
+Si se trabaja en el lobby, leer también:
+
+- `LOBBY_DESIGN.md`
+- `LOBBY_REFERENCE_BRIEF.md`
+
 ## Estado actual
 
 - concepto y estrategia documentados;
@@ -154,6 +165,7 @@ Si se usa Rebirth, leer obligatoriamente:
 - dos generaciones amplias de Rebirth rechazadas;
 - investigación profesional completada;
 - playbook y protocolo nuevos creados;
-- próximo paso: calibración visual y prompt plan-only del lobby, no otro megaprompt.
+- lobby diseñado con plano, referencia y prompt plan-only;
+- próximo paso: abrir Place limpio, adjuntar referencias y obtener el plan de Rebirth sin modificar Studio.
 
 Ver `PROJECT_STATE.md` y `NEXT_TASK.md`.
