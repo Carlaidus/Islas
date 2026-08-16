@@ -2,80 +2,111 @@
 
 ## Tarea actual
 
-**Preparar la referencia de producción del mundo antes de reconstruir el escenario.**
+**Diseñar la referencia de producción de la primera isla real antes de reconstruir Studio.**
 
-No enviar todavía un segundo prompt de Rebirth.
-
-## Motivo
-
-El primer prototipo de Rebirth queda rechazado. La siguiente intervención no puede volver a depender de que una IA invente por sí sola escala, composición y calidad visual.
-
-Ya existen dos documentos nuevos que mandan sobre la siguiente construcción:
-
-- `WORLD_DESIGN.md`
-- `ART_DIRECTION.md`
+No enviar todavía otro prompt de Rebirth.
 
 ## Objetivo
 
-Convertir esas reglas en una referencia suficientemente concreta para construir la primera isla real del juego y el futuro lobby con una calidad coherente.
+Crear una especificación visual y espacial suficientemente concreta para que la siguiente construcción no dependa de que una IA improvise el mapa.
 
-La siguiente construcción debe ser **parte real del juego**, no una prueba pequeña sin intención de conservarla.
+La primera isla debe plantearse como base real de producción del juego.
 
-## Especificación base de la isla real
+## Documentos obligatorios
 
-Objetivos iniciales:
+Antes de construir, revisar:
 
-- 420–500 studs de largo;
-- 350–450 studs de ancho;
-- forma orgánica, costa irregular;
-- relieve aproximado de 30–50 studs;
-- vegetación tropical con variedad;
-- rutas de exploración legibles;
-- zona base/construcción integrada de aproximadamente 130–160 studs;
-- Core defendible;
-- tienda integrada;
-- zona futura de cañón orientada a la isla rival;
-- varios puntos de recursos distribuidos mediante sockets diseñados;
-- tiempo de cruce objetivo 30–45 segundos;
-- recurso lejano 20–30 segundos desde base.
+- `GAME_DESIGN.md`
+- `WORLD_DESIGN.md`
+- `ART_DIRECTION.md`
+- `ECONOMY_DESIGN.md`
+- `COMBAT_DESIGN.md`
+- `DECISIONS.md`
 
-## Antes de generar
+## Entregables de esta tarea
 
-1. Definir/revisar referencia visual de isla tropical estilizada.
-2. Definir composición desde vista superior: costa, base, rutas, recursos, tienda y cañón.
-3. Definir qué herramienta construirá cada parte: Rebirth, Roblox Studio/Assistant, Codex/Rojo u otra opción disponible.
-4. Decidir si el escenario usará Terrain, MeshParts o combinación.
-5. No volver a prohibir herramientas visuales necesarias únicamente por comodidad de organización; la calidad del mundo tiene prioridad, manteniendo seguridad y trazabilidad.
+### 1. Plano top-down de una isla
 
-## Primer prototipo Rebirth actual
+Debe definir aproximadamente:
 
-`Workspace > RebirthPrototype` se considera material rechazado.
+- costa orgánica;
+- CombatFront;
+- ExplorationBackland;
+- DefenseZone;
+- 3–4 CoreSockets;
+- CannonPlatform;
+- Shop;
+- Workshop;
+- zona/spawn de equipo;
+- rutas principales;
+- rutas secundarias;
+- bosque/palmeras;
+- cantera/piedra;
+- zonas de cocos;
+- puntos secundarios/contratos;
+- resource socket groups.
 
-No invertir créditos en corregirlo pieza por pieza.
+### 2. Referencia artística
 
-No usar sus dimensiones como referencia.
+Crear una o varias imágenes de referencia propias para mostrar:
 
-Se eliminará cuando tengamos confirmado el flujo de reconstrucción o una copia segura del Place.
+- calidad visual objetivo;
+- densidad de vegetación;
+- terreno/costa;
+- escala respecto al avatar;
+- aspecto del CombatFront;
+- aspecto del Core;
+- lenguaje visual del cañón, tienda y taller.
 
-## Criterios de aceptación para la próxima isla
+Estas imágenes se podrán adjuntar posteriormente a Rebirth como contexto.
 
-La nueva isla sólo se aprueba si:
+### 3. Regla de líneas de tiro
 
-- parece un lugar de un juego real, no una plataforma de prueba;
-- invita a explorar;
-- los recorridos tienen propósito;
-- vegetación/rocas/terreno forman un paisaje coherente;
-- la zona de base permite varias defensas distintas;
-- el jugador entiende visualmente dónde están las zonas importantes;
-- los tiempos de recorrido medidos coinciden aproximadamente con `WORLD_DESIGN.md`;
-- puede convertirse en la base de producción del mapa sin tener que rehacerla desde cero.
+Validar sobre el plano que:
 
-## Fuera de alcance inmediato
+- cada CoreSocket pertenece al CombatFront;
+- ningún socket depende de disparar a través de una montaña;
+- la futura CannonPlatform puede cubrir todos los sockets rivales;
+- la misma geometría puede funcionar colocada en Duel y posteriormente en Triad.
 
-Hasta disponer de una isla/mundo aprobado visual y espacialmente, no implementar todavía:
+### 4. Escala
 
-- monetización;
-- rangos;
-- misiones complejas;
-- matchmaking por nivel;
-- destrucción estructural avanzada.
+Usar como punto de partida:
+
+- isla ~420–520 x 350–460 studs;
+- relieve 35–65 studs;
+- DefenseZone ~130–170 studs;
+- cruce ~30–45 s;
+- recurso lejano ~22–32 s.
+
+Las medidas se ajustarán al probar el mapa.
+
+## Arquitectura recomendada de la isla
+
+Dirección base:
+
+- silueta tipo hoja/abanico irregular;
+- CombatFront en el borde interior de la arena;
+- DefenseZone/Core en terraza del frente, claramente atacable;
+- CannonPlatform desplazada respecto al Core;
+- Shop/Workshop detrás o lateral de la defensa;
+- exploración extendida hacia exterior y laterales;
+- 2–3 rutas principales conectando base y recursos;
+- vegetación más densa en exploración y más controlada en líneas de combate.
+
+## Después de aprobar la referencia
+
+1. decidir herramienta exacta de construcción;
+2. eliminar/aislar el `RebirthPrototype` rechazado;
+3. crear la primera isla desde cero;
+4. medir recorridos reales en Studio;
+5. corregir escala/layout antes de duplicarla;
+6. crear arena Duel;
+7. prototipar balística;
+8. sólo entonces congelar separación entre islas.
+
+## Regla
+
+No gastar créditos en generar un nuevo mapa hasta tener el plano/referencia aprobados.
+
+La próxima generación debe tener un objetivo de calidad visual y una composición concreta, no una lista genérica de objetos.
