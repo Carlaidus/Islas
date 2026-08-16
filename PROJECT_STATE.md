@@ -4,7 +4,7 @@
 
 ## Estado general
 
-Fase: **preproducción seria / calibración de herramientas y dirección de producto**.
+Fase: **preproducción seria / calibración profesional de Rebirth para el lobby**.
 
 El concepto de Islas está definido. Los dos intentos amplios de worldbuilding con Rebirth están rechazados. El proyecto no abandona Rebirth: se ha investigado su uso profesional y se ha creado un protocolo nuevo para aprovecharlo sin repetir los fallos.
 
@@ -16,6 +16,7 @@ No se continuará construyendo encima de V1/V2.
 - Rama principal: `main`
 - Directorio local: `C:\Dev\Islas`
 - Place de trabajo acordado: `C:\Dev\Islas\studio\Islas_CURRENT.rbxlx`
+- Snapshot V2 recomendado: `C:\Dev\Islas\snapshots\Islas_REBIRTH_V2_RECHAZADO.rbxlx`
 - Git funcionando.
 - Rojo 7.6.1 instalado.
 - Rojo de Islas: puerto `34873`.
@@ -31,7 +32,7 @@ No se continuará construyendo encima de V1/V2.
 - Codex: arquitectura, seguridad, Rojo, inspección del `.rbxlx`, GitHub, pruebas y consolidación.
 - Carlos/Marc: diseño humano y playtest; cuenta Rebirth operada por adulto.
 
-## Investigación completada
+## Investigación y aprendizaje completados
 
 Se han revisado:
 
@@ -40,30 +41,18 @@ Se han revisado:
 - material oficial de uso;
 - comunidad/Discord;
 - reseñas y comparativas externas con cautela;
-- documentación Roblox sobre onboarding, retención, analítica, rendimiento, Places, teleport, MemoryStore y monetización.
+- documentación Roblox sobre onboarding, retención, analítica, rendimiento, Places, teleport, MemoryStore y monetización;
+- los dos Places reales generados por Rebirth.
 
-Documentos nuevos:
+Documentos operativos:
 
 - `REBIRTH_PLAYBOOK.md`
 - `REBIRTH_PROMPT_TEMPLATES.md`
 - `REBIRTH_POSTMORTEMS.md`
-- `REBIRTH_REVIEW_WORKFLOW.md` actualizado
+- `REBIRTH_REVIEW_WORKFLOW.md`
 - `AI_TOOLING_MATRIX.md`
 - `ROBLOX_PRODUCT_STRATEGY.md`
 - `RESEARCH_SOURCES.md`
-
-## Conclusión sobre Rebirth
-
-Rebirth se mantiene como herramienta importante.
-
-Capacidades útiles:
-
-- leer/modificar Studio;
-- scripts y UI;
-- assets/3D;
-- edición contextual;
-- debugging;
-- ejecución rápida.
 
 Método obligatorio:
 
@@ -91,7 +80,7 @@ No volver a usar:
 - 1v1/2v2/3v3.
 - estadísticas/leaderboards.
 - práctica de cañón.
-- placeholders de tienda cosmética, misiones y rango.
+- placeholders de tienda cosmética, misiones, rango y party.
 
 ### Partida
 
@@ -172,7 +161,7 @@ Estado: **RECHAZADO**.
 
 Auditoría real del Place:
 
-- spawn en agua / SpawnLocation inválido o ausente;
+- spawn en agua / ausencia de SpawnLocation válido;
 - nado posible entre islas;
 - palmeras rotas y segmentadas;
 - árboles en agua;
@@ -189,6 +178,33 @@ No se reparará parche a parche como base de producción.
 
 Ver `REBIRTH_POSTMORTEMS.md`.
 
+## Paquete de lobby preparado
+
+Se ha diseñado el lobby compacto como primer entregable de calibración.
+
+Documentos nuevos:
+
+- `LOBBY_DESIGN.md` — escala, flujo, composición, jerarquía y QA;
+- `LOBBY_REFERENCE_BRIEF.md` — autoridad de las dos imágenes de referencia;
+- `REBIRTH_LOBBY_PLAN_PROMPT.md` — prompt plan-only listo para Rebirth.
+
+Referencias preparadas:
+
+- concept art en perspectiva del lobby;
+- plano top-down técnico del lobby.
+
+Dirección espacial inicial:
+
+- huella ~280 x 220 studs;
+- Spawn al sur;
+- plaza central;
+- Quick Play en eje principal;
+- 1v1/2v2/3v3 como salidas de puerto en abanico;
+- estadísticas al oeste;
+- cosméticos al este;
+- misiones/rango y party al sur;
+- práctica de cañón al noroeste.
+
 ## Estado de implementación
 
 ### Preparado
@@ -198,13 +214,18 @@ Ver `REBIRTH_POSTMORTEMS.md`.
 - estrategia de producto;
 - herramientas conectadas;
 - playbook profesional Rebirth;
+- postmortems V1/V2;
 - matriz Rebirth/Codex/Studio;
 - workflow de revisión;
-- plan de producción revisado.
+- plan de producción revisado;
+- especificación y referencias del lobby;
+- prompt plan-only del lobby.
 
 ### No implementado de producción
 
-- calibration visual aprobada;
+- Place limpio confirmado;
+- plan de Rebirth aprobado;
+- Calibration Yard aprobado;
 - lobby producible;
 - Place/arquitectura publicada;
 - isla real;
@@ -225,15 +246,15 @@ Ver `REBIRTH_POSTMORTEMS.md`.
 
 Seguir `NEXT_TASK.md`:
 
-- snapshot V2;
-- Place limpio;
-- referencias top-down/moodboard del lobby;
-- Visual Calibration Yard;
-- sesión nueva Rebirth;
-- prompt plan-only;
-- primera muestra limitada.
+1. snapshot V2;
+2. abrir y guardar Place limpio;
+3. abrir conversación nueva de Rebirth;
+4. adjuntar concept art + plano top-down;
+5. pegar `REBIRTH_LOBBY_PLAN_PROMPT.md`;
+6. recibir plan sin cambios en Studio;
+7. traer la respuesta a ChatGPT para revisión.
 
-No construir el lobby entero antes de aprobar la calibración.
+No construir el lobby entero antes de aprobar Calibration Yard y sección representativa.
 
 ## Criterio para avanzar
 
