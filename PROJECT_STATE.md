@@ -4,20 +4,21 @@
 
 ## Estado general
 
-Fase: **preproducción / prototipado técnico**.
+Fase: **preproducción / prototipado visual inicial**.
 
-El concepto principal del juego está definido y documentado. El entorno local ya está preparado y Roblox Studio se ha conectado correctamente al proyecto mediante Rojo. Todavía no existe una implementación jugable del juego.
+El concepto principal del juego está definido y documentado. El entorno local está preparado, Roblox Studio se conecta correctamente mediante Rojo y Rebirth ya está instalado y conectado al Studio de Islas. Todavía no existe una implementación jugable completa.
 
-## Repositorio
+## Repositorio y entorno local
 
 - Repositorio: `Carlaidus/Islas`
 - Rama principal: `main`
 - Directorio local: `C:\Dev\Islas`
 - Git para Windows instalado y funcionando.
 - Rojo instalado: 7.6.1.
-- El proyecto local se inicializó con `rojo init`.
-- Islas se está sirviendo con Rojo por el puerto `34873` para no interferir con otro proyecto que usa/ocupaba el puerto habitual.
+- Proyecto local inicializado con `rojo init`.
+- Islas usa el puerto Rojo `34873` para no interferir con otro proyecto.
 - Roblox Studio se ha conectado correctamente a `localhost:34873`.
+- Rebirth está instalado y aparece `Connected` en verde dentro de Roblox Studio.
 
 ## Herramientas acordadas
 
@@ -25,13 +26,13 @@ El concepto principal del juego está definido y documentado. El entorno local y
 - Rojo
 - GitHub
 - Codex
-- Rebirth cuando aporte valor real
+- Rebirth para tareas donde modificar directamente Studio aporte una ventaja real
 - VS Code opcional, no necesario
 
 ## Diseño actualmente acordado
 
 - El jugador empieza en un lobby, no directamente en una isla.
-- Lobby mínimo con accesos/colas 1v1, 2v2 y 3v3.
+- Lobby con accesos/colas claros para 1v1, 2v2 y 3v3.
 - Dos islas enfrentadas por partida.
 - Equipos de 1 a 3 jugadores.
 - Fase de preparación y fase de batalla.
@@ -66,11 +67,12 @@ El concepto principal del juego está definido y documentado. El entorno local y
 - Rojo 7.6.1 funcionando.
 - Proyecto Islas inicializado con Rojo.
 - Roblox Studio conectado correctamente al servidor Rojo de Islas.
+- Rebirth instalado y conectado correctamente al Studio de Islas.
 - Diseño inicial y flujo de lobby documentados.
 
 ## No implementado todavía
 
-- Rebirth instalado/conectado y probado.
+- Primer prototipo visual generado con Rebirth.
 - Lobby físico.
 - Colas 1v1/2v2/3v3.
 - Islas.
@@ -78,21 +80,23 @@ El concepto principal del juego está definido y documentado. El entorno local y
 - Recolección.
 - Construcción.
 - Moneda.
-- Tienda/NPC.
-- Cañón.
-- Núcleo.
+- Tienda/NPC funcional.
+- Cañón funcional.
+- Núcleo funcional.
 - Daño.
 - Flujo completo de partida.
-- UI.
+- UI definitiva.
 - Persistencia.
 - Matchmaking.
 - Rangos.
 - Misiones.
 - Monetización.
 
-## Próximo objetivo técnico
+## Próximo objetivo
 
-Instalar y conectar Rebirth al proyecto Islas sin gastar créditos. Después, ChatGPT decidirá y preparará la primera intervención de Rebirth para generar un prototipo visual/estructural de alto valor.
+Usar el primer prompt de Rebirth para generar un **prototipo visual y estructural amplio** del lobby y de una arena 1v1/2v2/3v3 de dos islas, sin implementar todavía sistemas sensibles ni arquitectura definitiva.
+
+La primera intervención debe crear elementos modulares, claramente nombrados y agrupados bajo un contenedor propio para poder revisarlos, corregirlos o eliminarlos sin contaminar el resto del proyecto.
 
 ## Riesgos a vigilar
 
