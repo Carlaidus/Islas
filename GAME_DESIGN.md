@@ -1,264 +1,491 @@
 # GAME_DESIGN
 
+Última actualización: 2026-08-16
+
 ## Visión
 
-Islas es un juego competitivo multijugador de Roblox con un lobby de entrada y partidas por equipos basadas en dos fases: preparación y batalla. Los jugadores no aparecen directamente en una isla. Primero entran en un lobby, eligen el formato de partida y después son enviados a una arena con dos islas enfrentadas.
+**Islas** es un juego competitivo multijugador de Roblox donde cada equipo dispone de una isla propia durante una partida.
 
-Cada equipo ocupa una isla propia, recolecta recursos, obtiene moneda, construye defensas y se prepara para una fase corta de combate con cañones. Gana el equipo que destruya el núcleo de la isla rival antes de perder el suyo.
+La partida tiene dos grandes actos:
 
-La prioridad es que el juego sea divertido antes de añadir progresión compleja o monetización.
+1. **Preparación**: explorar, recolectar, comerciar, fabricar, construir defensas y preparar el cañón.
+2. **Batalla**: disparar contra los rivales, romper sus defensas y destruir su Core antes de perder el propio.
 
-## Lobby y acceso a partidas
+La preparación no es un trámite: está formada por varios pequeños minijuegos y decisiones tácticas. La batalla tampoco es sólo apuntar: lo construido, lo comprado, los recursos reservados y la coordinación del equipo influyen directamente.
 
-El lobby forma parte del diseño base del juego.
+El objetivo es que una partida cuente una pequeña historia: empiezas con una isla casi sin fortificar y terminas defendiendo una base construida por tu equipo mientras intercambias cañonazos con otras islas.
 
-Objetivos del lobby inicial:
+## Calidad objetivo
 
-- servir como punto de entrada de todos los jugadores;
-- dejar claro cómo empezar a jugar sin depender de menús complicados;
-- ofrecer zonas o accesos físicos diferenciados para 1v1, 2v2 y 3v3;
-- permitir ampliar después el espacio con progresión, personalización, misiones, información, eventos u otras actividades sociales.
+No se está construyendo una demo técnica desechable.
 
-Propuesta inicial de dirección:
+El proyecto debe evolucionar desde el principio hacia un juego:
 
-- una zona central sencilla y legible;
-- tres accesos/colas claramente identificados: 1v1, 2v2 y 3v3;
-- cada acceso comunica cuántos jugadores necesita y el estado de la cola;
-- un jugador solo puede entrar en cualquier formato y el sistema podrá completar su equipo con otros jugadores;
-- en una fase posterior, los grupos/parties deberán poder mantenerse juntos al entrar en cola;
-- la decoración y los sistemas sociales avanzados no son prioritarios hasta validar el núcleo jugable.
+- bonito;
+- legible;
+- profundo sin ser complicado de aprender;
+- divertido en solitario y cooperando;
+- escalable;
+- adecuado para público infantil/juvenil;
+- monetizable sin depender de pay-to-win;
+- mantenible técnicamente.
 
-El lobby mínimo debe existir en el vertical slice porque representa el flujo real de entrada al juego.
+La dirección visual se define en `ART_DIRECTION.md` y el mundo en `WORLD_DESIGN.md`.
 
-## Formato de partida inicial
+## Flujo general
 
-- 2 islas enfrentadas.
-- 1 a 3 jugadores por isla.
-- Modos naturales: 1v1, 2v2 y 3v3.
-- Todos los jugadores pueden realizar todas las acciones.
-- En equipos, la ventaja proviene de repartir tareas simultáneamente, no de clases obligatorias.
+`Lobby -> cola/modo -> Match -> preparación -> batalla -> resultado -> recompensas -> Lobby`
 
-Más adelante se podrán estudiar partidas con más islas, pero no forman parte de la primera versión.
+## Lobby
 
-## Fase 1: preparación
+Todos los jugadores comienzan en un lobby/hub, no directamente en una isla.
 
-Duración provisional: alrededor de 4 minutos. Se ajustará mediante pruebas.
+Dirección:
 
-Durante esta fase los jugadores:
+- pequeña isla-base/puerto tropical;
+- accesos claros a 1v1, 2v2 y 3v3;
+- futuros espacios para tienda, misiones, cosméticos, rangos, tutorial, estadísticas y eventos;
+- parties/grupos podrán mantenerse juntos cuando se implemente matchmaking;
+- el lobby debe sentirse como un lugar real, no como un menú 3D vacío.
 
-- recolectan recursos;
-- consiguen moneda de partida;
-- construyen la base;
-- protegen el núcleo;
-- compran objetos o mejoras tácticas en la tienda de la isla;
-- almacenan munición;
-- preparan su estrategia para la batalla.
+## Tamaño de equipo vs número de islas
 
-### Recursos iniciales
+Son variables diferentes.
 
-#### Madera
+### Tamaño de equipo
 
-- Muy abundante.
-- Construcción rápida y barata.
-- Resistencia baja.
+- 1v1: 1 jugador por equipo;
+- 2v2: 2 jugadores por equipo;
+- 3v3: 3 jugadores por equipo.
 
-#### Piedra
+### Formato de arena
 
-- Menos abundante.
-- Construcción más cara.
-- Resistencia claramente superior.
+- `Duel`: 2 equipos/islas;
+- `Triad`: 3 equipos/islas, modo futuro previsto desde arquitectura.
 
-#### Cocos
+Ejemplos futuros posibles:
 
-- Munición básica del cañón.
-- Inicialmente habrá un único tipo de coco para mantener el prototipo simple.
-- En versiones posteriores podrán existir variantes: pesados, explosivos, perforantes, incendiarios u otros.
+- 1v1v1;
+- 2v2v2;
+- 3v3v3.
 
-### Moneda de partida
+El primer vertical slice y el lanzamiento inicial pueden centrarse en Duel, pero los sistemas no deben asumir que siempre existen exactamente dos equipos.
 
-Cada isla contará con una economía sencilla durante la partida. La moneda deberá crear decisiones tácticas, no trabajo repetitivo sin interés.
+## Estructura de una partida
 
-Posibles fuentes, pendientes de balance:
+### 0. Entrada / despliegue
 
-- recolección;
-- pequeños objetivos de isla;
-- acciones útiles;
-- recompensas durante la preparación.
+Duración orientativa: 10–20 s.
 
-La moneda de partida es independiente de Robux.
+Objetivos:
 
-## NPC / tienda de isla
+- presentar equipos/islas;
+- seleccionar aleatoriamente el CoreSocket activo de cada equipo;
+- revelar la posición del Core;
+- activar la distribución de recursos de esa partida;
+- permitir que el jugador entienda rápidamente su isla antes de empezar el cronómetro principal.
 
-Cada isla tendrá un personaje o puesto de tienda accesible durante la partida.
+### 1. Preparación
 
-La tienda podrá vender, según el balance futuro:
+Objetivos de tiempo iniciales para pruebas:
 
-- cocos adicionales;
-- materiales;
+- 1v1: ~6:00 min;
+- 2v2: ~5:30 min;
+- 3v3: ~5:00 min.
+
+Valores configurables y no definitivos.
+
+Durante preparación los jugadores pueden:
+
+- explorar;
+- talar madera;
+- minar piedra;
+- recoger cocos;
+- buscar objetivos secundarios;
+- completar contratos del comerciante;
+- conseguir moneda de partida;
+- comprar utilidades;
+- fabricar objetos tácticos;
+- construir defensas;
+- preparar/armar el cañón;
+- almacenar munición;
+- decidir qué recursos reservar para reparar durante batalla.
+
+### 2. Transición a batalla
+
+Últimos segundos de preparación:
+
+- aviso audiovisual fuerte;
+- se cierra o limita la recolección normal;
+- se termina la construcción libre;
+- el cañón queda operativo;
+- se muestran claramente los Core enemigos;
+- comienza la fase de combate.
+
+### 3. Batalla
+
+Objetivo inicial: ~4:00 min + posible overtime de hasta ~1:00 min.
+
+Durante batalla:
+
+- disparar;
+- cargar munición;
+- escoger objetivo;
+- reparar estructuras existentes;
+- proteger el cañón;
+- decidir cuándo abandonar el ataque para defender;
+- en tres islas, decidir a qué rival atacar.
+
+La construcción normal queda bloqueada inicialmente durante esta fase. Más adelante se pueden probar piezas de emergencia limitadas.
+
+### 4. Resultado
+
+- Core destruido = equipo eliminado/derrotado;
+- Duel termina al destruirse uno de los dos Cores;
+- Triad continúa hasta quedar un único Core vivo o alcanzar el límite temporal;
+- pantalla de victoria/derrota;
+- estadísticas de partida;
+- XP/recompensas persistentes cuando ese sistema exista;
+- regreso al lobby.
+
+## La isla como espacio jugable
+
+Una isla es una arena de exploración compacta, no una plataforma circular.
+
+Debe contener:
+
+- CombatFront orientado al centro;
+- ExplorationBackland con recursos/rutas;
+- DefenseZone;
+- CoreSockets;
+- CannonPlatform;
+- Shop;
+- Workshop;
+- resource sockets;
+- spawn/team area;
+- pequeños puntos de interés.
+
+Consultar `WORLD_DESIGN.md` para medidas y reglas espaciales.
+
+## El Core
+
+El objetivo principal de cada equipo.
+
+Dirección:
+
+- tótem/reliquia/cristal tropical memorable;
+- colocado en uno de varios CoreSockets validados;
+- la posición se selecciona al inicio de la partida;
+- nunca aparece en cualquier punto aleatorio de la isla;
+- siempre es atacable por geografía desde todos los rivales del modo;
+- puede ser tapado mediante estructuras construidas por el jugador;
+- emite una señal visual para que el rival sepa qué zona debe atacar;
+- no se mueve durante batalla.
+
+La construcción alrededor del Core es uno de los principales elementos estratégicos.
+
+## Recursos
+
+Primera economía física:
+
+### Madera
+
+- abundante;
+- rápida de conseguir;
+- construcción barata;
+- resistencia baja/media.
+
+### Piedra
+
+- más escasa;
+- más lenta de obtener;
+- construcción cara;
+- alta resistencia.
+
+### Cocos
+
+- munición básica;
+- distribuidos mediante cocoteros/resource sockets;
+- variantes especiales se introducirán sólo después de que la munición base funcione.
+
+## Recolección como minijuego
+
+No queremos simples barras de progreso largas.
+
+Dirección:
+
+- tala con pequeños timings;
+- minería buscando puntos débiles;
+- cocos mediante interacción/movimiento corto;
+- habilidad concede eficiencia extra, pero nunca bloquea a jugadores pequeños o nuevos.
+
+Consultar `ECONOMY_DESIGN.md`.
+
+## Moneda de partida
+
+Nombre técnico provisional: `MatchCoins`.
+
+Características:
+
+- se obtiene durante esa partida;
+- se reinicia al terminar;
+- no se compra con Robux;
+- sirve para decisiones tácticas;
+- no sustituye madera/piedra/cocos.
+
+Fuentes candidatas:
+
+- contratos;
+- objetivos secundarios;
+- bonus de habilidad/recolección;
+- vender excedentes;
+- descubrimientos.
+
+## Comerciante / Shop
+
+Cada isla tiene un comerciante integrado en el mundo.
+
+La tienda usa MatchCoins.
+
+Productos tácticos candidatos:
+
 - kits de reparación;
-- mejoras temporales;
-- piezas especiales;
-- utilidades defensivas u ofensivas.
+- cocos adicionales;
+- refuerzos;
+- piezas limitadas;
+- mejoras pequeñas de recarga/almacenamiento;
+- herramientas temporales de preparación.
 
-Regla: ninguna compra debe eliminar la necesidad de recolectar, construir o jugar con habilidad.
+No debe vender una victoria.
+
+## Taller / fabricación
+
+Fabricación deliberadamente compacta.
+
+Construcción básica consume madera/piedra directamente.
+
+El taller se reserva para pocas recetas significativas:
+
+- kit de reparación;
+- munición preparada;
+- refuerzo;
+- componente/mejora de cañón;
+- pieza defensiva especial.
+
+No convertir el juego en un survival con docenas de recetas.
 
 ## Construcción
 
-La construcción inicial será modular, no totalmente libre.
+Sistema modular con snap/contexto de terreno.
 
-Piezas candidatas para el prototipo:
+Zona principal: `DefenseZone`.
+
+Materiales iniciales:
+
+- madera;
+- piedra.
+
+Piezas iniciales candidatas:
 
 - pared;
-- suelo/plataforma;
+- media pared;
+- suelo;
 - rampa;
-- protección de cañón.
+- pequeña cubierta/protección.
 
-Las piezas se colocarán mediante un sistema de previsualización y snap para que construir sea rápido, comprensible y compatible con mando, teclado/ratón y, más adelante, móvil.
-
-Cada pieza tendrá:
+Cada pieza tiene:
 
 - coste;
 - material;
-- resistencia;
-- estado de daño.
+- vida;
+- estado visual de daño.
 
-La posición de las piezas y el material elegido deberán importar durante el combate.
+La forma de la fortaleza debe importar.
 
-## Núcleo de la isla
+## Cañón
 
-Cada equipo tiene un objetivo principal que proteger: núcleo, ídolo, tótem o equivalente visual. El nombre definitivo está pendiente.
+Un cañón principal por equipo en la primera versión.
 
-- La victoria se produce al destruir el núcleo rival.
-- Debe ser visible y fácil de comprender.
-- Sus distintos estados de daño deben tener feedback visual claro.
+Todos los jugadores pueden utilizar todas sus acciones.
 
-Esto evita que la condición de victoria dependa de destruir toda la construcción enemiga.
+Mecánicas base:
 
-## Fase 2: batalla
-
-Duración provisional: 2-3 minutos, pendiente de pruebas.
-
-Al terminar la preparación:
-
-- se bloquea la construcción de nuevas defensas, al menos en la primera propuesta;
-- comienza la batalla;
-- los jugadores disparan contra la isla rival;
-- pueden reparar parcialmente estructuras existentes usando recursos reservados;
-- deben decidir entre atacar, recargar, reparar o gestionar recursos.
-
-### Cañón
-
-Mecánica prevista:
-
+- carga;
 - orientación horizontal;
-- ángulo vertical;
-- control de potencia mediante una barra o indicador de timing;
-- disparo balístico visible;
-- impacto sobre la pieza concreta alcanzada.
+- elevación;
+- potencia/timing;
+- disparo balístico;
+- recarga.
 
-La habilidad del jugador debe influir claramente en el resultado.
+En 1v1 una persona debe poder realizar el ciclo sin que resulte pesado.
 
-### Cooperación
+En 2v2/3v3 el equipo puede dividir tareas de manera natural.
 
-No habrá roles bloqueados. Un jugador solo debe poder operar todo el sistema.
+Para Triad el cañón debe poder girar lo suficiente para atacar a cualquiera de los otros dos equipos.
 
-En 2v2 o 3v3, los jugadores podrán repartirse espontáneamente tareas como:
+Consultar `COMBAT_DESIGN.md`.
 
-- disparar;
-- buscar o transportar munición;
-- reparar;
-- gestionar la tienda;
-- defender zonas críticas.
+## Preparación del cañón
 
-## Daño y destrucción
+La fase de preparación debe incluir el cañón como objetivo.
+
+Dirección:
+
+- el emplazamiento/chasis existe;
+- el equipo completa una preparación básica durante la fase 1;
+- no debe ser posible llegar a batalla y quedarse sin juego por haber fallado una receta;
+- el sistema garantiza una versión básica operativa;
+- recursos/moneda adicionales pueden mejorar protección, almacenamiento o ritmo de recarga.
+
+## Daño
 
 Primera versión:
 
-- daño modular por pieza;
-- distintas resistencias según material;
-- impacto localizado;
-- núcleo con vida propia.
+- daño localizado;
+- estructuras con vida individual;
+- madera y piedra con resistencias distintas;
+- Core con vida propia;
+- efectos visuales claros de deterioro.
 
-Escalado posterior posible:
+No introducir destrucción estructural compleja hasta validar esta capa.
 
-- soporte estructural;
-- derrumbes;
-- daño de área;
-- tipos especiales de proyectil.
+## Reparación
 
-No implementar destrucción física compleja antes de validar el prototipo básico.
+Durante batalla:
 
-## Final de partida
+- reparar estructuras existentes;
+- consumir recursos reservados;
+- tiempo de reparación suficiente para crear riesgo;
+- obliga a elegir entre atacar o defender.
 
-Al destruir un núcleo:
+Esto adquiere especial valor en 2v2/3v3 porque los jugadores pueden repartir funciones sin roles bloqueados.
 
-- termina la partida;
-- se muestra claramente el equipo vencedor;
-- se entregan recompensas;
-- se registran estadísticas;
-- se prepara el retorno al lobby o al siguiente ciclo de juego.
+## Cooperación
 
-## Progresión futura
+No existen clases obligatorias.
 
-Una vez validado el juego base:
+Todos pueden:
+
+- recolectar;
+- fabricar;
+- comprar;
+- construir;
+- cargar;
+- apuntar;
+- disparar;
+- reparar.
+
+La cooperación emerge porque varios jugadores pueden hacerlo simultáneamente.
+
+## Triad / tres islas
+
+No es necesario construir este modo primero, pero debe estar previsto.
+
+Principios:
+
+- arena radial;
+- islas a ~120°;
+- Core de cada isla visible/atacable desde las otras dos;
+- cañón con giro suficiente;
+- último Core vivo gana;
+- focus fire 2 contra 1 se estudiará mediante pruebas antes de introducir compensaciones artificiales.
+
+## Aprendizaje
+
+El juego debe enseñar haciendo.
+
+Primera partida:
+
+- pequeñas indicaciones contextuales;
+- marcadores sobre recursos útiles;
+- señal del Core;
+- instrucciones simples del comerciante/taller;
+- indicaciones claras de fase y temporizador;
+- tutorial pesado sólo si las pruebas demuestran que es necesario.
+
+## Progresión persistente
+
+Después de validar el bucle principal:
 
 - XP;
 - rangos;
 - misiones;
 - estadísticas;
-- desbloqueos;
-- matchmaking que intente agrupar niveles/rangos similares;
-- cosméticos y personalización.
+- desbloqueos cosméticos;
+- historial/logros;
+- matchmaking orientado por habilidad/rango cuando haya suficiente población.
 
-Ejemplos de rangos provisionales: Grumete, Marinero, Artillero, Capitán, Almirante. No están cerrados.
+Los rangos concretos todavía no están cerrados.
 
-## Monetización futura
+## Monetización con Robux
 
-Principio: no diseñar el núcleo de combate alrededor de pagar para ganar.
+Principio: no vender directamente poder competitivo determinante.
 
-Candidatos adecuados para Robux:
+Buenos candidatos:
 
 - skins de cañón;
-- apariencias de cocos/proyectiles;
-- explosiones y efectos visuales;
+- skins/efectos de coco;
+- explosiones visuales;
 - banderas;
-- decoraciones de isla;
-- animaciones y celebraciones;
+- apariencias del Core;
+- decoraciones cosméticas del área de base;
+- animaciones/celebraciones;
+- emotes;
 - cosméticos de personaje;
-- pases o contenido cosmético.
+- pases estéticos/progresión cosmética.
 
-Las decisiones concretas de monetización se tomarán después de demostrar que el bucle básico produce ganas de jugar otra partida.
+No vender MatchCoins directamente por Robux.
 
-## Escalabilidad técnica y de diseño
+No permitir que un jugador pague para empezar una partida con una fortaleza objetivamente superior.
 
-Los sistemas deberán estar desacoplados y configurables para poder cambiar sin reescribir el juego:
+## Arquitectura configurable
 
-- número de jugadores por equipo;
-- formatos/colas disponibles en lobby;
+El juego debe permitir cambiar mediante configuración:
+
+- número de equipos;
+- jugadores por equipo;
 - duración de fases;
-- tipos y cantidades de recursos;
-- precios de tienda;
-- estadísticas de materiales;
-- vida de estructuras;
+- mapa;
+- recursos activos;
+- nodos/socket groups;
+- costes;
+- tienda;
+- contratos;
+- vida de materiales;
+- CoreSockets;
 - parámetros del cañón;
-- recompensas;
-- mapas/islas;
-- modos de juego.
+- munición;
+- reglas de overtime;
+- recompensas.
 
-Siempre que sea razonable, los valores de balance deben vivir en configuración y no dispersos como números fijos por el código.
+No duplicar sistemas por modo.
 
-## Preguntas abiertas
+## Vertical slice real
 
-- Nombre definitivo del juego.
-- Dirección visual definitiva del lobby.
-- Nombre/estética del núcleo.
-- Duraciones finales.
-- Cómo se obtiene exactamente la moneda.
-- Catálogo inicial de la tienda.
-- Número y posición de cañones por equipo.
-- Si la munición requiere carga manual o una interacción más simple.
-- Cantidad de materiales y ritmo de recolección.
-- Qué se puede reparar durante combate y a qué coste.
-- Funcionamiento exacto de parties, colas y matchmaking por rango cuando llegue esa fase.
+Orden de validación:
 
-Estas preguntas deben resolverse mediante prototipos y pruebas, no sólo sobre el papel.
+1. definir y construir una isla real de calidad;
+2. validar escala/rutas/CoreSockets;
+3. duplicar/colocar arena Duel;
+4. prototipo de balística del cañón;
+5. recolección básica;
+6. construcción básica;
+7. Core y daño;
+8. transición preparación -> batalla -> resultado;
+9. economía/tienda/taller mínimos;
+10. lobby/colas funcionales;
+11. 2v2/3v3 y escalado;
+12. Triad cuando Duel sea sólido.
+
+## Criterio de diversión
+
+Antes de progresión/Robux, una partida debe conseguir que el jugador quiera repetir porque:
+
+- la distribución cambió;
+- podría haber construido mejor;
+- podría haber usado mejor su tiempo;
+- podría haber comprado otra cosa;
+- podría haber apuntado mejor;
+- el equipo rival hizo una estrategia distinta.
+
+Ese deseo de jugar "otra" es el producto principal.
