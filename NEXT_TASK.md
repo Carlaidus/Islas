@@ -2,13 +2,9 @@
 
 ## Tarea actual
 
-**Instalar y conectar Rebirth al proyecto Islas sin gastar créditos.**
+**Generar con Rebirth el primer prototipo visual/estructural de Islas.**
 
 Esta es la única tarea prioritaria actual.
-
-## Objetivo
-
-Conseguir que Rebirth quede correctamente instalado y conectado al Roblox Studio del proyecto Islas para poder utilizar después sus créditos en tareas de alto valor.
 
 ## Estado previo ya completado
 
@@ -16,56 +12,72 @@ Conseguir que Rebirth quede correctamente instalado y conectado al Roblox Studio
 - Git funcionando.
 - Rojo 7.6.1 instalado.
 - Proyecto Islas inicializado con `rojo init`.
-- Rojo de Islas funcionando en el puerto `34873`.
-- Roblox Studio conectado correctamente a Islas mediante Rojo.
+- Rojo de Islas usa el puerto `34873`.
+- Roblox Studio se conecta correctamente a Islas mediante Rojo.
+- Plugin Rebirth instalado.
+- Rebirth conectado correctamente al Studio de Islas (`Connected`).
 
-## Alcance
+## Objetivo
 
-1. Instalar el plugin oficial de Rebirth en Roblox Studio.
-2. Crear/iniciar sesión en la cuenta de Rebirth.
-3. Abrir el proyecto Islas en Roblox Studio.
-4. Conectar el plugin con el Dashboard de Rebirth.
-5. Verificar estado `Connected`.
-6. Confirmar cuántos créditos de prueba hay disponibles.
-7. No enviar todavía ningún prompt.
-8. Informar a ChatGPT cuando Rebirth esté conectado para preparar el primer prompt de construcción.
+Usar un único prompt de Rebirth de alto valor para construir una primera maqueta visual que permita evaluar el juego rápidamente antes de invertir tiempo en sistemas complejos.
 
-## Reglas importantes
+Debe incluir:
 
-- No tocar el proyecto de clicks.
-- No gastar créditos durante la instalación o prueba de conexión.
-- No pedir todavía a Rebirth que cree objetos, scripts o sistemas.
-- Antes del primer prompt, ChatGPT decidirá el alcance exacto y qué debe pertenecer a Rebirth frente a Rojo/Codex.
-- Evitar que Rebirth y Rojo modifiquen simultáneamente el mismo árbol sin decidir primero qué sistema es fuente de verdad.
+1. Un lobby tropical/colorido con zonas claras para entrar en 1v1, 2v2 y 3v3.
+2. Una arena prototipo separada con dos islas equilibradas enfrentadas.
+3. Tres posiciones de spawn por isla.
+4. Zona de construcción alrededor del objetivo principal.
+5. Recursos visuales provisionales: madera/palmeras, piedra/rocas y cocos.
+6. NPC/puesto de tienda provisional por isla.
+7. Núcleo/tótem claramente identificable por isla.
+8. Posición y modelo provisional de cañón por isla.
+9. Espacios y distancias pensados para partidas rápidas y disparos balísticos visibles.
+10. Organización limpia y modular en Explorer.
 
-## Diseño que debe recordar el siguiente paso
+## Estrategia de propiedad
 
-El primer prototipo no puede asumir que el jugador empieza directamente en una isla.
+Durante esta primera generación:
 
-El flujo base es:
+- Rebirth modificará únicamente el contenido visual/prototipo dentro de un contenedor propio, idealmente `Workspace/RebirthPrototype`.
+- No debe modificar código gestionado por Rojo.
+- No debe tocar ningún otro proyecto.
+- No debe implementar sistemas sensibles o definitivos.
 
-lobby -> zona/cola 1v1, 2v2 o 3v3 -> partida de dos islas -> preparación -> batalla -> resultado -> vuelta al ciclo.
+## Fuera de alcance
 
-## Fuera de alcance de esta tarea
+No implementar todavía:
 
-Todavía no construir:
-
-- lobby;
-- islas;
-- recursos;
-- cañones;
-- tienda;
-- moneda;
-- matchmaking;
-- monetización;
-- arte final.
+- matchmaking real;
+- teletransporte entre servidores/places;
+- DataStore;
+- Robux;
+- rangos;
+- misiones;
+- economía definitiva;
+- tienda funcional completa;
+- recolección definitiva;
+- sistema de construcción definitivo;
+- daño definitivo;
+- destrucción estructural avanzada;
+- arquitectura grande de scripts.
 
 ## Criterios de aceptación
 
-La tarea termina cuando:
+Tras el primer prompt debe ser posible inspeccionar en Studio, sin necesidad de Play:
 
-- Rebirth está instalado;
-- Rebirth está conectado al Studio correcto;
-- el usuario conoce los créditos disponibles;
-- no se ha gastado ningún crédito;
-- el proyecto de clicks no ha sido modificado.
+- el lobby;
+- las tres zonas 1v1/2v2/3v3;
+- las dos islas;
+- los spawns;
+- la disposición de recursos;
+- la tienda;
+- el núcleo;
+- el cañón;
+- la zona construible;
+- la distancia y lectura visual de la batalla.
+
+Después se revisará el resultado antes de gastar un segundo crédito.
+
+## Regla
+
+No enviar un segundo prompt de Rebirth hasta que ChatGPT y los usuarios hayan evaluado visualmente el resultado del primero y decidido qué conservar/corregir.
