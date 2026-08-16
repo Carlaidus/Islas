@@ -2,9 +2,33 @@
 
 ## Visión
 
-Islas es un juego competitivo multijugador de Roblox basado en dos fases: preparación y batalla. Cada equipo ocupa una isla propia, recolecta recursos, obtiene moneda, construye defensas y se prepara para una fase corta de combate con cañones. Gana el equipo que destruya el núcleo de la isla rival antes de perder el suyo.
+Islas es un juego competitivo multijugador de Roblox con un lobby de entrada y partidas por equipos basadas en dos fases: preparación y batalla. Los jugadores no aparecen directamente en una isla. Primero entran en un lobby, eligen el formato de partida y después son enviados a una arena con dos islas enfrentadas.
+
+Cada equipo ocupa una isla propia, recolecta recursos, obtiene moneda, construye defensas y se prepara para una fase corta de combate con cañones. Gana el equipo que destruya el núcleo de la isla rival antes de perder el suyo.
 
 La prioridad es que el juego sea divertido antes de añadir progresión compleja o monetización.
+
+## Lobby y acceso a partidas
+
+El lobby forma parte del diseño base del juego.
+
+Objetivos del lobby inicial:
+
+- servir como punto de entrada de todos los jugadores;
+- dejar claro cómo empezar a jugar sin depender de menús complicados;
+- ofrecer zonas o accesos físicos diferenciados para 1v1, 2v2 y 3v3;
+- permitir ampliar después el espacio con progresión, personalización, misiones, información, eventos u otras actividades sociales.
+
+Propuesta inicial de dirección:
+
+- una zona central sencilla y legible;
+- tres accesos/colas claramente identificados: 1v1, 2v2 y 3v3;
+- cada acceso comunica cuántos jugadores necesita y el estado de la cola;
+- un jugador solo puede entrar en cualquier formato y el sistema podrá completar su equipo con otros jugadores;
+- en una fase posterior, los grupos/parties deberán poder mantenerse juntos al entrar en cola;
+- la decoración y los sistemas sociales avanzados no son prioritarios hasta validar el núcleo jugable.
+
+El lobby mínimo debe existir en el vertical slice porque representa el flujo real de entrada al juego.
 
 ## Formato de partida inicial
 
@@ -172,7 +196,7 @@ Al destruir un núcleo:
 - se muestra claramente el equipo vencedor;
 - se entregan recompensas;
 - se registran estadísticas;
-- se prepara el retorno al siguiente ciclo de juego.
+- se prepara el retorno al lobby o al siguiente ciclo de juego.
 
 ## Progresión futura
 
@@ -210,6 +234,7 @@ Las decisiones concretas de monetización se tomarán después de demostrar que 
 Los sistemas deberán estar desacoplados y configurables para poder cambiar sin reescribir el juego:
 
 - número de jugadores por equipo;
+- formatos/colas disponibles en lobby;
 - duración de fases;
 - tipos y cantidades de recursos;
 - precios de tienda;
@@ -225,6 +250,7 @@ Siempre que sea razonable, los valores de balance deben vivir en configuración 
 ## Preguntas abiertas
 
 - Nombre definitivo del juego.
+- Dirección visual definitiva del lobby.
 - Nombre/estética del núcleo.
 - Duraciones finales.
 - Cómo se obtiene exactamente la moneda.
@@ -233,6 +259,6 @@ Siempre que sea razonable, los valores de balance deben vivir en configuración 
 - Si la munición requiere carga manual o una interacción más simple.
 - Cantidad de materiales y ritmo de recolección.
 - Qué se puede reparar durante combate y a qué coste.
-- Cómo funcionará el matchmaking y el lobby en versiones posteriores.
+- Funcionamiento exacto de parties, colas y matchmaking por rango cuando llegue esa fase.
 
 Estas preguntas deben resolverse mediante prototipos y pruebas, no sólo sobre el papel.
