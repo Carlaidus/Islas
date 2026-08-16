@@ -1,118 +1,127 @@
 # WORKFLOW
 
-## Principio general
+## Modelo simple
 
-El proyecto se desarrolla en iteraciones pequeñas. Cada iteración debe producir algo comprobable y dejar la documentación sincronizada con la realidad.
+El usuario no debe hacer trabajo técnico repetitivo de GitHub.
 
-## Flujo de trabajo recomendado
+Flujo normal:
 
-### 1. Revisar memoria operativa
+1. Marc/Carlos explican qué quieren a ChatGPT.
+2. ChatGPT dirige diseño/producto y decide si la tarea conviene a Rebirth o Codex.
+3. Rebirth modifica Roblox Studio cuando aporta ventaja directa dentro de Studio.
+4. Codex actúa como operador técnico del proyecto local `C:\Dev\Islas`: revisa archivos, absorbe/extrae cambios técnicos, mantiene Rojo, documentación, pruebas, commits y pushes.
+5. El usuario prueba el resultado en Roblox Studio.
 
-Antes de una tarea importante, ChatGPT debe revisar:
+## Responsabilidades
+
+### ChatGPT — dirección
+
+- diseño del juego;
+- prioridades y orden de producción;
+- alcance de cada fase;
+- prompts para Rebirth/Codex;
+- evaluación visual y de producto;
+- decisiones de balance y experiencia;
+- revisión de informes/código cuando sea necesario.
+
+ChatGPT no debe dedicar el flujo cotidiano a hacer de operador Git si Codex puede hacerlo desde el PC.
+
+### Rebirth — Studio
+
+Puede utilizarse para:
+
+- Terrain y worldbuilding;
+- modelos/objetos;
+- UI;
+- composición y edición de escena;
+- scripts y mecánicas cuando resulte eficiente;
+- cambios que aprovechen su acceso directo al árbol de Roblox Studio.
+
+El código de Rebirth no se considera automáticamente código de producción. Codex lo inspecciona antes de consolidarlo en Rojo cuando corresponda.
+
+### Codex — operador técnico
+
+Codex debe ser el responsable habitual de:
+
+- `C:\Dev\Islas`;
+- Git y GitHub;
+- estructura Rojo;
+- lectura/edición de código;
+- inspección del Place `.rbxlx` guardado;
+- extracción de scripts de Studio para revisión;
+- pruebas y comprobaciones;
+- actualización de `PROJECT_STATE.md`, `NEXT_TASK.md` y `LAST_CODEX_REPORT.md`;
+- commit y push.
+
+Los documentos del repositorio proporcionan a Codex el contexto de diseño necesario, pero Codex no sustituye la dirección de producto salvo instrucción explícita.
+
+## Archivo de Studio
+
+Usar una ruta fija para el Place de trabajo:
+
+`C:\Dev\Islas\studio\Islas_CURRENT.rbxlx`
+
+Una vez establecido ese archivo, abrirlo como Place de desarrollo habitual y guardar con `Ctrl+S`.
+
+Tras una intervención significativa de Rebirth, el usuario no necesita exportar archivos diferentes ni gestionar Git. Guarda el Place y puede indicar a Codex:
+
+`Sincroniza la sesión de Rebirth.`
+
+Codex seguirá las reglas de `AGENTS.md`.
+
+## Qué hace Codex al sincronizar
+
+- revisa el repo y el `.rbxlx` actual;
+- identifica scripts presentes en Studio;
+- genera una representación/reporte revisable cuando haga falta;
+- no convierte código bruto de Rebirth en producción sin autorización;
+- actualiza documentación;
+- ejecuta verificaciones pertinentes;
+- commit/push del estado coherente;
+- deja informe en `LAST_CODEX_REPORT.md`.
+
+## Revisión visual
+
+Terrain, MeshParts, decoración y composición se evalúan principalmente mediante Roblox Studio y capturas.
+
+El `.rbxlx` permite a Codex inspeccionar jerarquía, propiedades y scripts. ChatGPT puede pedir el archivo directamente sólo cuando una revisión concreta no pueda resolverse con GitHub, informes o capturas.
+
+## Antes de una tarea importante
+
+Leer según corresponda:
 
 - `README.md`
 - `GAME_DESIGN.md`
 - `PROJECT_STATE.md`
 - `DECISIONS.md`
 - `NEXT_TASK.md`
-- `LAST_CODEX_REPORT.md`
 - `AGENTS.md`
-
-### 2. Definir una sola tarea
-
-La tarea debe tener:
-
-- objetivo;
-- alcance;
-- fuera de alcance;
-- archivos/sistemas que puede tocar;
-- criterios de aceptación;
-- forma de probarla.
-
-### 3. Elegir herramienta
-
-#### ChatGPT
-
-Dirección de diseño y técnica, división de tareas, revisión y preparación de prompts.
-
-#### Codex
-
-Preferido para:
-
-- creación/modificación de código local;
-- arquitectura y refactors controlados;
-- configuración Rojo;
-- pruebas y revisión del repositorio;
-- tareas que puedan resolverse de forma reproducible desde archivos.
-
-#### Rebirth
-
-Reservar para tareas donde actuar directamente sobre Roblox Studio aporte ventaja real, por ejemplo manipulación contextual de objetos/escena o trabajo que sea innecesariamente costoso reproducir sólo desde archivos.
-
-No usar Rebirth como chat de brainstorming. Preparar primero el prompt fuera de Rebirth.
-
-### 4. Trabajar en rama cuando corresponda
-
-Para cambios relevantes de código:
-
-- partir de `main` actualizado;
-- usar una rama descriptiva;
-- evitar mezclar tareas no relacionadas;
-- probar antes de integrar.
-
-Durante la fase inicial, cambios documentales pequeños pueden hacerse directamente en `main` si no generan riesgo.
-
-### 5. Validar
-
-Cada tarea debe pasar sus criterios de aceptación.
-
-Cuando haya cambios visibles o mecánicos en Roblox, la validación debe incluir prueba en Studio.
-
-### 6. Registrar resultado
-
-Después de una intervención de Codex:
-
-- reemplazar/actualizar `LAST_CODEX_REPORT.md`;
-- actualizar `PROJECT_STATE.md`;
-- cambiar `NEXT_TASK.md` cuando la tarea esté cerrada;
-- añadir a `DECISIONS.md` sólo decisiones realmente cerradas;
-- registrar prompts de pago importantes en `PROMPTS_LOG.md`.
-
-## Política de prompts de pago
-
-Antes de enviar un prompt a Rebirth:
-
-1. Confirmar que no es más eficiente hacerlo con Codex/Rojo.
-2. Leer el estado actual del proyecto.
-3. Escribir una orden autosuficiente.
-4. Definir qué puede tocar y qué no.
-5. Incluir resultado esperado.
-6. Incluir comprobación.
-7. Evitar pedir varias funciones ambiguas en una misma orden.
-8. Registrar el prompt y resultado en `PROMPTS_LOG.md`.
+- `WORLD_DESIGN.md`
+- `ART_DIRECTION.md`
+- `ECONOMY_DESIGN.md`
+- `COMBAT_DESIGN.md`
 
 ## Política de diseño
 
-Orden de prioridades:
+Prioridades:
 
-1. Diversión del bucle principal.
-2. Claridad para un jugador nuevo.
-3. Buen funcionamiento 1v1.
-4. Cooperación 2v2/3v3.
-5. Estabilidad y seguridad.
-6. Progresión y retención.
-7. Monetización.
+1. diversión del bucle principal;
+2. claridad para un jugador nuevo;
+3. calidad visual y espacial coherente;
+4. buen funcionamiento 1v1;
+5. cooperación 2v2/3v3;
+6. estabilidad y seguridad;
+7. progresión y retención;
+8. monetización.
 
-No invertir este orden para intentar monetizar demasiado pronto.
+## Política de prompts de Rebirth
 
-## Política de cambios de diseño
-
-Las ideas nuevas son bienvenidas. No se consideran automáticamente decisiones cerradas.
-
-Proceso:
-
-idea -> discusión -> prototipo si hace falta -> decisión -> `DECISIONS.md`.
+- usar Rebirth cuando aporte velocidad/calidad real;
+- darle contexto suficiente del juego;
+- dividir por fases verificables, no pedir sistemas gigantes ambiguos;
+- revisar resultados antes de continuar;
+- registrar resultados relevantes en `PROMPTS_LOG.md`.
 
 ## Recuperación de contexto
 
-Si se abre un chat nuevo o se pierde contexto, el repositorio debe permitir reconstruir el estado leyendo la documentación operativa. GitHub es la memoria persistente principal del proyecto.
+GitHub es la memoria persistente principal del proyecto. ChatGPT y Codex deben poder reconstruir el estado leyendo los documentos del repositorio.
