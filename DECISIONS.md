@@ -41,12 +41,12 @@ ChatGPT actuará como director técnico y de diseño del proyecto:
 - El diseño futuro deberá permitir que un jugador solo pueda entrar en una cola de equipo y que grupos puedan mantenerse juntos cuando implementemos parties/matchmaking.
 - Se estudiará separar Lobby y Match en Places distintos dentro de la misma experiencia; colocar ambos físicamente alejados dentro de un mismo mapa no se considera arquitectura final.
 
-## 2026-08-16 — Formato inicial de partida
+## 2026-08-16 — Tamaño de equipo y número de islas
 
-- Dos islas enfrentadas por partida.
-- Equipos de 1 a 3 jugadores por isla.
-- El mismo diseño debe soportar 1v1, 2v2 y 3v3.
-- No se implementarán más de dos islas en la primera versión.
+- 1v1, 2v2 y 3v3 describen jugadores por equipo, no cantidad de islas.
+- `Duel` = 2 equipos/islas.
+- `Triad` = 3 equipos/islas y queda previsto desde el diseño aunque no sea el primer modo implementado.
+- Arquitectura, Core y cañón no deben asumir que siempre habrá exactamente un único enemigo.
 
 ## 2026-08-16 — Roles
 
@@ -57,10 +57,23 @@ ChatGPT actuará como director técnico y de diseño del proyecto:
 ## 2026-08-16 — Bucle principal
 
 - Lobby: elegir formato/cola y formar partida.
-- Fase de preparación: explorar, recolectar, conseguir moneda, comprar y construir.
+- Despliegue corto: revelar Core y distribución de partida.
+- Fase de preparación: explorar, recolectar, comerciar, fabricar, comprar, construir y preparar el cañón.
 - Fase de batalla: disparar, gestionar munición, reparar y defender.
-- La condición principal de victoria es destruir el núcleo/tótem rival.
+- La condición principal de victoria es destruir el Core rival.
 - Al finalizar, el flujo debe permitir regresar al ciclo de lobby/partida.
+
+## 2026-08-16 — Tiempos iniciales para prototipo
+
+Valores de partida, no definitivos:
+
+- preparación 1v1: ~6:00;
+- preparación 2v2: ~5:30;
+- preparación 3v3: ~5:00;
+- batalla: ~4:00;
+- overtime máximo inicial: ~1:00.
+
+Todos deben vivir en configuración y ajustarse mediante playtests.
 
 ## 2026-08-16 — Recursos iniciales
 
@@ -72,26 +85,53 @@ Para el prototipo se parte de:
 
 No añadir muchos recursos antes de comprobar que estos generan decisiones interesantes.
 
+## 2026-08-16 — Recolección como minijuego
+
+- La recolección no debe consistir únicamente en mantener pulsado un botón largo.
+- Tala, minería y cocos tendrán interacciones cortas con habilidad sencilla que mejore eficiencia sin bloquear a jugadores nuevos.
+- Ver `ECONOMY_DESIGN.md`.
+
 ## 2026-08-16 — Construcción
 
 - Construcción modular mediante piezas y snap.
 - Materiales con costes y resistencias distintas.
 - Primera versión con daño por pieza.
 - Derrumbes y simulación estructural compleja quedan para una fase posterior.
-- La construcción se concentrará principalmente en una zona base amplia e integrada en el terreno; el resto de la isla conserva función de exploración y recursos.
+- La construcción se concentrará principalmente en una DefenseZone amplia e integrada en el terreno; el resto de la isla conserva función de exploración y recursos.
 
 ## 2026-08-16 — Economía y tienda
 
-- Existirá una moneda de partida independiente de Robux.
-- Cada isla tendrá un NPC o puesto de tienda.
-- La tienda ofrecerá compras tácticas durante la partida.
-- Los precios y objetos concretos se decidirán mediante balance y pruebas.
+- Existirá una moneda de partida (`MatchCoins` como nombre técnico provisional) independiente de Robux.
+- MatchCoins se reinicia en cada partida y no se compra directamente con Robux.
+- Cada isla tendrá un comerciante/tienda.
+- Se incorporan contratos y pequeñas decisiones de vender excedentes frente a usar recursos.
+- La fabricación será compacta y se limitará a objetos tácticos significativos, no a decenas de recetas.
+- Ver `ECONOMY_DESIGN.md`.
+
+## 2026-08-16 — Core y visibilidad
+
+- El Core nunca se coloca aleatoriamente en cualquier punto de la isla.
+- Cada mapa define varios `CoreSockets` válidos dentro del CombatFront.
+- El servidor selecciona uno al inicio y lo revela durante la preparación.
+- Todo CoreSocket debe ser geográficamente atacable desde todos los enemigos previstos por el modo.
+- En Triad, cada socket debe tener línea de tiro desde las otras dos islas.
+- El Core tendrá una señal visual visible a distancia; las defensas construidas pueden ocultarlo físicamente y obligar a romper la fortificación.
+- El Core no se mueve durante batalla.
+
+## 2026-08-16 — Cañón y múltiples enemigos
+
+- Primera versión: un cañón principal por equipo.
+- Todos los jugadores pueden cargar, apuntar y disparar.
+- Debe tener giro horizontal amplio para soportar dos o tres islas.
+- El sistema de balística se prototipará antes de congelar separación entre islas.
+- Ver `COMBAT_DESIGN.md`.
 
 ## 2026-08-16 — Monetización
 
 - La monetización con Robux se diseñará después de validar la diversión del juego base.
 - Evitar pay-to-win como principio de diseño.
 - Priorizar cosméticos, personalización y contenido que no destruya el equilibrio competitivo.
+- No vender MatchCoins directamente por Robux.
 
 ## 2026-08-16 — Escala real de las islas
 
@@ -99,18 +139,24 @@ El primer prototipo serio parte de objetivos de recorrido, no de medidas escogid
 
 Objetivo inicial por isla:
 
-- aproximadamente 420–500 studs de largo;
-- aproximadamente 350–450 studs de ancho;
+- aproximadamente 420–520 studs de largo;
+- aproximadamente 350–460 studs de ancho;
 - costa orgánica e irregular;
-- relieve útil de aproximadamente 30–50 studs;
-- zona construible aproximada de 130–160 studs por lado integrada en el terreno;
+- relieve útil de aproximadamente 35–65 studs;
+- DefenseZone aproximada de 130–170 studs integrada en el terreno;
 - tiempo objetivo de cruce de isla: 30–45 segundos;
-- recurso lejano desde base: 20–30 segundos;
+- recurso lejano desde base: 22–32 segundos;
 - recorrido amplio del perímetro: 60–90 segundos.
 
-Separación inicial objetivo entre costas enfrentadas: aproximadamente 250–350 studs. La distancia definitiva se fijará junto al prototipo físico del cañón.
+La separación definitiva se fijará junto al prototipo físico del cañón. Las cifras son objetivos de primer diseño y se validarán jugando en Studio.
 
-Las cifras son objetivos de primer diseño y se validarán jugando en Studio.
+## 2026-08-16 — Arena radial
+
+- Las islas presentan un `CombatFront` hacia el centro de la arena.
+- La exploración se extiende hacia atrás/laterales (`ExplorationBackland`).
+- Duel coloca dos islas aproximadamente a 180°.
+- Triad coloca tres islas aproximadamente a 120°.
+- Esta geometría permite islas grandes sin esconder el Core por la propia geografía.
 
 ## 2026-08-16 — Aleatoriedad de recursos
 
@@ -140,12 +186,12 @@ Razones:
 - lobby interpretado como pads/carteles en lugar de una localización;
 - dirección artística insuficientemente definida antes del prompt.
 
-Se conserva únicamente como evidencia de que Rebirth pudo respetar jerarquía y restricciones técnicas. No se usará como base artística del juego.
+Se conserva únicamente como evidencia técnica temporal. No se usará como base artística ni espacial del juego.
 
 ## 2026-08-16 — Filosofía de implementación
 
 - Sistemas configurables y desacoplados.
 - Valores de balance centralizados cuando sea posible.
-- El lobby mínimo funcional sí pertenece al vertical slice porque es el punto de entrada real del juego.
-- Decoración avanzada del lobby, rangos, matchmaking por nivel y monetización pueden esperar hasta validar el núcleo jugable.
-- Un prototipo puede usar arte provisional, pero debe comunicar correctamente escala, navegación, ambiente y calidad objetivo; "es sólo un prototipo" no justifica aceptar una mala dirección de producto.
+- Servidor autoritativo para economía, Core, daño, victoria y recompensas.
+- El lobby mínimo funcional pertenece al vertical slice porque es el punto de entrada real.
+- Un prototipo puede usar arte provisional, pero debe comunicar correctamente escala, navegación, ambiente y calidad objetivo.
