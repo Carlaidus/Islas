@@ -14,6 +14,11 @@ Leer siempre:
 6. `LAST_CODEX_REPORT.md`
 7. `WORKFLOW.md`
 
+Si la tarea afecta a mundo, nivel, mapa, escala, lobby, islas, recursos, vegetación, arte o composición visual, leer además obligatoriamente:
+
+8. `WORLD_DESIGN.md`
+9. `ART_DIRECTION.md`
+
 Si alguno de estos archivos contradice una instrucción nueva y explícita del usuario, prevalece la instrucción nueva, pero la documentación debe actualizarse para reflejar el cambio.
 
 ## Regla de alcance
@@ -28,6 +33,14 @@ No aprovechar una tarea para:
 - introducir monetización;
 - alterar diseño de juego cerrado;
 - rehacer arte o UI ajenos a la tarea.
+
+## Dirección de producto
+
+- No elegir dimensiones, distancias o densidad de mundo arbitrariamente.
+- Para level design, priorizar tiempos de recorrido, rutas, legibilidad y función jugable.
+- No aceptar un blockout pobre como resultado visual sólo porque contenga todos los objetos solicitados.
+- El primer prototipo Rebirth de 2026-08-16 está rechazado y no debe usarse como referencia de escala o arte.
+- `WORLD_DESIGN.md` y `ART_DIRECTION.md` mandan sobre futuros escenarios salvo decisión posterior documentada.
 
 ## Arquitectura
 
@@ -47,12 +60,15 @@ Prioridades:
 - No crear manualmente en Studio scripts que deberían vivir en el árbol sincronizado salvo necesidad documentada.
 - Mantener clara la separación servidor/cliente/compartido.
 - No introducir dependencias externas sin justificar su necesidad.
+- Para el mundo visual se permite Terrain, MeshParts y assets seguros cuando sean la opción adecuada; no sacrificar calidad visual únicamente para encajar todo dentro de una estructura de archivos cómoda.
 
 ## Pruebas
 
 Cada tarea debe incluir una forma concreta de comprobar el resultado.
 
 No declarar una tarea completada sólo porque el código compila. Cuando sea aplicable, indicar los pasos de prueba dentro de Roblox Studio.
+
+Para level design, medir recorridos reales dentro de Studio cuando `WORLD_DESIGN.md` defina objetivos de tiempo.
 
 ## Seguridad y explotación
 
@@ -70,6 +86,8 @@ Nunca confiar en datos enviados por el cliente para:
 ## Coste de herramientas
 
 Rebirth u otras herramientas con coste por solicitud sólo se usarán cuando ChatGPT determine que aportan una ventaja real. Los prompts deben estar cerrados y ser verificables antes de enviarlos.
+
+No enviar una nueva generación grande de mundo sin referencia visual/compositiva suficiente.
 
 ## Al finalizar una tarea de Codex
 
