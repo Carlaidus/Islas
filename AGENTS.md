@@ -36,10 +36,20 @@ Antes de modificar nada:
 - `REBIRTH_REVIEW_WORKFLOW.md`
 - `PROMPTS_LOG.md`
 
-### Mundo, mapa, lobby, islas o arte
+### Mundo, mapa, islas o arte
 
 - `WORLD_DESIGN.md`
 - `ART_DIRECTION.md`
+
+### Lobby
+
+Además de los documentos anteriores, leer obligatoriamente:
+
+- `LOBBY_DESIGN.md`
+- `LOBBY_REFERENCE_BRIEF.md`
+- `REBIRTH_LOBBY_PLAN_PROMPT.md` cuando se prepare o revise la sesión de planificación.
+
+El plano top-down es autoridad espacial y el concept art es autoridad de calidad/ambiente. No intercambiar esas funciones.
 
 ### Preparación, recursos, tienda, contratos, fabricación o construcción
 
@@ -198,6 +208,18 @@ No declarar una tarea completada sólo porque compila o porque Rebirth dice que 
 - escala con avatar;
 - rendimiento;
 - móvil cuando aplique.
+
+### Lobby
+
+- Spawn repetido al menos cinco veces;
+- primera vista comprensible;
+- tiempo real hasta Quick Play y colas;
+- límites de agua y retorno;
+- duplicados exactos;
+- debug visible;
+- legibilidad móvil/escritorio;
+- Output limpio;
+- Calibration Set aprobado antes de poblar.
 
 ### Mecánicas
 
