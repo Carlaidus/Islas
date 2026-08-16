@@ -2,82 +2,80 @@
 
 ## Tarea actual
 
-**Generar con Rebirth el primer prototipo visual/estructural de Islas.**
+**Preparar la referencia de producción del mundo antes de reconstruir el escenario.**
 
-Esta es la única tarea prioritaria actual.
+No enviar todavía un segundo prompt de Rebirth.
 
-## Estado previo ya completado
+## Motivo
 
-- Repositorio clonado en `C:\Dev\Islas`.
-- Git funcionando.
-- Rojo 7.6.1 instalado.
-- Proyecto Islas inicializado con `rojo init`.
-- Rojo de Islas usa el puerto `34873`.
-- Roblox Studio se conecta correctamente a Islas mediante Rojo.
-- Plugin Rebirth instalado.
-- Rebirth conectado correctamente al Studio de Islas (`Connected`).
+El primer prototipo de Rebirth queda rechazado. La siguiente intervención no puede volver a depender de que una IA invente por sí sola escala, composición y calidad visual.
+
+Ya existen dos documentos nuevos que mandan sobre la siguiente construcción:
+
+- `WORLD_DESIGN.md`
+- `ART_DIRECTION.md`
 
 ## Objetivo
 
-Usar un único prompt de Rebirth de alto valor para construir una primera maqueta visual que permita evaluar el juego rápidamente antes de invertir tiempo en sistemas complejos.
+Convertir esas reglas en una referencia suficientemente concreta para construir la primera isla real del juego y el futuro lobby con una calidad coherente.
 
-Debe incluir:
+La siguiente construcción debe ser **parte real del juego**, no una prueba pequeña sin intención de conservarla.
 
-1. Un lobby tropical/colorido con zonas claras para entrar en 1v1, 2v2 y 3v3.
-2. Una arena prototipo separada con dos islas equilibradas enfrentadas.
-3. Tres posiciones de spawn por isla.
-4. Zona de construcción alrededor del objetivo principal.
-5. Recursos visuales provisionales: madera/palmeras, piedra/rocas y cocos.
-6. NPC/puesto de tienda provisional por isla.
-7. Núcleo/tótem claramente identificable por isla.
-8. Posición y modelo provisional de cañón por isla.
-9. Espacios y distancias pensados para partidas rápidas y disparos balísticos visibles.
-10. Organización limpia y modular en Explorer.
+## Especificación base de la isla real
 
-## Estrategia de propiedad
+Objetivos iniciales:
 
-Durante esta primera generación:
+- 420–500 studs de largo;
+- 350–450 studs de ancho;
+- forma orgánica, costa irregular;
+- relieve aproximado de 30–50 studs;
+- vegetación tropical con variedad;
+- rutas de exploración legibles;
+- zona base/construcción integrada de aproximadamente 130–160 studs;
+- Core defendible;
+- tienda integrada;
+- zona futura de cañón orientada a la isla rival;
+- varios puntos de recursos distribuidos mediante sockets diseñados;
+- tiempo de cruce objetivo 30–45 segundos;
+- recurso lejano 20–30 segundos desde base.
 
-- Rebirth modificará únicamente el contenido visual/prototipo dentro de un contenedor propio, idealmente `Workspace/RebirthPrototype`.
-- No debe modificar código gestionado por Rojo.
-- No debe tocar ningún otro proyecto.
-- No debe implementar sistemas sensibles o definitivos.
+## Antes de generar
 
-## Fuera de alcance
+1. Definir/revisar referencia visual de isla tropical estilizada.
+2. Definir composición desde vista superior: costa, base, rutas, recursos, tienda y cañón.
+3. Definir qué herramienta construirá cada parte: Rebirth, Roblox Studio/Assistant, Codex/Rojo u otra opción disponible.
+4. Decidir si el escenario usará Terrain, MeshParts o combinación.
+5. No volver a prohibir herramientas visuales necesarias únicamente por comodidad de organización; la calidad del mundo tiene prioridad, manteniendo seguridad y trazabilidad.
 
-No implementar todavía:
+## Primer prototipo Rebirth actual
 
-- matchmaking real;
-- teletransporte entre servidores/places;
-- DataStore;
-- Robux;
+`Workspace > RebirthPrototype` se considera material rechazado.
+
+No invertir créditos en corregirlo pieza por pieza.
+
+No usar sus dimensiones como referencia.
+
+Se eliminará cuando tengamos confirmado el flujo de reconstrucción o una copia segura del Place.
+
+## Criterios de aceptación para la próxima isla
+
+La nueva isla sólo se aprueba si:
+
+- parece un lugar de un juego real, no una plataforma de prueba;
+- invita a explorar;
+- los recorridos tienen propósito;
+- vegetación/rocas/terreno forman un paisaje coherente;
+- la zona de base permite varias defensas distintas;
+- el jugador entiende visualmente dónde están las zonas importantes;
+- los tiempos de recorrido medidos coinciden aproximadamente con `WORLD_DESIGN.md`;
+- puede convertirse en la base de producción del mapa sin tener que rehacerla desde cero.
+
+## Fuera de alcance inmediato
+
+Hasta disponer de una isla/mundo aprobado visual y espacialmente, no implementar todavía:
+
+- monetización;
 - rangos;
-- misiones;
-- economía definitiva;
-- tienda funcional completa;
-- recolección definitiva;
-- sistema de construcción definitivo;
-- daño definitivo;
-- destrucción estructural avanzada;
-- arquitectura grande de scripts.
-
-## Criterios de aceptación
-
-Tras el primer prompt debe ser posible inspeccionar en Studio, sin necesidad de Play:
-
-- el lobby;
-- las tres zonas 1v1/2v2/3v3;
-- las dos islas;
-- los spawns;
-- la disposición de recursos;
-- la tienda;
-- el núcleo;
-- el cañón;
-- la zona construible;
-- la distancia y lectura visual de la batalla.
-
-Después se revisará el resultado antes de gastar un segundo crédito.
-
-## Regla
-
-No enviar un segundo prompt de Rebirth hasta que ChatGPT y los usuarios hayan evaluado visualmente el resultado del primero y decidido qué conservar/corregir.
+- misiones complejas;
+- matchmaking por nivel;
+- destrucción estructural avanzada.
