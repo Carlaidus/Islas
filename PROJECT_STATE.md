@@ -12,7 +12,7 @@ El concepto principal del juego está definido y documentado, pero todavía no e
 
 - Repositorio: `Carlaidus/Islas`
 - Rama principal: `main`
-- Estado inicial: documentación operativa en creación.
+- Estado actual: memoria operativa inicial creada y lista para comenzar la preparación técnica local.
 
 ## Herramientas acordadas
 
@@ -39,12 +39,27 @@ El concepto principal del juego está definido y documentado, pero todavía no e
 - Reparación durante combate.
 - Progresión, rangos y monetización reservados para fases posteriores.
 
+## Memoria operativa creada
+
+- `README.md` — visión general y reglas básicas del proyecto.
+- `GAME_DESIGN.md` — diseño detallado del juego.
+- `DECISIONS.md` — decisiones cerradas y vigentes.
+- `PROJECT_STATE.md` — estado real actual.
+- `NEXT_TASK.md` — única tarea prioritaria siguiente.
+- `AGENTS.md` — instrucciones para Codex y otros agentes.
+- `WORKFLOW.md` — método de trabajo del proyecto.
+- `LAST_CODEX_REPORT.md` — informe operativo de la última tarea de Codex.
+- `PROMPTS_LOG.md` — registro de prompts relevantes y de pago.
+- `IDEAS_BACKLOG.md` — ideas interesantes todavía no convertidas en requisitos.
+
 ## Implementado
 
 - Repositorio GitHub creado.
-- `README.md` creado.
-- `GAME_DESIGN.md` creado.
-- `DECISIONS.md` creado.
+- Memoria operativa inicial creada.
+- Diseño inicial documentado.
+- Flujo de trabajo definido.
+- Reglas de trabajo para Codex definidas.
+- Estrategia de uso de Rebirth definida.
 
 ## No implementado todavía
 
@@ -72,7 +87,9 @@ El concepto principal del juego está definido y documentado, pero todavía no e
 
 ## Próximo objetivo técnico
 
-Preparar el entorno local del proyecto y crear un esqueleto mínimo Rojo/Roblox que sincronice correctamente con Studio antes de implementar mecánicas.
+Preparar el entorno local del proyecto en Windows y crear un esqueleto mínimo Rojo/Roblox que sincronice correctamente con Studio antes de implementar mecánicas.
+
+Directorio local recomendado: `C:\Dev\Islas`.
 
 ## Riesgos a vigilar
 
