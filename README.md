@@ -1,81 +1,105 @@
 # Islas
 
-Proyecto de juego multijugador para Roblox.
+Proyecto de juego multijugador competitivo para Roblox.
 
 ## Visión
 
-`Islas` es un juego competitivo por equipos. Los jugadores comienzan en un lobby, eligen el formato de partida y después son enviados a una arena de dos islas enfrentadas. Cada equipo recolecta recursos, obtiene moneda, construye y refuerza su base y, al terminar la fase de preparación, combate contra la isla rival usando cañones y cocos como munición.
+`Islas` enfrenta equipos que disponen de una isla propia. Antes de combatir, los jugadores exploran, recolectan, comercian, fabrican, construyen defensas y preparan su cañón. Después comienza una fase de batalla balística donde gana el equipo que destruya el Core rival antes de perder el suyo.
 
-El objetivo es crear primero una experiencia sencilla de entender y con ganas de repetir partida, y después escalarla con progresión, contenido y monetización con Robux sin convertirla en pay-to-win.
+La preparación y la batalla deben ser divertidas por separado y combinarse en una partida que genere ganas de repetir con otra estrategia.
 
 ## Flujo principal
 
-1. Entrar al lobby.
-2. Elegir/entrar en la zona de cola 1v1, 2v2 o 3v3.
-3. Formar los dos equipos y comenzar la partida.
-4. Aparecer en la isla del equipo.
-5. Recolectar recursos y moneda.
-6. Construir y reforzar la base.
-7. Comprar elementos tácticos en la tienda de la isla.
-8. Preparar cañón y munición.
-9. Comenzar la fase de combate.
-10. Apuntar, disparar, reparar y defender.
-11. Destruir el núcleo enemigo antes de perder el propio.
-12. Mostrar resultado y recompensas y regresar al ciclo de lobby/partida.
+1. Lobby/hub.
+2. Cola 1v1, 2v2 o 3v3.
+3. Despliegue y revelado de Core/recursos.
+4. Preparación: explorar, recolectar, comerciar, fabricar, construir y preparar cañón.
+5. Batalla: cargar, apuntar, disparar, reparar y defender.
+6. Destrucción de Core / resultado.
+7. Recompensas y vuelta al lobby.
 
-## Alcance inicial
+## Modos y escalabilidad
 
-La primera versión jugable debe poder demostrar:
+### Jugadores por equipo
 
-- lobby mínimo funcional;
-- zonas/colas diferenciadas para 1v1, 2v2 y 3v3;
-- 2 islas enfrentadas por partida;
-- equipos de 1 a 3 jugadores;
-- recursos básicos: madera, piedra y cocos;
-- moneda de partida;
-- NPC/tienda por isla;
-- construcción modular mediante piezas con snap;
-- núcleo/tótem destruible;
-- cañón con orientación, ángulo y potencia;
-- reparación durante el combate;
-- victoria por destrucción del núcleo enemigo.
+- 1v1
+- 2v2
+- 3v3
 
-El lobby forma parte del producto desde el principio, pero su versión inicial será sencilla. Decoración avanzada, espacios sociales, matchmaking por rango, múltiples modos, progresión compleja y monetización vendrán después de validar el núcleo jugable.
+### Equipos/islas
+
+- `Duel`: 2 islas/equipos — prioridad inicial.
+- `Triad`: 3 islas/equipos — previsto desde arquitectura para futuros 1v1v1, 2v2v2 o 3v3v3.
+
+## Sistemas principales
+
+- isla explorable con recursos variables;
+- madera, piedra y cocos;
+- recolección mediante pequeños minijuegos;
+- MatchCoins de partida;
+- comerciante y contratos;
+- fabricación compacta;
+- construcción modular;
+- Core colocado en CoreSockets validados;
+- cañón con orientación, elevación y potencia;
+- daño modular y reparación;
+- progresión y monetización después de validar el juego base.
+
+## Reglas del Core
+
+El Core nunca aparece libremente en cualquier punto de la isla.
+
+Cada mapa contiene varios `CoreSockets` dentro del CombatFront. El servidor selecciona uno al comenzar la partida. Todo socket debe ser atacable desde todos los rivales previstos por el modo. En una futura arena de tres islas, debe poder atacarse desde las otras dos.
+
+Las defensas construidas sí pueden ocultar físicamente el Core, obligando al rival a destruirlas.
+
+## Diseño del mundo
+
+La isla se divide conceptualmente en:
+
+- `CombatFront`: zona orientada hacia el centro de la arena, con DefenseZone, CoreSockets y CannonPlatform.
+- `ExplorationBackland`: zona exterior/lateral de exploración, rutas y recursos.
+
+Esto permite islas grandes sin esconder el objetivo detrás de la propia geografía.
 
 ## Herramientas
 
-- Roblox Studio: edición, prueba y publicación.
-- Rojo: sincronización entre archivos locales y Roblox Studio.
-- GitHub: historial y memoria operativa.
-- Codex: código, arquitectura, refactorización y tareas sobre los archivos del proyecto cuando sea la herramienta más adecuada.
-- Rebirth: prototipado y construcción directa dentro de Roblox Studio cuando su acceso al mundo 3D y al árbol de Studio ahorre trabajo real.
-- VS Code: opcional; no es necesario para el flujo del proyecto.
+- Roblox Studio
+- Rojo
+- GitHub
+- Codex
+- Rebirth cuando aporte valor real
+- VS Code opcional
 
-ChatGPT decide tarea por tarea qué herramienta conviene. No se fuerza la regla "visual = Rebirth / código = Codex" si otra distribución produce un resultado mejor y mantenible.
+ChatGPT dirige herramienta, orden de trabajo y prompts. No existe una división rígida del tipo "arte = Rebirth / código = Codex".
 
 ## Directorio local
 
-En Windows: `C:\Dev\Islas`.
+Windows: `C:\Dev\Islas`
 
-Esta carpeta es la copia local del repositorio y contiene la configuración de Rojo y los archivos que gestionemos fuera de Studio. GitHub es el remoto y el historial.
+Rojo de Islas usa actualmente el puerto `34873` para no interferir con otro proyecto.
 
-## Regla de trabajo
+## Documentación obligatoria
 
-Antes de encargar una tarea relevante a Codex o Rebirth se debe revisar, como mínimo:
+Antes de una tarea importante revisar:
 
 - `README.md`
 - `GAME_DESIGN.md`
+- `WORLD_DESIGN.md`
+- `ART_DIRECTION.md`
+- `ECONOMY_DESIGN.md` cuando afecte a preparación/economía
+- `COMBAT_DESIGN.md` cuando afecte a Core/cañón/batalla
 - `PROJECT_STATE.md`
 - `DECISIONS.md`
 - `NEXT_TASK.md`
-- `LAST_CODEX_REPORT.md`
 - `AGENTS.md`
 - `WORKFLOW.md`
+- `LAST_CODEX_REPORT.md`
 
-Consultar también `IDEAS_BACKLOG.md` cuando la tarea afecte al diseño y `PROMPTS_LOG.md` antes de reutilizar una orden de pago.
+Consultar también `PROMPTS_LOG.md` antes de reutilizar prompts de pago e `IDEAS_BACKLOG.md` para ideas aún no cerradas.
 
-`PROJECT_STATE.md` y `NEXT_TASK.md` deben mantenerse actualizados para que el proyecto pueda retomarse sin depender de una conversación concreta.
+## Estado actual
 
-## Estado
+El primer prototipo visual de Rebirth está rechazado y no se utilizará como referencia de escala o arte.
 
-Preproducción/prototipado técnico. Git y Rojo ya funcionan localmente y Roblox Studio se ha conectado al proyecto Islas. El siguiente paso es instalar y conectar Rebirth sin gastar créditos todavía.
+El proyecto está en preproducción seria. Ya están documentados el diseño maestro, mundo, arte, economía y combate. La siguiente tarea es crear el plano top-down y las referencias visuales de la primera isla real antes de volver a generar/construir escenario.
