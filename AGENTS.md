@@ -1,20 +1,21 @@
 # AGENTS
 
+Última actualización: 2026-08-16
+
 Instrucciones para cualquier agente de IA que trabaje en este repositorio, especialmente Codex.
 
-## Modelo operativo del proyecto
+## Modelo operativo
 
-Hay tres responsabilidades distintas:
+- **ChatGPT**: dirección de juego/producto. Investiga, decide prioridades, diseño, alcance, criterios de calidad y prepara órdenes para Rebirth/Codex.
+- **Rebirth**: agente dentro de Roblox Studio. Puede crear mundo, UI, assets, scripts y mecánicas siguiendo `REBIRTH_PLAYBOOK.md`.
+- **Codex**: operador técnico e ingeniero. Mantiene `C:\Dev\Islas`, inspecciona el Place, revisa código, trabaja con Rojo/Git/GitHub, prueba y documenta.
+- **Carlos/Marc**: explican objetivos, prueban el juego y validan la experiencia. Marc participa bajo supervisión adulta.
 
-- **ChatGPT**: dirección de juego/producto. Decide prioridades, diseño, alcance, criterios de calidad y prepara las órdenes para Rebirth o Codex.
-- **Rebirth**: constructor dentro de Roblox Studio. Puede crear mundo, objetos, UI, scripts y mecánicas cuando sea la herramienta adecuada.
-- **Codex**: operador técnico permanente del proyecto local y GitHub. Mantiene `C:\Dev\Islas`, inspecciona el estado guardado de Studio, sincroniza/exporta código para revisión, ejecuta comprobaciones, actualiza documentación y realiza commit/push cuando corresponde.
+Codex no debe reinventar decisiones de game design cerradas. Si detecta una contradicción importante, se detiene y la reporta.
 
-Codex NO debe reinventar decisiones de game design cerradas por ChatGPT/usuarios. Si detecta una contradicción importante, debe detenerse y reportarla.
+## Lectura obligatoria general
 
-## Antes de modificar nada
-
-Leer siempre:
+Antes de modificar nada:
 
 1. `README.md`
 2. `GAME_DESIGN.md`
@@ -23,47 +24,108 @@ Leer siempre:
 5. `NEXT_TASK.md`
 6. `LAST_CODEX_REPORT.md`
 7. `WORKFLOW.md`
+8. `AI_TOOLING_MATRIX.md`
 
-Si la tarea afecta a mundo, nivel, mapa, escala, lobby, islas, recursos, vegetación, arte o composición visual, leer además obligatoriamente:
+## Lecturas según tarea
 
-8. `WORLD_DESIGN.md`
-9. `ART_DIRECTION.md`
+### Rebirth o trabajo dentro de Studio
 
-Si la tarea afecta a recursos, moneda, tienda, contratos, fabricación, construcción o preparación, leer:
+- `REBIRTH_PLAYBOOK.md`
+- `REBIRTH_PROMPT_TEMPLATES.md`
+- `REBIRTH_POSTMORTEMS.md`
+- `REBIRTH_REVIEW_WORKFLOW.md`
+- `PROMPTS_LOG.md`
 
-10. `ECONOMY_DESIGN.md`
+### Mundo, mapa, lobby, islas o arte
 
-Si la tarea afecta a Core, cañón, balística, daño, reparación, victoria, dos/tres islas o fase de batalla, leer:
+- `WORLD_DESIGN.md`
+- `ART_DIRECTION.md`
 
-11. `COMBAT_DESIGN.md`
+### Preparación, recursos, tienda, contratos, fabricación o construcción
 
-Si alguno de estos archivos contradice una instrucción nueva y explícita del usuario, prevalece la instrucción nueva, pero la documentación debe actualizarse para reflejar el cambio.
+- `ECONOMY_DESIGN.md`
+
+### Core, cañón, balística, daño, reparación, victoria o Duel/Triad
+
+- `COMBAT_DESIGN.md`
+
+### Flujo de partida, onboarding, lanzamiento, analítica o monetización
+
+- `MATCH_FLOW.md`
+- `ROBLOX_PRODUCT_STRATEGY.md`
+- `PRODUCTION_PLAN.md`
+
+### Investigación/capacidades actuales
+
+- `RESEARCH_SOURCES.md`
+
+Las instrucciones nuevas y explícitas del usuario prevalecen, pero los documentos deben actualizarse para reflejar el cambio.
+
+## Reglas específicas de Rebirth
+
+Nunca preparar ni aprobar una intervención de Rebirth que incumpla el playbook.
+
+Para tareas complejas:
+
+1. sesión nueva cuando cambia el subsistema o el contexto está contaminado;
+2. backup si hay riesgo;
+3. referencias visuales cuando la calidad depende de arte/composición;
+4. prompt de plan sin cambios;
+5. revisión del plan;
+6. construcción acotada;
+7. prueba en Studio/Play;
+8. auditoría o `.rbxlx` cuando corresponda;
+9. postmortem/regla nueva si falla.
+
+Prohibido:
+
+- pedir “todo el juego”;
+- mezclar lobby, isla, economía y combate en una ejecución;
+- poblar el mapa entero antes de aprobar assets de muestra;
+- aceptar el informe textual como prueba;
+- continuar corrigiendo indefinidamente un entregable estructuralmente fallido;
+- dejar debug visible;
+- consolidar código sensible sin auditoría.
+
+## Cuenta y privacidad de Rebirth
+
+La cuenta y suscripción de Rebirth se operan mediante Carlos/adulto responsable. El servicio declara estar dirigido a mayores de 13 años.
+
+- Marc participa bajo supervisión;
+- no incluir datos personales, secretos, credenciales ni claves en prompts;
+- plugin de Studio preferido;
+- `Direct-to-ROBLOX` permanece apagado salvo decisión posterior documentada;
+- no habilitar automatización de productos/Robux sin auditoría.
 
 ## Sincronización después de Rebirth
 
-El Place de trabajo debe guardarse en una ruta fija dentro del proyecto, preferiblemente:
+Place de trabajo preferido:
 
 `C:\Dev\Islas\studio\Islas_CURRENT.rbxlx`
 
-Después de una sesión significativa de Rebirth, Codex debe poder recibir la orden corta `Sincroniza la sesión de Rebirth` y realizar el trabajo técnico sin pedir al usuario que haga Git manualmente.
+Ante la orden:
 
-Al sincronizar:
+`Sincroniza la sesión de Rebirth`
 
-1. Leer `git status` y el estado del repositorio.
-2. Inspeccionar `studio/Islas_CURRENT.rbxlx` si existe.
-3. Extraer a archivos de revisión cualquier `Script`, `LocalScript` y `ModuleScript` contenido en el `.rbxlx`, manteniendo una ruta/nombre reconocible y sin convertirlo automáticamente en código de producción.
-4. Generar/actualizar un manifiesto legible con scripts encontrados, rutas y cambios relevantes para revisión.
-5. No migrar automáticamente código bruto de Rebirth al árbol Rojo definitivo salvo que la tarea lo autorice explícitamente.
-6. Actualizar la documentación operativa necesaria.
-7. Ejecutar las comprobaciones razonables para la tarea.
-8. Crear commit y hacer push a GitHub cuando el estado sea coherente y la tarea lo permita.
-9. Dejar `LAST_CODEX_REPORT.md` con un resumen suficiente para que ChatGPT pueda revisar lo ocurrido desde GitHub.
+Codex debe:
 
-El objetivo es que el usuario no tenga que gestionar comandos Git ni exportaciones repetitivas. Su acción normal debe limitarse a guardar el Place y lanzar una orden corta a Codex.
+1. revisar documentación relevante;
+2. leer `git status`;
+3. inspeccionar el `.rbxlx` si existe;
+4. identificar scripts y cambios técnicos;
+5. generar una representación/manifiesto revisable cuando haga falta;
+6. detectar riesgos, duplicados, APIs obsoletas y problemas cliente/servidor;
+7. no promover código bruto automáticamente;
+8. migrar/refactorizar a Rojo sólo si la tarea lo autoriza;
+9. ejecutar comprobaciones razonables;
+10. actualizar `LAST_CODEX_REPORT.md` y estado operativo;
+11. commit/push cuando el repo sea coherente.
+
+Ver `REBIRTH_REVIEW_WORKFLOW.md`.
 
 ## Regla de alcance
 
-Trabajar sólo en la tarea descrita en `NEXT_TASK.md` o en la tarea explícitamente indicada por ChatGPT/usuario.
+Trabajar sólo en `NEXT_TASK.md` o en la tarea explícita.
 
 No aprovechar una tarea para:
 
@@ -71,93 +133,104 @@ No aprovechar una tarea para:
 - cambiar arquitectura sin necesidad;
 - añadir funciones no solicitadas;
 - introducir monetización;
-- alterar diseño de juego cerrado;
-- rehacer arte o UI ajenos a la tarea.
+- alterar diseño cerrado;
+- rehacer arte/UI ajenos;
+- borrar contenido fuera del alcance.
 
 ## Dirección de producto
 
-- No elegir dimensiones, distancias o densidad de mundo arbitrariamente.
-- Para level design, priorizar tiempos de recorrido, rutas, legibilidad, líneas de tiro y función jugable.
-- No aceptar un blockout pobre como resultado visual sólo porque contenga todos los objetos solicitados.
-- El primer prototipo Rebirth del 2026-08-16 está rechazado y no debe usarse como referencia de escala o arte.
-- `WORLD_DESIGN.md` y `ART_DIRECTION.md` mandan sobre futuros escenarios salvo decisión posterior documentada.
-- 1v1/2v2/3v3 significa jugadores por equipo; el número de equipos/islas es otra variable.
-- Arquitectura y mapas deben poder evolucionar de `Duel` (2 equipos) a `Triad` (3 equipos) sin reescribir sistemas fundamentales.
-- El Core nunca se coloca libremente al azar: se usan CoreSockets validados.
+- dimensiones desde tiempos de recorrido y función;
+- primero Duel/1v1 completo, luego ampliar;
+- Triad previsto arquitectónicamente, no construido antes de validar Duel;
+- el Core usa CoreSockets validados;
+- CombatFront hacia rivales; exploración hacia atrás/laterales;
+- primera diversión en menos de cinco minutos;
+- Quick Play además de accesos físicos en lobby;
+- retención y finalización de partida antes que monetización amplia;
+- no vender MatchCoins ni poder competitivo;
+- calidad visual evaluada por lo que ve el jugador, no por el número de instancias.
 
 ## Arquitectura
 
 Prioridades:
 
 - sistemas desacoplados;
-- configuración centralizada para valores de balance;
-- autoridad del servidor para lógica sensible, economía y resultados de combate;
-- validación de entradas remotas;
-- evitar confiar en el cliente para moneda, daño, inventario o recompensas;
-- código legible antes que abstracciones innecesarias;
-- soporte 1–3 jugadores por equipo sin duplicar sistemas;
-- soporte futuro 2–3 equipos mediante configuración donde sea razonable.
-
-## Roblox / Rojo
-
-- El repositorio local es la fuente de verdad del código aprobado gestionado por Rojo.
-- Rebirth puede crear código dentro de Studio, pero ese código se considera candidato hasta ser inspeccionado y, si procede, migrado al árbol Rojo.
-- Mantener clara la separación servidor/cliente/compartido.
-- No introducir dependencias externas sin justificar su necesidad.
-- Para el mundo visual se permite Terrain, MeshParts y assets seguros cuando sean la opción adecuada; no sacrificar calidad visual únicamente para encajar todo dentro de una estructura de archivos cómoda.
+- configuración centralizada;
+- servidor autoritativo;
+- remotes validados;
+- código legible y modular;
+- soporte 1–3 jugadores por equipo sin duplicar lógica;
+- soporte futuro 2–3 equipos por configuración cuando sea razonable;
+- código aprobado en Rojo/GitHub;
+- Terrain/assets visuales pueden permanecer en Studio.
 
 ## Economía y seguridad
 
-Asumir que el cliente puede ser manipulado.
+El servidor decide/valida:
 
-El servidor decide/valida siempre:
-
-- recursos concedidos;
+- recursos;
 - MatchCoins;
 - contratos;
 - compras;
-- costes de construcción/fabricación;
+- crafting/building costs;
 - inventario relevante;
-- daño;
-- reparación;
+- daño y reparación;
 - Core activo;
 - victoria;
-- recompensas persistentes.
+- recompensas persistentes;
+- teletransporte/matchmaking;
+- recibos de compras.
 
-Nunca permitir que el cliente declare directamente estos resultados.
+Nunca permitir que el cliente declare directamente esos resultados.
 
 ## Pruebas
 
-Cada tarea debe incluir una forma concreta de comprobar el resultado.
+No declarar una tarea completada sólo porque compila o porque Rebirth dice que terminó.
 
-No declarar una tarea completada sólo porque el código compila.
+### Level design
 
-Para level design medir en Studio:
+- spawn;
+- recorrido;
+- rutas;
+- límites de agua;
+- líneas a CoreSockets;
+- giro del cañón;
+- escala con avatar;
+- rendimiento;
+- móvil cuando aplique.
 
-- tiempos de recorrido;
-- líneas de tiro a CoreSockets;
-- giro de cañón a todos los rivales previstos;
-- lectura del objetivo a distancia;
-- espacio de construcción;
-- rendimiento aproximado.
+### Mecánicas
 
-Para sistemas económicos/combate, probar al menos los tamaños de equipo relevantes y límites/inputs manipulados cuando corresponda.
+- flujo normal;
+- errores/inputs inválidos;
+- spam;
+- dos jugadores simultáneos;
+- respawn/reconexión;
+- servidor/cliente;
+- Output sin errores.
 
-## Coste de herramientas
+### Producto
 
-Rebirth u otras herramientas con coste por solicitud se usan cuando ChatGPT determine que aportan ventaja real. Los prompts deben estar cerrados y ser verificables antes de enviarlos.
+- primera partida;
+- primer recurso;
+- primera construcción;
+- primer disparo;
+- finalización;
+- segunda cola;
+- eventos analíticos relevantes.
 
 ## Al finalizar una tarea de Codex
 
 Actualizar `LAST_CODEX_REPORT.md` con:
 
-- tarea realizada;
-- archivos modificados;
-- estado Studio/repo observado;
-- decisiones técnicas tomadas;
-- pruebas realizadas;
-- resultados;
-- problemas pendientes;
-- commit y push si existen.
+- tarea;
+- rama/commit;
+- archivos;
+- estado Studio/repo;
+- decisiones técnicas;
+- pruebas;
+- resultado;
+- riesgos;
+- siguiente recomendación.
 
-Actualizar también `PROJECT_STATE.md` y `NEXT_TASK.md` cuando corresponda.
+Actualizar también `PROJECT_STATE.md`, `NEXT_TASK.md`, `DECISIONS.md`, `PROMPTS_LOG.md` o el playbook cuando corresponda.
