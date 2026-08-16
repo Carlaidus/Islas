@@ -4,135 +4,376 @@
 
 ## Principio
 
-Rebirth recibe el contexto completo del juego, pero no se le pide construir todos los sistemas de una vez. Se trabajará en fases conservables y verificables. Codex/Rojo asumirán arquitectura y lógica cuando aporten más control/mantenibilidad.
+Islas se construye por entregables reales y conservables.
 
-## Arena escalable por slots
+No se volverá a pedir a Rebirth que genere en una sola sesión:
 
-La arena se diseñará alrededor de un centro común con **6 IslandAnchorSockets** potenciales separados 60 grados.
+- lobby;
+- arena;
+- varias islas;
+- biblioteca de assets;
+- hero assets;
+- validaciones;
+- mecánicas.
 
-- `Anchor_A`: 0°
-- `Anchor_B`: 60°
-- `Anchor_C`: 120°
-- `Anchor_D`: 180°
-- `Anchor_E`: 240°
-- `Anchor_F`: 300°
+Cada fase sigue:
 
-Configuraciones iniciales:
+`referencia -> plan-only -> aprobación -> calibración -> construcción -> Play/QA -> consolidación`
 
-- Duel (2 equipos): `A + D` -> 180°.
-- Triad (3 equipos): `A + C + E` -> 120° entre equipos.
+## Objetivo comercial inicial
 
-Esto permite usar la misma lógica radial sin obligar a diseñar una arena distinta para 2 y 3 equipos.
+Llegar primero a un **vertical slice 1v1** que demuestre:
 
-Cada isla se orienta automáticamente con su `CombatFront` hacia el centro de la arena.
+- entrar desde un lobby;
+- formar partida;
+- explorar/recolectar;
+- construir;
+- preparar y usar cañón;
+- destruir Core;
+- resultado y retorno;
+- calidad suficiente para mostrar públicamente;
+- analítica básica.
 
-## Fases de producción
+Después ampliar a 2v2/3v3, progresión y monetización.
 
-### Fase A — World Foundation
+---
 
-Responsable preferente: Rebirth + Studio.
+# Fase 0 — Limpieza, referencias y calibración
 
-Objetivo:
+## Objetivo
 
-- eliminar/aislar el prototipo rechazado;
-- crear lobby/hub visual de calidad;
-- crear arena radial y anchors;
-- crear una isla arquetipo de producción con Terrain/meshes/assets seguros;
-- CoreSockets, ResourceSockets, TreasureSockets, DefenseZone, CannonPlatform, Shop, Workshop y Spawns;
-- duplicar la isla para validar Duel/Triad sin convertir aún cada isla en un mapa artístico distinto;
-- medir escala visual, lectura y líneas de tiro.
+Preparar un entorno limpio y demostrar que el nuevo método de Rebirth funciona antes de reconstruir mundo completo.
 
-Sin gameplay funcional todavía.
+## Entregables
 
-### Fase B — Movement / resource loop
+1. conservar snapshot de V2 rechazada;
+2. crear Place limpio/working copy;
+3. definir concept/moodboard del lobby;
+4. definir plano top-down compacto del lobby;
+5. definir referencias de isla/vegetación/Core/cañón;
+6. crear `Visual Calibration Yard` separado;
+7. Rebirth genera muestras, no mapa:
+   - 3 palmeras;
+   - 3 rocas;
+   - 2 clusters de vegetación;
+   - 1 módulo de puesto tropical;
+   - 1 Core preview;
+   - 1 cañón preview.
+8. aprobar/rechazar cada familia.
 
-Responsable: Codex/Rojo para lógica; Rebirth para interacciones/feedback visual cuando convenga.
+## Criterio de salida
 
-- selección de ResourceSockets;
-- tala;
-- minería;
-- cocos;
-- inventario de partida;
-- cajas/tesoros opcionales;
-- escalado por equipo.
+No se construye lobby/isla hasta aprobar una biblioteca visual mínima.
 
-### Fase C — Economy / shop / workshop
+---
 
-- MatchCoins;
-- contratos variables;
-- merchant shop;
-- pocas recetas tácticas;
-- seguridad server-authoritative;
-- UI funcional.
+# Fase A — Lobby de producción
 
-### Fase D — Building / Core
+## A1 — Plan-only
 
-- CoreSocket selection;
-- Core beacon;
+Rebirth inspecciona Place limpio y propone:
+
+- jerarquía;
+- composición;
+- spawn;
+- Quick Play;
+- 1v1/2v2/3v3;
+- práctica de cañón;
+- estadísticas/leaderboards;
+- zonas futuras;
+- assets aprobados;
+- pruebas.
+
+No modifica nada.
+
+## A2 — Slice del lobby
+
+Construir primero:
+
+- spawn/arrival;
+- plaza principal;
+- Quick Play;
+- una entrada de cola;
+- un módulo de estadísticas;
+- una parte del entorno.
+
+Probar en Play y aprobar estilo/escala.
+
+## A3 — Lobby completo compacto
+
+Completar:
+
+- 1v1/2v2/3v3;
+- Quick Play;
+- party placeholder;
+- leaderboards/estadísticas visuales;
+- tienda cosmética placeholder;
+- misiones/rango placeholder;
+- Practice Cannon Range;
+- límites y recorrido.
+
+Sin matchmaking real todavía.
+
+## Criterios
+
+- spawn correcto siempre;
+- jugador entiende cómo jugar en segundos;
+- no hay pads de desarrollo como diseño principal;
+- compacto y rápido;
+- móvil/PC legibles;
+- no hay duplicados/debug/errores.
+
+---
+
+# Fase B — Una isla de producción
+
+## B1 — Plan top-down y Terrain
+
+Una sola isla, sin duplicar.
+
+- silueta orgánica;
+- CombatFront;
+- ExplorationBackland;
 - DefenseZone;
-- snap building;
-- madera/piedra;
-- vida y estados visuales de piezas;
-- reparación.
+- rutas;
+- zonas de recursos;
+- Shop/Workshop;
+- TeamSpawns;
+- CannonPlatform;
+- CoreSockets;
+- límites de agua.
 
-### Fase E — Cannon combat
+Construir primero Terrain/rutas principales y medir recorrido con avatar.
 
-- montaje básico del cañón;
-- carga;
-- yaw/elevation;
-- barra de potencia;
-- balística del coco;
-- impacto/daño;
-- knockback opcional a jugadores;
-- feedback audiovisual;
-- balance de distancia real.
+## B2 — Biblioteca aplicada
 
-### Fase F — Match state machine
+Poblar sólo una zona representativa con assets aprobados:
+
+- costa;
+- bosque/palmeras;
+- cantera;
+- vegetación secundaria;
+- landmark.
+
+Aprobar densidad/rendimiento antes de poblar toda la isla.
+
+## B3 — Isla completa
+
+- vegetación equilibrada;
+- rutas secundarias;
+- ResourceSockets;
+- TreasureSockets;
+- Shop;
+- Workshop;
+- CoreSockets invisibles en Play;
+- CannonPlatform;
+- límites temáticos del mar.
+
+## Criterios
+
+- 30–45 s de cruce objetivo;
+- recurso lejano 22–32 s;
+- CoreSockets atacables;
+- no hay árboles bajo agua;
+- no hay geometría rota;
+- no hay marcadores visibles;
+- rendimiento móvil razonable;
+- invita a explorar.
+
+---
+
+# Fase C — Arena Duel y preparación Triad
+
+## Objetivo
+
+Crear la primera arena de dos islas a partir de una isla aprobada.
+
+## Entregables
+
+- duplicar/rotar isla de forma controlada;
+- simetría funcional;
+- centro marino;
+- distancia provisional;
+- límites para impedir nado entre islas;
+- sightlines a todos los CoreSockets;
+- anchors futuros de Triad sólo como datos/markers ocultos;
+- Instance Streaming configurado/probado si procede.
+
+No construir tres islas todavía.
+
+## Criterio
+
+Duel se ve, recorre y funciona. La geometría no bloquea la futura balística.
+
+---
+
+# Fase D — Movimiento, recursos e inventario de partida
+
+Construir sistemas de uno en uno:
+
+1. framework común de ResourceNode;
+2. madera funcional;
+3. minijuego de tala;
+4. inventario de partida;
+5. piedra/minería;
+6. cocos;
+7. selección de sockets;
+8. treasure opportunities.
+
+Responsabilidad:
+
+- Rebirth puede crear/prototipar interacción, UI y feedback;
+- Codex audita/modulariza servidor/cliente y Rojo.
+
+Criterio: el bucle de preparación es divertido aun sin combate.
+
+---
+
+# Fase E — Economía, comerciante y taller
+
+1. MatchCoins server-authoritative;
+2. contratos;
+3. vender excedentes;
+4. tienda de partida;
+5. UI;
+6. pocas recetas de taller;
+7. balance por tamaño de equipo.
+
+No Robux.
+
+---
+
+# Fase F — Construcción y Core
+
+1. selección CoreSocket;
+2. Core + beacon;
+3. DefenseZone;
+4. preview/snap;
+5. paredes madera;
+6. paredes piedra;
+7. resto de piezas mínimas;
+8. vida/estado visual;
+9. reparación;
+10. bloqueo de construcción en batalla.
+
+---
+
+# Fase G — Cañón y combate
+
+1. cañón visual aprobado;
+2. interacción/carga;
+3. yaw;
+4. elevación;
+5. potencia;
+6. proyectil coco;
+7. impacto;
+8. daño modular;
+9. Core damage;
+10. feedback audiovisual;
+11. repair loop;
+12. balance distancia/tiempo de vuelo.
+
+La separación de islas se congela aquí, no antes.
+
+---
+
+# Fase H — Match state machine
 
 - Intro/Core reveal;
 - Preparation;
-- countdown;
+- transición/countdown;
 - Battle;
 - Overtime;
 - Results;
-- reset/return.
+- reset;
+- retorno.
 
-### Fase G — Lobby real / queues / server architecture
+Instrumentar funnel y custom events.
 
-- lobby Place;
-- match Place;
-- colas 1v1, 2v2, 3v3;
+---
+
+# Fase I — Lobby funcional, colas y Places
+
+- Experience con Lobby Place y Match Place;
+- Quick Play;
+- cola 1v1;
+- servidor reservado;
+- teleport server-side;
+- fallos/reintentos;
+- retorno;
+- después 2v2/3v3;
 - parties;
-- reserved match servers;
-- matchmaking cross-server;
-- return flow.
+- MemoryStore si se necesita matchmaking entre servidores.
 
-### Fase H — Progression and monetization
+TeleportService se prueba en experiencia publicada/cliente real.
 
-Sólo después de validar diversión:
+---
 
-- XP/rank;
-- missions;
-- persistent cosmetics currency if needed;
-- cannon skins;
-- Core skins;
-- banners;
-- effects;
-- emotes;
-- victory animations;
-- passes/cosmetic products.
+# Fase J — Soft launch
 
-No vender MatchCoins ni potencia competitiva directa.
+- alpha cerrada;
+- onboarding funnel;
+- primera sesión;
+- D1;
+- sesión media;
+- rendimiento/crashes;
+- balance;
+- correcciones.
 
-## Mecánicas adicionales aprobadas como candidatas
+No gastar en adquisición importante antes de demostrar retención.
 
-- Practice Cannon Range en lobby.
-- Treasure/washed-up crate sockets en exploración.
-- Merchant contracts variables por partida.
-- Golden coconut / small island event como evento raro no decisivo.
-- Core beacon visible a distancia.
-- impactos de cañón con knockback/derribo breve a jugadores, sin convertir player-kills en objetivo principal.
+---
 
-## Regla de calidad
+# Fase K — Progresión y monetización
 
-Cada fase debe terminar con una prueba jugable/visual y criterios de aceptación antes de abrir la siguiente. No se acepta una lista de objetos como sustituto de calidad visible.
+Después de validar el juego:
+
+- XP/rango;
+- misiones;
+- estadísticas;
+- cosméticos;
+- skins Core/cañón;
+- banners/emotes/efectos;
+- pase cosmético;
+- productos/pases sólo con recibos seguros;
+- monetización ética.
+
+No vender MatchCoins, daño o ventaja competitiva directa.
+
+---
+
+# Fase L — Expansión
+
+- 2v2/3v3 profundos;
+- nuevos mapas/biomas;
+- tipos de coco;
+- Triad;
+- eventos;
+- temporadas;
+- contenido social.
+
+Triad se implementa cuando Duel ya es divertido y estable.
+
+## Regla de entregable
+
+Cada entregable necesita:
+
+- propietario principal;
+- prompt/tarea;
+- criterio observable;
+- prueba;
+- capturas/informe;
+- decisión conservar/corregir/rechazar;
+- documentación.
+
+## Regla de Rebirth
+
+Rebirth recibe contexto completo relevante, pero construye únicamente el entregable actual.
+
+Normalmente:
+
+- 1 prompt plan-only;
+- 1 prompt ejecución;
+- 0–1 prompt reparación precisa.
+
+Si hacen falta correcciones vagas repetidas, detener, auditar y replantear.
