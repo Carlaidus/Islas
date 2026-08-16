@@ -1,126 +1,181 @@
 # NEXT_TASK
 
+Última actualización: 2026-08-16
+
 ## Tarea actual
 
-**Reconstruir con Rebirth la Fase A — World Foundation de Islas.**
+**Preparar y ejecutar la calibración profesional de Rebirth antes de reconstruir el juego.**
 
-El prototipo anterior está rechazado. La nueva construcción debe plantearse como base real de producción y seguir `PRODUCTION_PLAN.md`.
+No enviar todavía otro megaprompt de mundo.
 
-## Documentos obligatorios
+## Motivo
 
-Antes de evaluar o continuar esta fase, revisar:
+Los prototipos V1 y V2 de Rebirth están rechazados.
 
-- `GAME_DESIGN.md`
-- `WORLD_DESIGN.md`
-- `ART_DIRECTION.md`
-- `ECONOMY_DESIGN.md`
-- `COMBAT_DESIGN.md`
-- `MATCH_FLOW.md`
+El problema no se resolverá abandonando Rebirth ni repitiendo la misma estrategia. Se aplicará el flujo definido en:
+
+- `REBIRTH_PLAYBOOK.md`
+- `REBIRTH_PROMPT_TEMPLATES.md`
+- `REBIRTH_POSTMORTEMS.md`
+- `AI_TOOLING_MATRIX.md`
 - `PRODUCTION_PLAN.md`
-- `DECISIONS.md`
 
-## Objetivo de Fase A
+## Resultado esperado de esta tarea
 
-Crear dentro del Studio de desarrollo:
+Terminar con:
 
-1. Un lobby/hub tropical de calidad de producto con:
-   - 1v1 / 2v2 / 3v3 integrados en arquitectura real;
-   - área futura de progresión/comercio;
-   - Practice Cannon Range.
-2. Una arena radial de desarrollo con 6 `IslandAnchorSockets`.
-3. Una isla arquetipo real de aproximadamente 420–520 x 350–460 studs, orgánica, explorable y con relieve.
-4. Duplicados/rotaciones de esa isla suficientes para visualizar Duel y Triad.
-5. `CombatFront`, `ExplorationBackland`, `DefenseZone`, `CoreSockets`, `CannonPlatform`, `Shop`, `Workshop`, `Spawns`, `ResourceSockets` y `TreasureSockets`.
-6. Calidad visual tropical de aventura según `ART_DIRECTION.md`.
-7. Líneas de tiro geográficas válidas hacia los `CoreSockets`.
+1. Place limpio de trabajo;
+2. V2 guardada como snapshot histórico;
+3. referencias visuales del lobby;
+4. plano top-down del lobby compacto;
+5. `Visual Calibration Yard`;
+6. una conversación nueva de Rebirth;
+7. un prompt de planificación sin modificar Studio;
+8. plan revisado y aprobado antes de construir;
+9. primera muestra visual limitada y evaluable.
 
-## Arena escalable
+## Paso 1 — Seguridad y limpieza
 
-Usar 6 anchors alrededor del centro separados 60°:
+- guardar el Place actual como snapshot rechazado;
+- no construir encima de V2;
+- crear/abrir una copia limpia de desarrollo;
+- establecer:
 
-- A 0°
-- B 60°
-- C 120°
-- D 180°
-- E 240°
-- F 300°
+`C:\Dev\Islas\studio\Islas_CURRENT.rbxlx`
 
-Preview de configuraciones:
+- confirmar Rebirth conectado mediante la cuenta adulta de Carlos;
+- mantener `Direct-to-ROBLOX` apagado;
+- decidir estado de Rojo para no competir por objetos.
 
-- Duel: A + D.
-- Triad: A + C + E.
+## Paso 2 — Referencia del lobby
 
-Cada isla debe orientar su `CombatFront` hacia el centro.
+Crear antes de usar Rebirth:
 
-## Regla del Core
+- moodboard/concept propio;
+- vista top-down;
+- escala con avatar;
+- paleta/materiales;
+- composición de:
+  - spawn/arrival;
+  - Quick Play;
+  - 1v1/2v2/3v3;
+  - práctica de cañón;
+  - estadísticas/leaderboards;
+  - tienda cosmética placeholder;
+  - misiones/rango placeholder.
 
-El Core NO aparece libremente por la isla.
+Dirección:
 
-Cada isla tendrá 3–4 `CoreSockets` dentro del `CombatFront`/`DefenseZone`.
+- pequeño puerto/isla-base tropical;
+- compacto;
+- aspecto de experiencia publicada;
+- jugador entiende cómo jugar en segundos;
+- no pads y carteles de desarrollo como arquitectura principal.
 
-Todos deben:
+## Paso 3 — Calibration Yard
 
-- ser atacables desde cada rival válido;
-- no quedar ocultos por geografía permanente;
-- permitir fortificación alrededor;
-- tener valor competitivo equivalente.
+Antes de construir lobby completo, aprobar muestras:
 
-El Core activo podrá identificarse por una señal vertical/energética visible desde las islas enemigas.
+- 3 palmeras;
+- 3 rocas;
+- 2 clusters de vegetación;
+- 1 módulo de madera/tela para puesto;
+- 1 módulo de muelle/portal/cola;
+- avatar para escala.
 
-## Escala inicial
+Requisitos:
 
-- isla: ~420–520 x 350–460 studs;
-- relieve: ~35–65 studs;
-- DefenseZone: ~130–170 studs;
-- cruce de isla objetivo: 30–45 s;
-- recurso lejano: 22–32 s;
-- distancia final entre islas NO se congela todavía; se ajustará con la futura balística.
+- no troncos segmentados con huecos;
+- no bolas como rocas finales;
+- sin duplicados;
+- sin scripts desconocidos;
+- pivots/colisiones razonables;
+- instance count razonable;
+- calidad suficiente para usar en producción.
 
-## Calidad visual obligatoria
+## Paso 4 — Prompt plan-only
 
-No aceptar:
+Abrir sesión nueva y pedir a Rebirth:
 
-- discos planos;
-- baseplates como terreno principal;
-- árboles de cilindros y bolas como resultado visible;
-- cañones de geometría primitiva;
-- pads/carteles flotantes como lobby;
-- composición vacía o de blockout técnico.
+- inspeccionar Place limpio;
+- estudiar referencias;
+- proponer jerarquía, composición, assets, escala y pruebas;
+- no modificar nada;
+- detenerse tras el plan.
 
-Se permite Terrain, MeshParts y assets seguros sin scripts cuando mejoren el resultado.
+Usar plantilla A de `REBIRTH_PROMPT_TEMPLATES.md`.
 
-## Alcance de este prompt
+## Paso 5 — Revisión
 
-Rebirth debe recibir el contexto completo del juego, pero en esta intervención construir **sólo Fase A — World Foundation**.
+ChatGPT revisará el plan antes de ejecución.
 
-NO implementar todavía:
+No aprobar si:
 
-- matchmaking real;
-- DataStore;
-- MatchCoins funcionales;
-- recolección funcional;
-- crafting funcional;
-- shop funcional;
-- building funcional;
-- daño;
-- disparo del cañón;
-- progresión;
-- Robux.
+- mezcla lobby e isla;
+- propone miles de primitivas;
+- no incluye spawn/Playtest;
+- no usa referencias;
+- no define Quick Play;
+- no contempla móvil;
+- no define QA de duplicados/debug;
+- vuelve a basarse en V1/V2.
+
+## Paso 6 — Primera ejecución limitada
+
+Construir únicamente:
+
+- calibration set;
+- spawn/arrival;
+- una pequeña sección representativa del lobby.
+
+No completar todo el lobby hasta aprobar:
+
+- arte;
+- escala;
+- composición;
+- calidad de assets;
+- recorrido.
 
 ## Criterios de aceptación
 
-La Fase A sólo se aprueba si:
+- spawn válido en Play;
+- no se empieza en agua/vacío;
+- muestras sin geometría rota;
+- no hay duplicados exactos;
+- no hay debug visible;
+- estética coincide con referencias;
+- escala correcta con avatar;
+- Output sin errores nuevos;
+- resultado digno de convertirse en base de producción;
+- capturas aprobadas por Carlos/Marc/ChatGPT.
 
-- el lobby parece un lugar real;
-- la isla invita a explorar;
-- hay rutas, zonas y relieve reconocibles;
-- la escala respecto al avatar es creíble;
-- las zonas de recursos tienen sentido;
-- el CombatFront mantiene lectura hacia rivales;
-- cada CoreSocket tiene línea de ataque válida;
-- la isla puede orientarse en Duel y Triad;
-- la calidad visual puede servir como base de producción, no como prototipo que haya que rehacer entero.
+## Fuera de alcance
+
+Todavía no construir:
+
+- lobby entero;
+- islas;
+- arena;
+- recursos funcionales;
+- economía;
+- construcción;
+- cañón funcional;
+- matchmaking;
+- Robux.
 
 ## Después
 
-No enviar un segundo prompt automáticamente. Revisar visualmente y medir recorridos antes de pasar a Fase B.
+Si la calibración se aprueba:
+
+1. completar lobby por fases;
+2. crear referencias/calibration de isla;
+3. construir una única isla;
+4. medir/QA;
+5. continuar `PRODUCTION_PLAN.md`.
+
+Si falla:
+
+- hacer auditoría;
+- separar fallo de referencias, prompt y herramienta;
+- actualizar postmortem/playbook;
+- no continuar generando volumen.
