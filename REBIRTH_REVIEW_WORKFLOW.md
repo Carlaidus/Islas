@@ -4,112 +4,230 @@
 
 ## Objetivo
 
-Garantizar que cualquier codigo o cambio tecnico creado por Rebirth dentro de Roblox Studio pueda revisarse, conservarse y migrarse a la fuente de verdad del proyecto antes de considerarlo aceptado.
+Poder utilizar Rebirth con libertad dentro de Roblox Studio sin convertir a Carlos o Marc en administradores de un flujo técnico complicado.
+
+La revisión se adapta al riesgo de la tarea. No se exporta ni se sube un archivo después de cada pequeño cambio visual.
 
 ## Regla principal
 
-Nada de codigo generado por Rebirth se considera definitivo mientras exista unicamente dentro de Roblox Studio.
+Rebirth puede crear:
 
-El codigo mantenible del proyecto debe terminar en archivos locales gestionados por Rojo y versionados en GitHub.
+- mundo;
+- Terrain;
+- modelos;
+- UI;
+- scripts;
+- mecánicas.
 
-## Captura automatica de codigo: Script Sync
+Pero su informe final no es la fuente de verdad.
 
-El flujo preferido ya no es exportar un `.rbxlx` despues de cada prompt.
+La fuente de verdad para aprobar un resultado es una combinación de:
 
-Roblox Studio Script Sync se utilizara para sincronizar automaticamente codigo creado dentro de carpetas dedicadas `RebirthInbox` hacia:
+- Roblox Studio;
+- prueba en Play;
+- capturas;
+- Output;
+- Place guardado `.rbxlx` cuando haga falta;
+- revisión de Codex/ChatGPT para código o sistemas sensibles;
+- GitHub para el código/documentación consolidada.
 
-`C:\Dev\Islas\rebirth_inbox`
+## Archivo de trabajo fijo
 
-Carpetas acordadas:
+Guardar el Place principal en:
 
-- `ServerScriptService/RebirthInbox`
-- `ReplicatedStorage/RebirthInbox`
-- `StarterPlayer/StarterPlayerScripts/RebirthInbox`
+`C:\Dev\Islas\studio\Islas_CURRENT.rbxlx`
 
-No aplicar Script Sync sobre carpetas controladas por Rojo.
+Una vez establecido, abrir siempre ese archivo y guardar normalmente con:
 
-Mientras el codigo no haya sido revisado, Rebirth debe crear sus scripts nuevos dentro de estos Inbox siempre que la tarea lo permita.
+`Ctrl + S`
 
-Ver `SETUP_REBIRTH_SCRIPT_SYNC.md`.
+No hace falta crear una exportación diferente después de cada prompt.
 
-## Subida a GitHub
+## Copias de seguridad
 
-Despues de una intervencion de Rebirth que cree/modifique codigo:
+Crear una copia fechada únicamente:
 
-1. comprobar que Script Sync ha escrito los `.luau` dentro de `rebirth_inbox`;
-2. ejecutar `PUSH_REBIRTH_CODE.bat`;
-3. el BAT actualiza el repositorio, prepara exclusivamente `rebirth_inbox`, crea un commit fechado y lo sube a `main`;
-4. informar a ChatGPT para que revise la ultima captura.
-
-El BAT no debe utilizarse para publicar codigo de produccion sin revision; su finalidad es poner el codigo bruto de Rebirth a disposicion de revision.
-
-## Revision obligatoria
-
-Revisar especialmente:
-
-- Script, LocalScript y ModuleScript creados/modificados;
-- RemoteEvents/RemoteFunctions;
-- autoridad cliente/servidor;
-- economia;
-- moneda;
-- recursos;
-- inventario;
-- compras;
-- daño;
-- Core/victoria;
-- DataStore;
-- TeleportService;
-- matchmaking;
-- validacion de entradas remotas;
-- cualquier uso de Robux/MarketplaceService.
-
-## Migracion a produccion
-
-Si el codigo se aprueba:
-
-1. ChatGPT/Codex lo revisa/refactoriza cuando sea necesario.
-2. Se migra desde `rebirth_inbox` al arbol definitivo gestionado por Rojo.
-3. Se elimina o sustituye la version temporal de Studio para no conservar dos fuentes de verdad.
-4. GitHub/Rojo pasan a ser la fuente de verdad del codigo aprobado.
-5. Se actualizan `PROJECT_STATE.md`, informes y decisiones si procede.
-
-## Instantaneas `.rbxlx`
-
-Las instantaneas completas siguen siendo utiles, pero ya no son obligatorias tras cada prompt.
-
-Usarlas:
-
-- antes/despues de cambios grandes de mundo;
-- cuando haga falta inspeccionar jerarquia completa, propiedades o scripts fuera del Inbox;
-- como punto de recuperacion antes de una operacion arriesgada;
-- cuando Rebirth haya modificado contenido que Script Sync no puede representar.
+- antes de borrar/reconstruir una zona importante;
+- antes de una intervención de Rebirth amplia;
+- cuando se aprueba un milestone;
+- antes de migrar código o arquitectura;
+- cuando hay riesgo de perder trabajo valioso.
 
 Nombre recomendado:
 
-`snapshots/Rebirth_YYYY-MM-DD_descripcion.rbxlx`
+`studio/snapshots/Islas_YYYY-MM-DD_HHMM_descripcion.rbxlx`
 
-Preferir `.rbxlx` sobre `.rbxl` cuando el objetivo sea inspeccion tecnica, porque `.rbxlx` es XML.
+## Nivel 1 — Cambio visual pequeño
 
-## Mundo visual
+Ejemplos:
 
-Script Sync sincroniza codigo/folders, no el mundo visual completo.
+- ajustar vegetación;
+- cambiar colores/materiales;
+- mover props;
+- corregir una zona;
+- variar decoración.
 
-Terrain, MeshParts, modelos y otros elementos visuales pueden permanecer gestionados desde Studio cuando sea la opcion adecuada.
+Revisión normal:
 
-Los modelos visuales importantes se pueden versionar como `.rbxmx`/`.rbxm` cuando resulte practico.
+1. Captura del resultado.
+2. Prueba breve en modo edición/Play.
+3. Confirmar que no hay errores visibles.
+4. Guardar con `Ctrl+S`.
 
-## Primer intento de Rebirth
+No es obligatorio pasar el `.rbxlx` ni ejecutar Codex.
 
-El primer prototipo visual rechazado informo:
+## Nivel 2 — Entregable visual/espacial grande
 
-- 0 Scripts;
-- 0 LocalScripts/ModuleScripts;
-- 0 RemoteEvents/RemoteFunctions.
+Ejemplos:
 
-Por tanto no contiene programacion propia de Rebirth que haya que migrar.
+- lobby;
+- isla;
+- arena;
+- Core;
+- cañón;
+- UI completa;
+- reconstrucción de Terrain.
 
-## Regla de aceptacion
+Revisión:
 
-Nunca aceptar una respuesta de Rebirth del tipo `todo funciona` sin revisar el codigo real cuando haya generado programacion.
+1. Guardar antes y después.
+2. Capturas obligatorias:
+   - vista general;
+   - vista desde avatar;
+   - vista top-down cuando aplique;
+   - detalle de los elementos principales.
+3. Recorrer en Play.
+4. Comprobar spawn, límites, colisiones y rutas.
+5. Revisar Explorer/Output de forma básica.
+6. Pasar `.rbxlx` a ChatGPT o pedir revisión a Codex si:
+   - la jerarquía no se entiende;
+   - hay objetos duplicados/transparentes/rotos;
+   - Rebirth afirma haber validado cosas que no se ven;
+   - el resultado incluye scripts;
+   - se va a aprobar como milestone.
 
-El reporte de Rebirth es informacion auxiliar; la fuente de verdad para revision es el codigo sincronizado/capturado y, una vez aprobado, el repositorio definitivo gestionado por Rojo.
+## Nivel 3 — Código o mecánica normal
+
+Ejemplos:
+
+- nodo de recursos;
+- UI interactiva;
+- minijuego;
+- tienda provisional;
+- cañón prototipo;
+- construcción.
+
+Revisión:
+
+1. Probar el flujo completo en Play.
+2. Revisar Output.
+3. Guardar `.rbxlx`.
+4. Pedir a Codex:
+
+`Sincroniza la sesión de Rebirth.`
+
+5. Codex:
+   - inspecciona scripts del Place;
+   - crea un manifiesto/reporte;
+   - identifica riesgos;
+   - no consolida automáticamente código bruto;
+   - migra/refactoriza a Rojo sólo cuando la tarea lo autoriza;
+   - actualiza documentación, commit y push.
+6. ChatGPT revisa el informe y decide siguiente paso.
+
+El usuario puede subir directamente el `.rbxlx` a ChatGPT cuando sea más rápido o se pida una auditoría concreta.
+
+## Nivel 4 — Sistema sensible
+
+Auditoría obligatoria antes de aceptar:
+
+- MatchCoins;
+- inventario;
+- contratos/recompensas;
+- compras;
+- Core/daño/victoria;
+- RemoteEvents/RemoteFunctions;
+- DataStore;
+- TeleportService/MemoryStore;
+- MarketplaceService/Robux;
+- progresión persistente.
+
+Flujo:
+
+1. Backup.
+2. Rebirth crea/prototipa si conviene.
+3. Playtest funcional.
+4. Guardar `.rbxlx`.
+5. Codex inspecciona y audita.
+6. Servidor autoritativo obligatorio.
+7. Inputs remotos validados y limitados.
+8. Refactor/migración a Rojo antes de considerar producción.
+9. Pruebas de error, abuso y reconexión según sistema.
+10. GitHub actualizado.
+
+## Qué significa `Sincroniza la sesión de Rebirth`
+
+Codex debe:
+
+1. Leer `AGENTS.md` y documentación relevante.
+2. Revisar `git status`.
+3. Localizar `studio/Islas_CURRENT.rbxlx`.
+4. Inspeccionar el Place y enumerar scripts/servicios/cambios técnicos relevantes.
+5. Extraer o representar scripts para revisión cuando sea necesario.
+6. Comparar con el estado previo disponible.
+7. Señalar código inseguro, duplicado, obsoleto o fuera de arquitectura.
+8. No promover código a producción sin autorización.
+9. Actualizar `LAST_CODEX_REPORT.md`.
+10. Actualizar `PROJECT_STATE.md`/`NEXT_TASK.md` cuando corresponda.
+11. Commit/push sólo cuando el estado del repo sea coherente.
+
+## Revisión visual obligatoria
+
+Codex y el `.rbxlx` pueden detectar estructura y código, pero no sustituyen completamente el juicio visual.
+
+Carlos/Marc/ChatGPT deben valorar:
+
+- si el mundo se entiende;
+- si invita a jugar;
+- si la escala funciona;
+- si el arte parece roto;
+- si la UI se lee;
+- si una mecánica es divertida.
+
+## QA mínimo de cualquier intervención
+
+- spawn correcto;
+- no empezar en agua/vacío;
+- no hay errores nuevos en Output;
+- no hay duplicados exactos evidentes;
+- no hay debug visible en Play;
+- no hay objetos importantes bajo agua o fuera de límites;
+- no se modificó contenido fuera de alcance;
+- se probó el criterio principal de éxito;
+- se guardó el Place.
+
+## Regla de aceptación
+
+Nunca aceptar:
+
+- “todo funciona” sin probar;
+- “creé X instancias” como prueba de calidad;
+- jerarquía correcta con experiencia visual rota;
+- código sensible sólo porque no da error inmediato;
+- un resultado que el jugador no entiende.
+
+## Flujo simple para el usuario
+
+La mayoría de las veces:
+
+1. pegar prompt;
+2. probar;
+3. enviar capturas/reporte;
+4. `Ctrl+S`.
+
+Sólo cuando ChatGPT lo indique:
+
+- subir `.rbxlx`; o
+- pedir a Codex `Sincroniza la sesión de Rebirth`.
+
+No hay Script Sync, Inbox ni BAT obligatorio en el flujo actual.
