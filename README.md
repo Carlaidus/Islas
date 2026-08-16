@@ -4,54 +4,60 @@ Proyecto de juego multijugador para Roblox.
 
 ## Visión
 
-`Islas` es un juego competitivo por equipos en el que cada equipo ocupa una isla, recolecta recursos, construye una pequeña base y, al terminar la fase de preparación, combate contra la isla rival usando cañones y proyectiles.
+`Islas` es un juego competitivo por equipos. Los jugadores comienzan en un lobby, eligen el formato de partida y después son enviados a una arena de dos islas enfrentadas. Cada equipo recolecta recursos, obtiene moneda, construye y refuerza su base y, al terminar la fase de preparación, combate contra la isla rival usando cañones y cocos como munición.
 
-El objetivo inicial es crear una experiencia sencilla de entender, divertida desde la primera partida y escalable a más sistemas, progresión y monetización con Robux sin convertir el juego en pay-to-win.
+El objetivo es crear primero una experiencia sencilla de entender y con ganas de repetir partida, y después escalarla con progresión, contenido y monetización con Robux sin convertirla en pay-to-win.
 
-## Bucle principal
+## Flujo principal
 
-1. Entrar en partida.
-2. Ser asignado a una isla/equipo.
-3. Recolectar recursos y moneda.
-4. Construir y reforzar la base.
-5. Comprar elementos tácticos en la tienda de la isla.
-6. Preparar el cañón y almacenar munición.
-7. Comenzar la fase de combate.
-8. Apuntar, disparar, reparar y defender.
-9. Destruir el núcleo enemigo antes de perder el propio.
-10. Recibir recompensas, XP y progresión.
+1. Entrar al lobby.
+2. Elegir/entrar en la zona de cola 1v1, 2v2 o 3v3.
+3. Formar los dos equipos y comenzar la partida.
+4. Aparecer en la isla del equipo.
+5. Recolectar recursos y moneda.
+6. Construir y reforzar la base.
+7. Comprar elementos tácticos en la tienda de la isla.
+8. Preparar cañón y munición.
+9. Comenzar la fase de combate.
+10. Apuntar, disparar, reparar y defender.
+11. Destruir el núcleo enemigo antes de perder el propio.
+12. Mostrar resultado y recompensas y regresar al ciclo de lobby/partida.
 
 ## Alcance inicial
 
-La primera versión jugable se centrará en:
+La primera versión jugable debe poder demostrar:
 
-- 2 islas enfrentadas.
-- Equipos de 1 a 3 jugadores por isla.
-- Recursos básicos: madera, piedra y cocos.
-- Moneda de partida.
-- NPC/tienda por isla.
-- Construcción modular mediante piezas con snap.
-- Núcleo/tótem destruible.
-- Cañón con orientación, ángulo y potencia.
-- Reparación durante el combate.
-- Victoria por destrucción del núcleo enemigo.
+- lobby mínimo funcional;
+- zonas/colas diferenciadas para 1v1, 2v2 y 3v3;
+- 2 islas enfrentadas por partida;
+- equipos de 1 a 3 jugadores;
+- recursos básicos: madera, piedra y cocos;
+- moneda de partida;
+- NPC/tienda por isla;
+- construcción modular mediante piezas con snap;
+- núcleo/tótem destruible;
+- cañón con orientación, ángulo y potencia;
+- reparación durante el combate;
+- victoria por destrucción del núcleo enemigo.
 
-No se implementarán todavía lobby avanzado, matchmaking por rango, múltiples modos, monetización ni progresión compleja hasta validar que el combate base es divertido.
+El lobby forma parte del producto desde el principio, pero su versión inicial será sencilla. Decoración avanzada, espacios sociales, matchmaking por rango, múltiples modos, progresión compleja y monetización vendrán después de validar el núcleo jugable.
 
 ## Herramientas
 
-- Roblox Studio.
-- Rojo.
-- VS Code.
-- GitHub.
-- Codex, ya disponible en la cuenta de pago.
-- Rebirth, como herramienta adicional cuando trabajar directamente dentro de Roblox Studio aporte una ventaja clara.
+- Roblox Studio: edición, prueba y publicación.
+- Rojo: sincronización entre archivos locales y Roblox Studio.
+- GitHub: historial y memoria operativa.
+- Codex: código, arquitectura, refactorización y tareas sobre los archivos del proyecto cuando sea la herramienta más adecuada.
+- Rebirth: prototipado y construcción directa dentro de Roblox Studio cuando su acceso al mundo 3D y al árbol de Studio ahorre trabajo real.
+- VS Code: opcional; no es necesario para el flujo del proyecto.
 
-## Directorio local recomendado
+ChatGPT decide tarea por tarea qué herramienta conviene. No se fuerza la regla "visual = Rebirth / código = Codex" si otra distribución produce un resultado mejor y mantenible.
+
+## Directorio local
 
 En Windows: `C:\Dev\Islas`.
 
-Esta carpeta contendrá la copia local del repositorio, el código, la configuración de Rojo y los archivos de documentación. GitHub será el remoto y el historial del proyecto.
+Esta carpeta es la copia local del repositorio y contiene la configuración de Rojo y los archivos que gestionemos fuera de Studio. GitHub es el remoto y el historial.
 
 ## Regla de trabajo
 
@@ -72,4 +78,4 @@ Consultar también `IDEAS_BACKLOG.md` cuando la tarea afecte al diseño y `PROMP
 
 ## Estado
 
-Preproducción. Diseño base y memoria operativa creados. La siguiente tarea es preparar el entorno local y la sincronización Rojo/Roblox Studio.
+Preproducción/prototipado técnico. Git y Rojo ya funcionan localmente y Roblox Studio se ha conectado al proyecto Islas. El siguiente paso es instalar y conectar Rebirth sin gastar créditos todavía.
