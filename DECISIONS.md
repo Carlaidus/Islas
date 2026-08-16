@@ -1,197 +1,343 @@
 # DECISIONS
 
-Registro de decisiones que se consideran vigentes. Si una decisión cambia, se añade una nueva entrada explicando el cambio; no se borra la historia sin motivo.
+Última actualización: 2026-08-16
 
-## 2026-08-16 — Repositorio principal
+Registro de decisiones vigentes. Cuando una decisión cambie, debe registrarse el cambio y su motivo.
+
+---
+
+## 2026-08-16 — Repositorio y entorno
 
 - Repositorio operativo: `Carlaidus/Islas`.
 - Rama principal: `main`.
-- De momento el proyecto se gestionará desde la cuenta GitHub `Carlaidus`.
+- Directorio local: `C:\Dev\Islas`.
+- Place de trabajo: `C:\Dev\Islas\studio\Islas_CURRENT.rbxlx`.
+- Rojo de Islas usa el puerto `34873`.
+- De momento el repositorio permanece en la cuenta `Carlaidus`.
 
-## 2026-08-16 — Herramientas base
+## 2026-08-16 — Modelo de trabajo
 
-- Roblox Studio para construir, probar y publicar.
-- Rojo para sincronizar el proyecto entre archivos locales y Roblox Studio.
-- GitHub para historial, colaboración y memoria operativa.
-- Codex está disponible mediante la cuenta de pago y se utilizará para código, arquitectura y tareas sobre el repositorio cuando sea la opción más conveniente.
-- Rebirth se utilizará cuando su integración directa con Roblox Studio permita crear o modificar el juego más rápido y con suficiente control.
-- VS Code es opcional y no forma parte obligatoria del flujo.
+- ChatGPT dirige producto, diseño, balance, investigación, alcance y prompts.
+- Rebirth puede crear mundo, Terrain, assets, UI, scripts y mecánicas dentro de Studio.
+- Codex es operador técnico: arquitectura, seguridad, Rojo, Git/GitHub, inspección del `.rbxlx`, pruebas y consolidación.
+- Carlos y Marc aportan intención y playtest.
+- VS Code no es obligatorio.
 - No usar Cursor Pro por ahora.
-- ChatGPT decidirá qué herramienta usar tarea por tarea; no se impondrá una división rígida si otra opción es mejor.
-- Los prompts de herramientas con coste deben prepararse con precisión para evitar gasto innecesario.
+- No existe una división rígida “visual = Rebirth / código = Codex”.
+- La herramienta se elige según `AI_TOOLING_MATRIX.md`.
 
-## 2026-08-16 — Dirección del proyecto
+## 2026-08-16 — Rebirth se mantiene
 
-ChatGPT actuará como director técnico y de diseño del proyecto:
+Rebirth no se abandona tras los dos resultados fallidos.
 
-- decidirá el orden de construcción;
-- decidirá qué herramienta conviene para cada tarea;
-- preparará prompts detallados para Codex y Rebirth;
-- revisará la documentación operativa antes de tareas importantes;
-- evitará pedir al usuario que tome decisiones técnicas que puedan resolverse razonadamente desde la dirección del proyecto;
-- no fijará escalas, distancias o dirección artística de forma arbitraria sin diseñar antes la experiencia de juego correspondiente;
-- priorizará construir un juego real y escalable, no encadenar pruebas técnicas sin valor de producto.
+Se considera valioso por:
 
-## 2026-08-16 — Lobby y entrada a partida
+- acceso al Studio real;
+- creación/modificación de instancias;
+- scripts/UI;
+- assets/3D;
+- debugging contextual;
+- cambios repetitivos rápidos.
 
-- Los jugadores NO empiezan directamente en una isla.
-- El punto de entrada del juego será un lobby/hub.
-- El lobby tendrá zonas o accesos claros para entrar en partidas 1v1, 2v2 y 3v3.
-- El lobby debe sentirse como una localización real (puerto/isla-base/aldea tropical), no como una baseplate con pads y carteles.
-- El diseño futuro deberá permitir que un jugador solo pueda entrar en una cola de equipo y que grupos puedan mantenerse juntos cuando implementemos parties/matchmaking.
-- Se estudiará separar Lobby y Match en Places distintos dentro de la misma experiencia; colocar ambos físicamente alejados dentro de un mismo mapa no se considera arquitectura final.
+Pero deja de utilizarse como generador autónomo de “todo el mundo” mediante megaprompt.
 
-## 2026-08-16 — Tamaño de equipo y número de islas
+Método obligatorio:
 
-- 1v1, 2v2 y 3v3 describen jugadores por equipo, no cantidad de islas.
-- `Duel` = 2 equipos/islas.
-- `Triad` = 3 equipos/islas y queda previsto desde el diseño aunque no sea el primer modo implementado.
-- Arquitectura, Core y cañón no deben asumir que siempre habrá exactamente un único enemigo.
+`referencia -> plan-only -> aprobación -> calibration set -> construcción acotada -> Play/QA -> auditoría/consolidación`
 
-## 2026-08-16 — Roles
+Ver:
 
-- No habrá roles obligatorios o bloqueados por jugador.
-- Todos los jugadores podrán realizar las acciones esenciales.
-- La cooperación surgirá al repartir tareas simultáneamente.
+- `REBIRTH_PLAYBOOK.md`
+- `REBIRTH_PROMPT_TEMPLATES.md`
+- `REBIRTH_POSTMORTEMS.md`
+- `REBIRTH_REVIEW_WORKFLOW.md`
 
-## 2026-08-16 — Bucle principal
+## 2026-08-16 — Cuenta y privacidad de Rebirth
 
-- Lobby: elegir formato/cola y formar partida.
-- Despliegue corto: revelar Core y distribución de partida.
-- Fase de preparación: explorar, recolectar, comerciar, fabricar, comprar, construir y preparar el cañón.
-- Fase de batalla: disparar, gestionar munición, reparar y defender.
-- La condición principal de victoria es destruir el Core rival.
-- Al finalizar, el flujo debe permitir regresar al ciclo de lobby/partida.
+- El servicio declara estar dirigido a usuarios de 13 años o más.
+- La cuenta/suscripción la opera Carlos/adulto responsable.
+- Marc participa bajo supervisión.
+- Se prefiere el plugin local de Roblox Studio.
+- `Direct-to-ROBLOX` permanece apagado salvo decisión posterior justificada.
+- No se envían secretos, credenciales, claves ni datos personales.
+- No se habilita creación automática de productos/Robux hasta auditar el flujo.
 
-## 2026-08-16 — Tiempos iniciales para prototipo
+## 2026-08-16 — Flujo de revisión de Rebirth
 
-Valores de partida, no definitivos:
+- No se exporta/sube `.rbxlx` después de cada pequeño cambio visual.
+- Se guarda normalmente con `Ctrl+S`.
+- Se usa `.rbxlx` en hitos, código, jerarquía dudosa, cambios grandes o auditorías.
+- Ante la orden `Sincroniza la sesión de Rebirth`, Codex inspecciona el Place, revisa scripts y actualiza GitHub.
+- El informe de Rebirth nunca sustituye Studio, Play, Output, capturas o código real.
+- No usar Script Sync/RebirthInbox/BAT como flujo obligatorio actual.
+
+## 2026-08-16 — Lobby
+
+- Los jugadores no empiezan en una isla de combate.
+- El Start Place será un lobby/hub compacto.
+- Aspecto: pequeño puerto/isla-base tropical habitada.
+- Debe incluir `Quick Play` además de accesos físicos.
+- Accesos claros a 1v1, 2v2 y 3v3.
+- Spawn correcto y lectura inmediata.
+- Práctica de cañón como tutorial contextual.
+- Estadísticas/leaderboards seleccionados.
+- Espacios para tienda cosmética, misiones, rango y party.
+- La tienda no debe bloquear la primera diversión.
+- No usar pads/carteles de desarrollo como arquitectura principal.
+
+## 2026-08-16 — Places
+
+Dirección de arquitectura:
+
+- Place 1: Lobby/Hub.
+- Place 2: Match.
+- TeleportService decidido por servidor.
+- Servidores reservados para partidas cuando se implemente el flujo real.
+- MemoryStore para colas cross-server cuando sea necesario.
+- TeleportService se prueba en experiencia publicada/cliente, no sólo Play Solo.
+- Separar Places también ayuda a organización y rendimiento.
+
+## 2026-08-16 — Modos
+
+### Jugadores por equipo
+
+- 1v1
+- 2v2
+- 3v3
+
+### Equipos/islas
+
+- `Duel`: 2 equipos/islas. Prioridad inicial.
+- `Triad`: 3 equipos/islas. Previsto arquitectónicamente, posterior a Duel.
+
+1v1/2v2/3v3 no describen el número de islas.
+
+## 2026-08-16 — Prioridad de lanzamiento
+
+Primero construir un vertical slice 1v1 de extremo a extremo.
+
+Orden:
+
+1. primera diversión/onboarding;
+2. lobby mínimo real;
+3. Match 1v1 completo;
+4. calidad/rendimiento móvil;
+5. analítica/retención;
+6. 2v2/3v3;
+7. progresión;
+8. monetización cosmética;
+9. Triad/contenido adicional.
+
+No ampliar adquisición/monetización si primera sesión y D1 son débiles.
+
+## 2026-08-16 — Bucle de partida
+
+1. Lobby.
+2. Quick Play/cola.
+3. formación de partida.
+4. presentación/Core reveal.
+5. preparación.
+6. countdown.
+7. batalla.
+8. overtime si hace falta.
+9. resultado.
+10. retorno.
+
+## 2026-08-16 — Tiempos iniciales
+
+Hipótesis configurables:
 
 - preparación 1v1: ~6:00;
 - preparación 2v2: ~5:30;
 - preparación 3v3: ~5:00;
 - batalla: ~4:00;
-- overtime máximo inicial: ~1:00.
+- overtime: hasta ~1:00;
+- partida objetivo: ~10–12 min.
 
-Todos deben vivir en configuración y ajustarse mediante playtests.
+Se ajustan mediante playtest.
 
-## 2026-08-16 — Recursos iniciales
+## 2026-08-16 — Recursos
 
-Para el prototipo se parte de:
+Recursos base:
 
 - madera;
 - piedra;
 - cocos como munición.
 
-No añadir muchos recursos antes de comprobar que estos generan decisiones interesantes.
+No añadir muchos recursos antes de validar decisiones interesantes.
 
-## 2026-08-16 — Recolección como minijuego
+## 2026-08-16 — Recolección
 
-- La recolección no debe consistir únicamente en mantener pulsado un botón largo.
-- Tala, minería y cocos tendrán interacciones cortas con habilidad sencilla que mejore eficiencia sin bloquear a jugadores nuevos.
-- Ver `ECONOMY_DESIGN.md`.
+- No mantener pulsado sin decisión como única interacción.
+- Tala, minería y cocos tendrán minijuegos cortos.
+- La habilidad mejora rendimiento sin bloquear a principiantes.
+- Recursos aparecen en sockets diseñados, no coordenadas totalmente aleatorias.
+- Valor/tiempos equivalentes entre equipos.
+
+## 2026-08-16 — Economía de partida
+
+- `MatchCoins` es nombre técnico provisional.
+- Se reinicia cada partida.
+- No se compra por Robux.
+- Se obtiene mediante contratos, exploración, eficiencia y venta de excedentes seleccionados.
+- Comerciante vende ventajas tácticas temporales no decisivas.
+- Fabricación compacta, pocas recetas.
+- Servidor autoritativo.
 
 ## 2026-08-16 — Construcción
 
-- Construcción modular mediante piezas y snap.
-- Materiales con costes y resistencias distintas.
-- Primera versión con daño por pieza.
-- Derrumbes y simulación estructural compleja quedan para una fase posterior.
-- La construcción se concentrará principalmente en una DefenseZone amplia e integrada en el terreno; el resto de la isla conserva función de exploración y recursos.
+- Construcción modular con snap.
+- DefenseZone limitada e integrada en terreno.
+- Madera barata/menos resistente.
+- Piedra cara/resistente.
+- Primera versión: daño por pieza.
+- Construcción normal se bloquea en batalla.
+- Reparación de estructuras existentes consume recursos reservados.
+- Derrumbes estructurales complejos quedan después.
 
-## 2026-08-16 — Economía y tienda
+## 2026-08-16 — Core
 
-- Existirá una moneda de partida (`MatchCoins` como nombre técnico provisional) independiente de Robux.
-- MatchCoins se reinicia en cada partida y no se compra directamente con Robux.
-- Cada isla tendrá un comerciante/tienda.
-- Se incorporan contratos y pequeñas decisiones de vender excedentes frente a usar recursos.
-- La fabricación será compacta y se limitará a objetos tácticos significativos, no a decenas de recetas.
-- Ver `ECONOMY_DESIGN.md`.
+- Victoria principal: destruir Core rival.
+- No aparece libremente por la isla.
+- Cada mapa define varios `CoreSockets` validados en CombatFront.
+- El servidor selecciona uno al inicio.
+- Todo socket debe ser atacable desde rivales válidos.
+- En Triad, atacable desde las otras dos islas.
+- Geografía permanente nunca lo oculta.
+- Beacon visible a distancia.
+- Defensas construidas sí pueden bloquearlo.
+- No se mueve durante batalla.
 
-## 2026-08-16 — Core y visibilidad
+## 2026-08-16 — Cañón
 
-- El Core nunca se coloca aleatoriamente en cualquier punto de la isla.
-- Cada mapa define varios `CoreSockets` válidos dentro del CombatFront.
-- El servidor selecciona uno al inicio y lo revela durante la preparación.
-- Todo CoreSocket debe ser geográficamente atacable desde todos los enemigos previstos por el modo.
-- En Triad, cada socket debe tener línea de tiro desde las otras dos islas.
-- El Core tendrá una señal visual visible a distancia; las defensas construidas pueden ocultarlo físicamente y obligar a romper la fortificación.
-- El Core no se mueve durante batalla.
+- Un cañón principal por equipo inicialmente.
+- Todos pueden cargar/apuntar/disparar.
+- Orientación horizontal, elevación y potencia.
+- Coco balístico visible.
+- Giro suficiente para futuro Triad.
+- Distancia entre islas se congela al prototipar balística, no antes.
+- Eliminación de jugadores no es objetivo principal; knockback/respawn rápido son candidatos.
 
-## 2026-08-16 — Cañón y múltiples enemigos
+## 2026-08-16 — Mundo
 
-- Primera versión: un cañón principal por equipo.
-- Todos los jugadores pueden cargar, apuntar y disparar.
-- Debe tener giro horizontal amplio para soportar dos o tres islas.
-- El sistema de balística se prototipará antes de congelar separación entre islas.
-- Ver `COMBAT_DESIGN.md`.
+La isla tiene:
 
-## 2026-08-16 — Monetización
+- `CombatFront` hacia centro/rivales;
+- `ExplorationBackland` hacia exterior/laterales;
+- DefenseZone;
+- CoreSockets;
+- CannonPlatform;
+- Shop/Workshop;
+- rutas y recursos;
+- límites temáticos de agua.
 
-- La monetización con Robux se diseñará después de validar la diversión del juego base.
-- Evitar pay-to-win como principio de diseño.
-- Priorizar cosméticos, personalización y contenido que no destruya el equilibrio competitivo.
-- No vender MatchCoins directamente por Robux.
+No se puede nadar hasta otra isla. Usar mar profundo/corriente/retorno temático.
 
-## 2026-08-16 — Escala real de las islas
+## 2026-08-16 — Escala inicial de isla
 
-El primer prototipo serio parte de objetivos de recorrido, no de medidas escogidas al azar.
+Objetivos de diseño, pendientes de medición:
 
-Objetivo inicial por isla:
+- 420–520 studs de largo;
+- 350–460 studs de ancho;
+- costa orgánica;
+- relieve 35–65 studs;
+- DefenseZone 130–170 studs;
+- cruce 30–45 s;
+- recurso lejano 22–32 s;
+- recorrido amplio 60–90 s.
 
-- aproximadamente 420–520 studs de largo;
-- aproximadamente 350–460 studs de ancho;
-- costa orgánica e irregular;
-- relieve útil de aproximadamente 35–65 studs;
-- DefenseZone aproximada de 130–170 studs integrada en el terreno;
-- tiempo objetivo de cruce de isla: 30–45 segundos;
-- recurso lejano desde base: 22–32 segundos;
-- recorrido amplio del perímetro: 60–90 segundos.
-
-La separación definitiva se fijará junto al prototipo físico del cañón. Las cifras son objetivos de primer diseño y se validarán jugando en Studio.
-
-## 2026-08-16 — Arena radial
-
-- Las islas presentan un `CombatFront` hacia el centro de la arena.
-- La exploración se extiende hacia atrás/laterales (`ExplorationBackland`).
-- Duel coloca dos islas aproximadamente a 180°.
-- Triad coloca tres islas aproximadamente a 120°.
-- Esta geometría permite islas grandes sin esconder el Core por la propia geografía.
-
-## 2026-08-16 — Aleatoriedad de recursos
-
-- No usar posiciones totalmente aleatorias.
-- Diseñar puntos/sockets válidos de recursos y activar subconjuntos distintos en cada partida.
-- Mantener igualdad de valor y tiempos de acceso entre equipos, permitiendo variación de posiciones.
+Las cifras dependen de Play, no de que “quepan” objetos.
 
 ## 2026-08-16 — Dirección artística
 
-- Tropical de aventura, estilizado, colorido y de calidad de experiencia Roblox publicada.
-- No aceptar círculos planos, árboles de cilindros/bolas, NPCs mannequin ni objetos primitivos como resultado visual del juego.
-- Se permite/recomienda Terrain, MeshParts y assets seguros cuando aporten calidad.
-- Los colores de equipo son acentos, no el arte entero de la isla.
-- Antes de una nueva generación grande con IA habrá referencias visuales y criterios claros de composición/calidad.
-- Ver `ART_DIRECTION.md` y `WORLD_DESIGN.md`.
+- aventura tropical estilizada/colorida;
+- calidad de experiencia publicada;
+- no hiperrealista;
+- más rica que low-poly primitivo;
+- vegetación variada;
+- Terrain/MeshParts/assets seguros permitidos;
+- colores de equipo como acento;
+- referencias visuales obligatorias para arte importante;
+- aprobar muestras antes de poblar.
 
-## 2026-08-16 — Primer prototipo Rebirth rechazado
+## 2026-08-16 — Rendimiento
 
-El primer prototipo creado por Rebirth (lobby + dos islas, 763 instancias) queda **rechazado como diseño visual y de escala**.
+- Match grande debe probar Instance Streaming.
+- Evitar miles de Parts pequeñas.
+- colisiones simplificadas en decoración;
+- LOD/meshes/Terrain con criterio;
+- probar móvil modesto;
+- medir FPS, memoria, errores y crashes.
+
+## 2026-08-16 — Analítica
+
+Instrumentar desde vertical slice:
+
+- `joined_lobby`;
+- `selected_queue`;
+- `entered_match`;
+- `collected_first_resource`;
+- `placed_first_build_piece`;
+- `fired_first_cannon_shot`;
+- `completed_first_match`;
+- `queued_second_match`.
+
+Prioridad: primera sesión, completar partida, segunda cola, D1 y sesión media.
+
+## 2026-08-16 — Monetización
+
+- después de validar diversión/retención;
+- principalmente cosméticos;
+- skins de cañón/Core, banderas, efectos, emotes, celebraciones;
+- no vender MatchCoins;
+- no vender daño, vida, puntería automática o materiales competitivos;
+- no urgencia falsa;
+- paid random items sólo si cumplen políticas, preferiblemente evitarlos al inicio.
+
+## 2026-08-16 — Rebirth V1 rechazado
 
 Razones:
 
-- islas demasiado pequeñas y planas;
-- ausencia real de exploración;
-- baseplate y composición sin calidad de producto;
-- geometría primitiva y elementos amontonados;
-- lobby interpretado como pads/carteles en lugar de una localización;
-- dirección artística insuficientemente definida antes del prompt.
+- islas pequeñas/circulares;
+- sin exploración;
+- blockout primitivo;
+- lobby de pads;
+- prompt amplio sin referencias;
+- escala mal dirigida.
 
-Se conserva únicamente como evidencia técnica temporal. No se usará como base artística ni espacial del juego.
+No reutilizar arte/layout/medidas.
 
-## 2026-08-16 — Filosofía de implementación
+## 2026-08-16 — Rebirth V2 rechazado
 
-- Sistemas configurables y desacoplados.
-- Valores de balance centralizados cuando sea posible.
-- Servidor autoritativo para economía, Core, daño, victoria y recompensas.
-- El lobby mínimo funcional pertenece al vertical slice porque es el punto de entrada real.
-- Un prototipo puede usar arte provisional, pero debe comunicar correctamente escala, navegación, ambiente y calidad objetivo.
+Problemas reales:
+
+- spawn en agua;
+- nado entre islas;
+- palmeras rotas;
+- árboles en mar;
+- vegetación inconsistente;
+- debug/transparentes visibles;
+- duplicados/triplicados;
+- CoreSockets superpuestos;
+- miles de Parts primitivas y 0 MeshParts;
+- informe no reflejaba blockers.
+
+No reparar parche a parche como base de producción.
+
+Ver `REBIRTH_POSTMORTEMS.md`.
+
+## 2026-08-16 — Próxima estrategia de Rebirth
+
+No otro worldbuilding completo.
+
+1. Place limpio.
+2. referencias/moodboard/top-down.
+3. sesión nueva.
+4. plan-only.
+5. calibration yard.
+6. muestras aprobadas.
+7. sección pequeña del lobby.
+8. QA.
+9. completar por fases.
+
+Ver `NEXT_TASK.md` y `PRODUCTION_PLAN.md`.
