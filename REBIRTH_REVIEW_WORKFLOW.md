@@ -4,67 +4,112 @@
 
 ## Objetivo
 
-Garantizar que cualquier código o cambio técnico creado por Rebirth dentro de Roblox Studio pueda revisarse, conservarse y migrarse a la fuente de verdad del proyecto antes de considerarlo aceptado.
+Garantizar que cualquier codigo o cambio tecnico creado por Rebirth dentro de Roblox Studio pueda revisarse, conservarse y migrarse a la fuente de verdad del proyecto antes de considerarlo aceptado.
 
 ## Regla principal
 
-Nada de código generado por Rebirth se considera definitivo mientras exista únicamente dentro de Roblox Studio.
+Nada de codigo generado por Rebirth se considera definitivo mientras exista unicamente dentro de Roblox Studio.
 
-El código mantenible del proyecto debe terminar en archivos locales gestionados por Rojo y versionados en GitHub.
+El codigo mantenible del proyecto debe terminar en archivos locales gestionados por Rojo y versionados en GitHub.
+
+## Captura automatica de codigo: Script Sync
+
+El flujo preferido ya no es exportar un `.rbxlx` despues de cada prompt.
+
+Roblox Studio Script Sync se utilizara para sincronizar automaticamente codigo creado dentro de carpetas dedicadas `RebirthInbox` hacia:
+
+`C:\Dev\Islas\rebirth_inbox`
+
+Carpetas acordadas:
+
+- `ServerScriptService/RebirthInbox`
+- `ReplicatedStorage/RebirthInbox`
+- `StarterPlayer/StarterPlayerScripts/RebirthInbox`
+
+No aplicar Script Sync sobre carpetas controladas por Rojo.
+
+Mientras el codigo no haya sido revisado, Rebirth debe crear sus scripts nuevos dentro de estos Inbox siempre que la tarea lo permita.
+
+Ver `SETUP_REBIRTH_SCRIPT_SYNC.md`.
+
+## Subida a GitHub
+
+Despues de una intervencion de Rebirth que cree/modifique codigo:
+
+1. comprobar que Script Sync ha escrito los `.luau` dentro de `rebirth_inbox`;
+2. ejecutar `PUSH_REBIRTH_CODE.bat`;
+3. el BAT actualiza el repositorio, prepara exclusivamente `rebirth_inbox`, crea un commit fechado y lo sube a `main`;
+4. informar a ChatGPT para que revise la ultima captura.
+
+El BAT no debe utilizarse para publicar codigo de produccion sin revision; su finalidad es poner el codigo bruto de Rebirth a disposicion de revision.
+
+## Revision obligatoria
+
+Revisar especialmente:
+
+- Script, LocalScript y ModuleScript creados/modificados;
+- RemoteEvents/RemoteFunctions;
+- autoridad cliente/servidor;
+- economia;
+- moneda;
+- recursos;
+- inventario;
+- compras;
+- daño;
+- Core/victoria;
+- DataStore;
+- TeleportService;
+- matchmaking;
+- validacion de entradas remotas;
+- cualquier uso de Robux/MarketplaceService.
+
+## Migracion a produccion
+
+Si el codigo se aprueba:
+
+1. ChatGPT/Codex lo revisa/refactoriza cuando sea necesario.
+2. Se migra desde `rebirth_inbox` al arbol definitivo gestionado por Rojo.
+3. Se elimina o sustituye la version temporal de Studio para no conservar dos fuentes de verdad.
+4. GitHub/Rojo pasan a ser la fuente de verdad del codigo aprobado.
+5. Se actualizan `PROJECT_STATE.md`, informes y decisiones si procede.
+
+## Instantaneas `.rbxlx`
+
+Las instantaneas completas siguen siendo utiles, pero ya no son obligatorias tras cada prompt.
+
+Usarlas:
+
+- antes/despues de cambios grandes de mundo;
+- cuando haga falta inspeccionar jerarquia completa, propiedades o scripts fuera del Inbox;
+- como punto de recuperacion antes de una operacion arriesgada;
+- cuando Rebirth haya modificado contenido que Script Sync no puede representar.
+
+Nombre recomendado:
+
+`snapshots/Rebirth_YYYY-MM-DD_descripcion.rbxlx`
+
+Preferir `.rbxlx` sobre `.rbxl` cuando el objetivo sea inspeccion tecnica, porque `.rbxlx` es XML.
+
+## Mundo visual
+
+Script Sync sincroniza codigo/folders, no el mundo visual completo.
+
+Terrain, MeshParts, modelos y otros elementos visuales pueden permanecer gestionados desde Studio cuando sea la opcion adecuada.
+
+Los modelos visuales importantes se pueden versionar como `.rbxmx`/`.rbxm` cuando resulte practico.
 
 ## Primer intento de Rebirth
 
-El primer prototipo visual rechazado informó explícitamente:
+El primer prototipo visual rechazado informo:
 
 - 0 Scripts;
 - 0 LocalScripts/ModuleScripts;
 - 0 RemoteEvents/RemoteFunctions.
 
-Por tanto ese intento no contiene programación propia de Rebirth que haya que migrar.
+Por tanto no contiene programacion propia de Rebirth que haya que migrar.
 
-## Flujo obligatorio cuando Rebirth genere código
+## Regla de aceptacion
 
-1. Rebirth realiza la tarea en Studio.
-2. Antes de aceptar la tarea, guardar una instantánea completa del Place en formato XML `.rbxlx`.
-3. Nombre recomendado:
+Nunca aceptar una respuesta de Rebirth del tipo `todo funciona` sin revisar el codigo real cuando haya generado programacion.
 
-   `snapshots/Rebirth_YYYY-MM-DD_descripcion.rbxlx`
-
-4. La instantánea sirve para inspeccionar jerarquía, propiedades y fuentes de scripts mediante herramientas externas.
-5. Revisar todos los Script, LocalScript y ModuleScript creados o modificados.
-6. Revisar especialmente:
-   - RemoteEvents/RemoteFunctions;
-   - economía;
-   - daño;
-   - inventario;
-   - compras;
-   - DataStore;
-   - teletransportes;
-   - autoridad cliente/servidor.
-7. Si el código se aprueba, migrarlo a archivos `.server.lua`, `.client.lua` y `.lua` dentro del árbol local gestionado por Rojo.
-8. Una vez migrado, GitHub pasa a ser la fuente de verdad de ese código.
-9. El script original creado directamente por Rebirth en Studio debe eliminarse o quedar reemplazado por la versión gestionada por Rojo para evitar dos fuentes de verdad.
-10. Actualizar `LAST_CODEX_REPORT.md` o el informe correspondiente y `PROJECT_STATE.md`.
-
-## Formato de instantánea
-
-Preferir `.rbxlx` para revisión porque es XML y legible por herramientas externas.
-
-`.rbxl` puede conservarse como copia binaria compacta, pero no es el formato preferido para revisar código.
-
-## Mundo visual
-
-El escenario, Terrain, MeshParts y otros elementos visuales pueden permanecer parcialmente gestionados desde Studio cuando Rojo no sea la herramienta adecuada.
-
-El proyecto puede ser parcialmente gestionado por Rojo:
-
-- Rojo/GitHub: código y configuración mantenible.
-- Studio: Terrain y determinados assets visuales.
-
-Los modelos visuales importantes que convenga versionar pueden exportarse como `.rbxmx`/`.rbxm` cuando sea práctico.
-
-## Regla de aceptación
-
-Nunca aceptar una respuesta de Rebirth del tipo «todo funciona» sin revisar el código real cuando haya generado programación.
-
-El reporte de Rebirth es información auxiliar; la fuente de verdad es el contenido real de Studio y, una vez migrado, el repositorio local/GitHub.
+El reporte de Rebirth es informacion auxiliar; la fuente de verdad para revision es el codigo sincronizado/capturado y, una vez aprobado, el repositorio definitivo gestionado por Rojo.
