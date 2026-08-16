@@ -19,6 +19,14 @@ Si la tarea afecta a mundo, nivel, mapa, escala, lobby, islas, recursos, vegetac
 8. `WORLD_DESIGN.md`
 9. `ART_DIRECTION.md`
 
+Si la tarea afecta a recursos, moneda, tienda, contratos, fabricación, construcción o preparación, leer:
+
+10. `ECONOMY_DESIGN.md`
+
+Si la tarea afecta a Core, cañón, balística, daño, reparación, victoria, dos/tres islas o fase de batalla, leer:
+
+11. `COMBAT_DESIGN.md`
+
 Si alguno de estos archivos contradice una instrucción nueva y explícita del usuario, prevalece la instrucción nueva, pero la documentación debe actualizarse para reflejar el cambio.
 
 ## Regla de alcance
@@ -37,10 +45,13 @@ No aprovechar una tarea para:
 ## Dirección de producto
 
 - No elegir dimensiones, distancias o densidad de mundo arbitrariamente.
-- Para level design, priorizar tiempos de recorrido, rutas, legibilidad y función jugable.
+- Para level design, priorizar tiempos de recorrido, rutas, legibilidad, líneas de tiro y función jugable.
 - No aceptar un blockout pobre como resultado visual sólo porque contenga todos los objetos solicitados.
-- El primer prototipo Rebirth de 2026-08-16 está rechazado y no debe usarse como referencia de escala o arte.
+- El primer prototipo Rebirth del 2026-08-16 está rechazado y no debe usarse como referencia de escala o arte.
 - `WORLD_DESIGN.md` y `ART_DIRECTION.md` mandan sobre futuros escenarios salvo decisión posterior documentada.
+- 1v1/2v2/3v3 significa jugadores por equipo; el número de equipos/islas es otra variable.
+- Arquitectura y mapas deben poder evolucionar de `Duel` (2 equipos) a `Triad` (3 equipos) sin reescribir sistemas fundamentales.
+- El Core nunca se coloca libremente al azar: se usan CoreSockets validados.
 
 ## Arquitectura
 
@@ -52,7 +63,8 @@ Prioridades:
 - validación de entradas remotas;
 - evitar confiar en el cliente para moneda, daño, inventario o recompensas;
 - código legible antes que abstracciones innecesarias;
-- soporte futuro para 1v1, 2v2 y 3v3 sin duplicar sistemas.
+- soporte 1–3 jugadores por equipo sin duplicar sistemas;
+- soporte futuro 2–3 equipos mediante configuración donde sea razonable.
 
 ## Roblox / Rojo
 
@@ -62,26 +74,42 @@ Prioridades:
 - No introducir dependencias externas sin justificar su necesidad.
 - Para el mundo visual se permite Terrain, MeshParts y assets seguros cuando sean la opción adecuada; no sacrificar calidad visual únicamente para encajar todo dentro de una estructura de archivos cómoda.
 
+## Economía y seguridad
+
+Asumir que el cliente puede ser manipulado.
+
+El servidor decide/valida siempre:
+
+- recursos concedidos;
+- MatchCoins;
+- contratos;
+- compras;
+- costes de construcción/fabricación;
+- inventario relevante;
+- daño;
+- reparación;
+- Core activo;
+- victoria;
+- recompensas persistentes.
+
+Nunca permitir que el cliente declare directamente estos resultados.
+
 ## Pruebas
 
 Cada tarea debe incluir una forma concreta de comprobar el resultado.
 
-No declarar una tarea completada sólo porque el código compila. Cuando sea aplicable, indicar los pasos de prueba dentro de Roblox Studio.
+No declarar una tarea completada sólo porque el código compila.
 
-Para level design, medir recorridos reales dentro de Studio cuando `WORLD_DESIGN.md` defina objetivos de tiempo.
+Para level design medir en Studio:
 
-## Seguridad y explotación
+- tiempos de recorrido;
+- líneas de tiro a CoreSockets;
+- giro de cañón a todos los rivales previstos;
+- lectura del objetivo a distancia;
+- espacio de construcción;
+- rendimiento aproximado.
 
-Asumir que el cliente puede ser manipulado.
-
-Nunca confiar en datos enviados por el cliente para:
-
-- conceder moneda;
-- conceder recursos;
-- validar compras;
-- aplicar daño;
-- declarar una victoria;
-- guardar progresión.
+Para sistemas económicos/combate, probar al menos los tamaños de equipo relevantes y límites/inputs manipulados cuando corresponda.
 
 ## Coste de herramientas
 
